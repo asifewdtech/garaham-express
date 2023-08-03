@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+.nav-bg {
+  background-color: white;
+  color: black !important;
+  box-shadow: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.nav-txt {
+  color: black;
+}
+
+.nav-main-div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.nav-btns {
+  display: block;
+  text-transform: none;
+  font-size: 15px;
+  font-weight: 400;
+  color: #475569;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-family: 'Rubik';
+}
+
+.signin-btn {
+  background-color: #3652a3;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 15px;
+  text-transform: none;
+  border-radius: 10px;
+  font-family: 'Rubik';
+
+}
+
+.banner {
+  background-image: url(../../assets/images/waves.png);
+  background-color: #E8EEFF;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Rubik', sans-serif !important;
+}
+
+.main-banner {
+  background-image: url(../../assets/images/waves.png);
+  background-color: #E8EEFF;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  font-family: 'Rubik', sans-serif !important;
+}
+.header-bg-text {
+
+  padding-top: 128px;
+  padding-bottom: 128px;
+}
+.header-bg-text-all{
+  padding-top: 77px;
+  padding-bottom: 77px;
+}
+.header-bg-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.header-cp {
+  color: #555;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: -1.34px;
+  width: 381px;
+  height: 70;
+  margin: 0;
+}
+
+.header-p {
+  color: #7B88A8;
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.34px;
+  width: 773px;
+  height: 106px;
+  padding: 0;
+  margin: 0;
+}
+
+.leftSidebox {
+  border-radius: 10px;
+  position: absolute;
+  top: 310px;
+  width: fit-content;
+  height: auto;
+  left: 60px;
+  /* margin-left: 30px; */
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
+}
+
+.leftSideboxHeading {
+  color: #555;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -1.34px;
+  text-align: center;
+}
+
+.rightSideBox {
+  position: absolute;
+  flex-shrink: 0;
+  border-radius: 10px;
+  box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
+  top: 443px;
+  right: 82px;
+}
+
+.rightSideBoxHeading {
+  color: #555;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -1.34px;
+  /* margin-left: 73px; */
+  /* box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05); */
+}
+
+.upperCard {
+  height: auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: absolute;
+  top: 50px;
+  right: -254px;
+  border-radius: 10px;
+}
+
+.arrowImg {
+  width: 56px;
+  flex-shrink: 0
+}
+
+.ThreeLines {
+  stroke-width: 1px;
+  stroke: #5065A8;
+  width: 95.5px;
+  /* height: 30.5px; */
+  flex-shrink: 0;
+  margin-left: -6px;
+  margin-bottom: 15px;
+}
+
+.ianImg {
+  position: absolute;
+  top: 60px;
+  right: 9px;
+  width: 37px;
+  /* height: 30px; */
+  flex-shrink: 0;
+}
+
+.christinaImg {
+  position: absolute;
+  top: 37px;
+  right: 40px;
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.toaImg {
+  position: absolute;
+  top: 70px;
+  left: 111px;
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.rightSideBoxInner {
+  box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  border-radius: 10px;
+
+}
+
+.upperCardInner {
+  box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+
+}
+
+.leftSideboxShadow {
+  box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.upperCardInner {
+  text-align: center;
+
+}
+
+.header-bg-text {
+  max-width: 786px;
+  margin: auto;
+  position: relative;
+}
+
+.CardImages {
+  margin-top: 6px;
+}
+
+.upperCardInner-1 {
+  padding-bottom: 16px !important;
+}
+.bottomCardInner-1{
+  padding: 14px 34px 0 34px;
+  padding-bottom: 0px !important;
+}
+.logo_box_main{
+  padding: 15px;
+}

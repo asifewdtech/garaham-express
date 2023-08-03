@@ -1,0 +1,203 @@
+/* Select facebook page css starts */
+.horizontal_list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.SP_inner_container {
+  width: 75.7%;
+  height: 413px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: blue;
+  margin: auto;
+  box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
+  margin-right: 4%;
+  margin-left: 0;
+  padding-left: 3%;
+  padding-top: 25px;
+}
+
+.SP_heading {
+  color: #444;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px;
+  /* 194.444% */
+  letter-spacing: -0.34px;
+}
+
+.choose_text {
+  padding-top: 20px;
+  padding-left: 13px;
+  color: #555;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 111.111% */
+  letter-spacing: -0.34px;
+  padding-bottom: 30px;
+  padding-top: 20px;
+}
+
+.select_page {
+  width: 378px;
+  height: 57px;
+  flex-shrink: 0;
+  border: 0 !important;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+}
+
+/* Hide the default select arrow */
+.select_page {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: #555;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.34px;
+}
+
+/* Add the custom SVG as the background image for the select element */
+.custom-select {
+  position: relative;
+  width: 378px;
+  height: 57px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+}
+
+.custom-select::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  /* Adjust this value to move the icon towards the left */
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'><path d='M11.2902 16.71C11.4775 16.8963 11.731 17.0008 11.9952 17.0008C12.2594 17.0008 12.5128 16.8963 12.7002 16.71L20.7002 8.71C20.864 8.5187 20.9496 8.27262 20.9399 8.02095C20.9302 7.76927 20.8258 7.53053 20.6477 7.35244C20.4697 7.17434 20.2309 7.07001 19.9792 7.06029C19.7276 7.05057 19.4815 7.13618 19.2902 7.3L12.0002 14.59L4.71019 7.29C4.52188 7.1017 4.26649 6.99591 4.00019 6.99591C3.73388 6.99591 3.47849 7.1017 3.29019 7.29C3.10188 7.47831 2.99609 7.7337 2.99609 8C2.99609 8.2663 3.10188 8.5217 3.29019 8.71L11.2902 16.71Z' fill='black'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
+
+.side_container {
+ 
+  width: 25%;
+  flex-shrink: 0;
+  border-radius: 25px;
+  background: #fff;
+  box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
+
+
+
+}
+
+.image_container {
+  margin-top: -55px;
+  text-align: center;
+  width: 100%;
+}
+
+.side_text {
+  margin-top: 16px;
+}
+
+.contest {
+  color: #1877f2;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px;
+  text-align: center;
+
+  letter-spacing: -0.34px;
+}
+
+.page {
+  color: #a0a0a0;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  padding: 36px;
+  font-weight: 400;
+  line-height: 20px;
+  /* 111.111% */
+  letter-spacing: -0.34px;
+}
+
+.font-weight-500 {
+  color: #555;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.select_option {
+  width: 378px;
+  height: 57px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+}
+
+.content_div {
+  display: flex;
+}
+
+/* MEDIA QUERY */
+
+@media only screen and (max-width: 768px) {
+  .custom-select {
+    width: 95%;
+    height: 48px;
+  }
+
+  .content_div {
+    display: block;
+  }
+
+  .select_page {
+    width: 100%;
+    height: 47px;
+  }
+  .side_container {
+    width: 100%;
+    margin-top: 75px !important;
+    margin: auto;
+  }
+  .image_container {
+    margin-top: 0;
+    text-align: center;
+    width: 100%;
+}
+.image_container img{
+  margin-top: -55px;
+}
+}
+
+
+/* Select facebook page css ends */

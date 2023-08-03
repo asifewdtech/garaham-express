@@ -1,0 +1,166 @@
+/* choosing a platform css starts */
+.commentPicker {
+  color: #444;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 70px;
+  /* 218.75% */
+  letter-spacing: -1.34px;
+  margin: auto;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  margin-top: 45px !important;
+  margin-bottom: 45px !important;
+
+}
+
+.CP_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center !important;
+  flex-shrink: 0;
+  margin: auto;
+}
+
+.logo {
+  width: 155px;
+  height: 155px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+#insta_logo {
+  width: 155px;
+  height: 155px;
+  flex-shrink: 0;
+}
+
+#insta_container {
+  padding-left: 74px;
+  padding-right: 74px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.logo_container {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
+  padding-left: 48px;
+  padding-right: 49px;
+  padding-top: 63px;
+  padding-bottom: 63px;
+  margin-left: 22px;
+  cursor: pointer;
+}
+
+.logo_box {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 1.5rem !important;
+}
+
+.logo_img {
+  width: 178px;
+
+}
+
+@media only screen and  (max-width: 768px) {
+  .logo_img {
+    width: 100%;
+}
+}
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  .logo_container {
+    width: 141.477px !important;
+    height: 179.325px !important;
+    flex-shrink: 0 !important;
+    border-radius: 10px !important;
+    background: #FFF !important;
+    box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  #logo_container {
+    width: 169.477px !important;
+    height: 179.325px !important;
+    flex-shrink: 0 !important;
+    border-radius: 10px !important;
+    background: #FFF !important;
+    box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05) !important;
+    margin-left: 109px !important;
+  }
+
+  .header-cp {
+    color: #555;
+    font-feature-settings: 'clig' off, 'liga' off !important;
+    font-family: Rubik !important;
+    font-size: 38px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    line-height: 70px !important;
+    letter-spacing: -1.34px !important;
+    align-items: center !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .header-p {
+    width: 347px !important;
+    height: 124px !important;
+    flex-shrink: 0 !important;
+    color: #7B88A8 !important;
+    text-align: center !important;
+    font-feature-settings: 'clig' off, 'liga' off !important;
+    font-family: Rubik !important;
+    font-size: 18px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    letter-spacing: -0.34px !important;
+  }
+
+  .commentPicker {
+    color: #444;
+    font-feature-settings: 'clig' off, 'liga' off !important;
+    font-family: Rubik !important;
+    font-size: 24px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 70px !important;
+    letter-spacing: -1.34px !important;
+    /* margin-top: 25px !important; */
+  }
+
+  .logo {
+    width: 118.109px !important;
+    height: 107.109px !important;
+    flex-shrink: 0 !important;
+    margin-left: 13px !important;
+  }
+
+  .css-mhc70k-MuiGrid-root>.MuiGrid-item {
+    padding-left: 0px !important;
+  }
+
+  #insta_logo {
+    width: 86px !important;
+    height: 96px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: 27px !important;
+    margin-top: 8px !important;
+    margin-top: 29px !important
+  }
+}
+
+/* choosing a platform css ends */

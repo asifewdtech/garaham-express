@@ -1,0 +1,201 @@
+.rubik {
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+}
+
+.winner_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+
+}
+
+.winner {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.winner_heading {
+  margin-top: 50px;
+  color: #5065a8;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px;
+  /* 70% */
+  letter-spacing: -0.34px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.winner_subheading {
+  color: #555;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  height: 70px;
+  letter-spacing: -0.34px;
+  margin: auto;
+  width: fit-content;
+  margin-top: 15px;
+}
+
+
+.winners_list {
+  display: grid;
+  grid-template-columns: repeat(var(--num-columns, 3), 1fr);
+  gap: 66px;
+  margin: auto;
+  width: 97%;
+  margin-top: 15px;
+  /* overflow: auto; */
+}
+
+/* footer css starts */
+.new_contest {
+  color: #5065a8;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px;
+  /* 291.667% */
+  font-family: Rubik;
+  letter-spacing: -0.34px;
+  width: 270px;
+  height: 73px;
+  flex-shrink: 0;
+}
+
+.active {
+  border-radius: 10px;
+  background: #e8eeff;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  /* margin-left: 84px;
+  margin-right: 80px; */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+
+.share {
+  width: 475px;
+  height: 78px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: #f6f9ff;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.share_copy {
+  display: none;
+}
+
+.share p {
+  color: #555;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 83.333% */
+  font-family: Rubik !important;
+  letter-spacing: -0.34px;
+}
+
+.svg-container::after {
+  content: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' width='27' height='24' viewBox='0 0 27 24' fill='none'><path d='M18.1268 12.7098C18.3288 12.5225 18.4423 12.269 18.4423 12.0048C18.4423 11.7406 18.3288 11.4872 18.1268 11.2998L9.4485 3.29981C9.24098 3.13599 8.97404 3.05038 8.70103 3.0601C8.42801 3.06983 8.16903 3.17416 7.97583 3.35225C7.78264 3.53035 7.66946 3.76908 7.65892 4.02076C7.64837 4.27244 7.74124 4.51851 7.91895 4.70981L15.8271 11.9998L7.9081 19.2898C7.70383 19.4781 7.58908 19.7335 7.58908 19.9998C7.58908 20.2661 7.70383 20.5215 7.9081 20.7098C8.11237 20.8981 8.38942 21.0039 8.6783 21.0039C8.96718 21.0039 9.24423 20.8981 9.4485 20.7098L18.1268 12.7098Z' fill='%23555555'/></svg>");
+  display: inline-block;
+  margin-left: 10px;
+  /* Adjust the spacing between Typography and SVG as needed */
+}
+
+.share_link {
+  border-radius: 15px;
+  background: #5065A8;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+  width: 185px;
+  height: 46px;
+  flex-shrink: 0;
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.34px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.new_winner {
+  color: #FFF;
+  font-family: Rubik;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.34px;
+  border-radius: 10px;
+  background: #3E63CF;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+  width: 270px;
+  height: 73px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* MEDIA QUERY */
+
+@media only screen and (min-width: 320px) and (max-width: 600px) {
+  .winner_heading  {
+    font-size: 40px;
+  }
+  .winner_subheading  {
+    font-size: 22px;
+  }
+  .footer {
+    display: none;
+  }
+  .share {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 15px;
+  }
+  .share p {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .share_link {
+    width: 134px;
+    font-size: 14px;
+  }
+  .copy_box {
+    width: 17px;
+    height: 17px;
+  }
+  .share_copy {
+    display: flex;
+  }
+}

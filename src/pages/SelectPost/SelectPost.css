@@ -1,0 +1,202 @@
+/* select post from facebook page css starts */
+.selectPost_container {
+  width: 1200px;
+  /* height: 993px; */
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
+  margin-left: 185px;
+  padding: 32px 16px;
+
+}
+
+.main-contaner {
+  width: 1200px !important;
+  height: 993px !important;
+  flex-shrink: 0 !important;
+  margin-left: 185px !important;
+  padding: 32px 16px !important;
+}
+
+.select_heading {
+  color: #444;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: -0.34px;
+  margin-left: 32px;
+  margin-top: 15px;
+}
+
+.select_subheading {
+  color: #555;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 111.111% */
+  letter-spacing: -0.34px;
+  margin-left: 49px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-row-gap: 30px;
+}
+
+.cards-main-box {
+  padding-top: 30px;
+  height: 300px;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #E5E5E5;; /* Change this to your desired color */
+  border-radius: 5px;
+}
+
+
+
+.select-post-box {
+  border-radius: 15px;
+  background: #FFF;
+  /* New */
+  box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* .post_card:hover {
+      box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+    } */
+
+.post_card {
+  display: flex;
+  width: 480px;
+  /* height: 221px; */
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+}
+
+.post_text {
+  width: 273px;
+  /* height: 147px; */
+  flex-shrink: 0;
+  color: #555;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  /* 122.222% */
+  letter-spacing: -0.34px;
+}
+
+.post_image {
+  margin-left: 20px;
+  height: 180px;
+  width: 180px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  /* background: url('/postImg.png'), lightgray 50% / cover no-repeat; */
+}
+
+.cmnts_count {
+  color: #A0A0A0;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.34px;
+  padding-left: 20px;
+}
+
+.fb-card-text {
+  color: #555;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 125% */
+  letter-spacing: -0.34px;
+}
+
+.fb-card-box {
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+
+}
+
+.active_card {
+  border: 1px solid #5065a8;
+  border-radius: 10px !important;
+  background: #FFF !important;
+  box-shadow: 3px 11px 8px 0px rgba(10, 50, 247, 0.07) !important;
+}
+
+.fb-box-condition {
+  color: #555;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 111.111% */
+  letter-spacing: -0.34px;
+  padding-bottom: 5px;
+}
+
+/* MEDIA QUERY */
+
+@media only screen and (max-width: 768px) {
+  .cards {
+    grid-template-columns: 100%;
+    overflow-y: hidden;
+  }
+
+  .cards-main-box {
+    height: auto;
+    overflow-y: hidden;
+  }
+
+  .post_text {
+    width: 169px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17px;
+  }
+  .post_image {
+    width: 111px;
+    height: 111px;
+  }
+  .post_card {
+    width: 318px;
+    padding: 15px;
+  }
+  .cmnts_count {
+    padding-left: 5px;
+    font-size: 12px;
+  }
+}
+
+/* select post from facebook page css ends */

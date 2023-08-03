@@ -1,0 +1,43 @@
+.chooseWinner_main {
+  border-radius: 15px;
+  background: #FFF;
+  width: 1170px;
+  height: 600px;
+  flex-shrink: 0;
+  box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
+  margin-left: 185px;
+  padding-top: 22px;
+  padding-left: 35px;
+}
+
+.chooseWinner_heading {
+  color: #444;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 70px;
+  /* 194.444% */
+  letter-spacing: -0.34px;
+
+}
+
+.trophy1 {
+  width: 410.875px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+.timg {
+  margin: auto;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 600px) {
+  .trophy1 {
+    width: 163px !important;
+    height: 163px !important;
+  }
+}
