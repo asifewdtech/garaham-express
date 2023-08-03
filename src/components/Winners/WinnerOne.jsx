@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
-import Image from "next/image";
 import { useState } from "react";
 const WinnerOne = ({ count }) => {
   const [showEntries, setshowEntries] = useState(false);
@@ -20,58 +19,132 @@ const WinnerOne = ({ count }) => {
 
   };
   return (
-    <div className="main">
-      <Typography className="winner_count">{count}</Typography>
-      <div>
-        <Box className="trophy_Container">
-          <img className="trophy" src="/trophy.png" alt="trophy" />
-          {/* <div id="rect"> */}
-          <img className="rect_img" src="/rect.png" alt="name" />
-          {/* </div> */}
-
-          <Typography className="name">Graham Caldwell</Typography>
-        </Box>
-      </div>
-
-      <Box className="winner_comment">
-        <img
-          src="/winner.png"
-          alt="winner"
-          className="winner_img"
-        />
-        <div className="samll_screen_name" style={{display:"flex", alignItems: "center"}}>
-          <Typography className="cmnt_name" element="p" id="name">
+    <div className="">
+ 
+ <section>
+ 
+  <div className="row w-100">
+    <div className="col-lg-4 m-auto widthMain">
+      <h2 className="prizeWinner text-center">1</h2>
+      <div className="d-flex justify-content-center align-items-center winnerContentSec1">
+        <img src="/trophy.png" alt="" />
+        <div className="yellowBorder marginImg">
+          <h2 className="py-3 px-4 winnerTitle text-primary mb-0">
             Graham Caldwell
-          </Typography>
-          <Typography id="cmnt">Test Comment 🎈🎊🎉</Typography>
+          </h2>
         </div>
-        <div
-          id="ellipse"
-          onMouseEnter={(event) => handleHover(event)}
-          onMouseLeave={() => setshowEntries(false)}
-        >
-          <Image className="bar" alt="bart" src="/bar.png" width="32" height="32"></Image>
-          {showEntries && (
-            <div
-              id="entry"
-              className={` ${direction}`}
-            >
-              <Image
-                className={`${direction == 'entry_right' ? "" : 'reversed_img'} `}
+      </div>
+      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5">
+        <div className="position-relative tooltipMain">
+          <div className="tooltipSection" style={{ opacity: 0 }}>
+            <p className="tooltipdesc position-relative p-4 mb-0">
+              Among the whole list, there were 7 entries of @grahamjcaldwell
+              user.
+            </p>
+          </div>
+          <div
+            className="position-absolute ellipseimg"
+            onmouseenter="showTooltip(this,'enter')"
+            onmouseleave="showTooltip(this,'leave')"
+          >
+            <img className="mainImg" src="/ellipse.png" alt="" />
+          </div>
+        </div>
+        <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
+        <img src="/winner.png" alt="" />
 
-                src="/shape.png"
-                width="272"
-                height="176"
-                alt="message"
-              ></Image>
-              <Typography className={`${direction == 'entry_right' ? "" : 'reversed_text'} entries_text`}>
-                Among the whole list, there were 7 entries of @grahamjcaldwell
-                user.
-              </Typography>
-            </div>
-          )}
+          <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
+            <h6 className="text-primary winnerTitleScnd mb-0">
+              Graham Caldwell
+            </h6>
+            <p className="mb-0 mt-2 mt-sm-2 mt-lg-0">Test Comment 🎈🎊🎉</p>
+          </div>
         </div>
-      </Box>
+      </div>
+    </div>
+    <div className="col-lg-4 m-auto widthMain">
+      <h2 className="prizeWinner text-center winnerSecMain">2</h2>
+      <div className="d-flex justify-content-center align-items-center winnerContentSec1 ">
+      <img src="/trophy.png" alt="" />
+
+        <div className="yellowBorder marginImg">
+          <h2 className="py-3 px-3 winnerTitle text-primary mb-0">
+            Graham Caldwell
+          </h2>
+        </div>
+      </div>
+      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5">
+        <div className="position-relative tooltipMain">
+          <div className="tooltipSection toolSectMain" style={{ opacity: 0 }}>
+            <p className="tooltipdesc toolSectMainDesc position-relative p-4 mb-0">
+              Among the whole list, there were 7 entries of @grahamjcaldwell
+              user.
+            </p>
+          </div>
+          <div
+            className="position-absolute ellipseimg"
+            onmouseenter="showTooltip(this,'enter')"
+            onmouseleave="showTooltip(this,'leave')"
+          >
+            <img className="mainImg" src="/ellipse.png" alt="" />
+          </div>
+        </div>
+        <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
+          <img src="/winner.png" alt="" />
+          <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
+            <h6 className="text-primary winnerTitleScnd mb-0">
+              Graham Caldwell
+            </h6>
+            <p className="mb-0 mt-2 mt-sm-2 mt-lg-0">Test Comment 🎈🎊🎉</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className="col-lg-4 m-auto widthMain">
+      <h2 className="prizeWinner text-center winnerSecMain winnerSecMain_2">
+        3
+      </h2>
+      <div className="d-flex justify-content-center align-items-center winnerContentSec1 ">
+      <img src="/trophy.png" alt="" />
+
+        <div className="yellowBorder marginImg">
+          <h2 className="py-3 px-3 winnerTitle text-primary mb-0">
+            Graham Caldwell
+          </h2>
+        </div>
+      </div>
+      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5">
+        <div className="position-relative tooltipMain">
+          <div className="tooltipSectionMain" style={{ opacity: 0 }}>
+            <p className="tooltipdescMain position-relative p-4 mb-0">
+              Among the whole list, there were 7 entries of @grahamjcaldwell
+              user.
+            </p>
+          </div>
+          <div
+            className="position-absolute ellipseimg"
+            onmouseenter="showTooltip(this,'enter')"
+            onmouseleave="showTooltip(this,'leave')"
+          >
+            <img className="mainImg" src="/ellipse.png" alt="" />
+          </div>
+        </div>
+        <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
+        <img src="/winner.png" alt="" />
+
+          <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
+            <h6 className="text-primary winnerTitleScnd mb-0">
+              Graham Caldwell
+            </h6>
+            <p className="mb-0 mt-2 mt-sm-2 mt-lg-0">Test Comment 🎈🎊🎉</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
     </div>
   );
 };

@@ -13,7 +13,7 @@
 }
 
 .winner {
-  margin: auto;
+  /* margin: auto; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -89,6 +89,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 100px;
+  flex-wrap: wrap;
 }
 
 .share {
@@ -169,7 +170,8 @@
 
 @media only screen and (min-width: 320px) and (max-width: 600px) {
   .winner_heading  {
-    font-size: 40px;
+    font-size: 26px;
+    text-align: center;
   }
   .winner_subheading  {
     font-size: 22px;
@@ -198,4 +200,30 @@
   .share_copy {
     display: flex;
   }
+}
+
+
+.footer1{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 788px) {
+  .pick{
+    margin-top: 10px;
+  }
+  .share {
+    /* width: 100%; */
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 15px;
+}
+.footer1{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
 }

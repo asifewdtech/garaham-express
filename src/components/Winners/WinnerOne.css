@@ -247,4 +247,10 @@
   .samll_screen_name {
     display: block !important;
   }
+
+}
+@media only screen and (max-width: 768px) {
+  .css-1n12ehp{
+   display: none;
+  }
 }

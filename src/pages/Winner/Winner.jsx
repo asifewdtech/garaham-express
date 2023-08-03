@@ -29,26 +29,10 @@ const Winner = () => {
             <WinnerOne count={2} />
             <WinnerOne count={3} />
           </div> */}
-          <Grid container spacing={{ xs: 0, md: 16 }}>
-            <Grid item md={4}>
-              <Item sx={{ border: 'none', boxShadow: 'none', borderRadius: 0 }}>
-                <WinnerOne count={1} />
-              </Item>
-            </Grid>
-            <Grid item md={4}>
-              <Item sx={{ border: 'none', boxShadow: 'none', borderRadius: 0 }}>
-                <WinnerOne count={2} />
-              </Item>
-            </Grid>
-            <Grid item md={4}>
-              <Item sx={{ border: 'none', boxShadow: 'none', borderRadius: 0 }}>
-                <WinnerOne count={3} />
-              </Item>
-            </Grid>
-          </Grid>
+          <WinnerOne/>
           {/* Winner list starts */}
         </Box>
-        <Box className="footer">
+        <Box className="footer1">
           <Link style={{ textDecoration: 'none', color: 'white' }} href='/SelectPage/SelectFbPage'>
             <Typography className="new_contest active">
               Start a New Contest{" "}
@@ -64,7 +48,7 @@ const Winner = () => {
               <Image src="/copy.png" width="24" height="24" alt="copy"></Image>
             </div>
           </div>
-          <div>
+          <div className="pick">
             <Link style={{ textDecoration: 'none', color: 'white' }} href='/ChooseWinner/ChooseWinner'>
               <Typography className="new_winner">
                 Pick Another Winner
@@ -72,7 +56,7 @@ const Winner = () => {
             </Link>
           </div>
         </Box>
-        <Container maxWidth='xl'>
+        {/* <Container maxWidth='xl'>
           <div className="share share_copy">
             <Typography>Share the results</Typography>
             <div className="svg-container"></div>
@@ -91,7 +75,7 @@ const Winner = () => {
               <Button variant="contained" className="save_btn">Save and Continue</Button>
             </Link>
           </Box>
-        </Container>
+        </Container> */}
       </Box>
     </Container>
   </>
