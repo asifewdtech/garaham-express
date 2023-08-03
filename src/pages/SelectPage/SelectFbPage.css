@@ -10,7 +10,7 @@
   height: 413px;
   flex-shrink: 0;
   border-radius: 15px;
-  background: blue;
+  background: #fff;
   margin: auto;
   box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
   margin-right: 4%;
@@ -187,7 +187,7 @@
     height: 48px;
     /* padding-left: 10px; */
     margin: auto;
-    
+
   }
 
   .content_div {
