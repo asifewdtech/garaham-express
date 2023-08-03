@@ -106,20 +106,21 @@ body {
   .CP_inner_container {
     width: 100%;
     padding: 0;
-    /* padding-left: 15px;
-    padding-right: 15px; */
+    /* padding-left: 15px; */
+    /* padding-right: 15px; */
     padding-bottom: 20px;
   }
 
   .CP_heading {
     padding-top: 18px;
-    font-size: 24px;
+    font-size: 22px;
     line-height: 24px;
+    padding-left: 10px;
   }
 
   .CP_sub_heading {
     font-size: 19px;
-    padding-left: 0;
+    padding-left: 10px;
     padding-top: 8px;
     padding-bottom: 15px;
     /* margin-top: -12px; */
@@ -130,6 +131,7 @@ body {
     height: 48px;
     font-size: 15px;
     margin-top: 20px;
+    margin-left: 10px;
   }
 
   .go_back {
@@ -138,5 +140,12 @@ body {
     font-size: 15px;
     margin-top: 20px;
     margin-left: -15px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1550px) {
+  .CP_heading {
+    font-size: 28px;
+    line-height: 30px;
   }
 }

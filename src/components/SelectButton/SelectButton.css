@@ -1,7 +1,6 @@
 .select-button-container {
     margin-bottom: 20px;
     width: fit-content;
-    margin-left: 0;
 }
 
 .list_items {
@@ -42,6 +41,26 @@
         /* width: 80px; */
         padding: 6px;
         display: table-cell;
+    }
+
+    .select-button-container {
+        margin-bottom: 20px !important;
+        margin: auto;
+        margin-top: -40px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1440px) {
+    .list_items {
+        color: #555;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: Rubik;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: -0.34px;
+        width: 115px;
     }
 
     .select-button-container {

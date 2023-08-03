@@ -105,12 +105,11 @@
  
   width: 25%;
   flex-shrink: 0;
+  height: 500px;
   border-radius: 25px;
   background: #fff;
   box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
-
-
-
+  margin-top: -240px;
 }
 
 .image_container {
@@ -127,7 +126,7 @@
   color: #1877f2;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Rubik;
-  font-size: 30px;
+  font-size: 26px;
   font-style: normal;
   font-weight: 500;
   line-height: 70px;
@@ -142,7 +141,7 @@
   font-family: Rubik;
   font-size: 18px;
   font-style: normal;
-  padding: 36px;
+  padding: 8px 30px;
   font-weight: 400;
   line-height: 20px;
   /* 111.111% */
@@ -167,6 +166,18 @@
 .content_div {
   display: flex;
 }
+.fb-box-condition {
+  color: #555;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Rubik;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  /* 111.111% */
+  letter-spacing: -0.34px;
+  padding-bottom: 5px;
+}
 
 /* MEDIA QUERY */
 
@@ -174,6 +185,7 @@
   .custom-select {
     width: 95%;
     height: 48px;
+    padding-left: 10px;
   }
 
   .content_div {
@@ -197,6 +209,18 @@
 .image_container img{
   margin-top: -55px;
 }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1440px) {
+  .side_container {
+    margin-top: -180px;
+  }
+  .contest {
+    font-size: 20px;
+  }
+  .page, .fb-box-condition {
+    font-size: 16px;
+  }
 }
 
 
