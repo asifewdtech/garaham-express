@@ -133,11 +133,11 @@ body {
   }
 
   .go_back {
-    width: 165.73px;
+    width: 50%;
     height: 48px;
     font-size: 15px;
     margin-top: 20px;
-    margin-left: -15px;
+    margin-left: 0;
   }
 }
 

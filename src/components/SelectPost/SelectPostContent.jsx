@@ -76,7 +76,7 @@ const SelectPostContent = () => {
       <Box className='cards'>
         {cardContent.map((card, i) => {
           return <Card key={i} onClick={() => handleSelectCard(i)} className={`post_card ${selectCard === i ? "active_card" : ""}`}>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: "50%" }}>
               <CardContent sx={{ padding: 0 }}>
                 <Typography variant="subtitle1" color="text.secondary" component="div" className='post_text'>
                   {card.content}

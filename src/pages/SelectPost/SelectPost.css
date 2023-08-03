@@ -46,15 +46,16 @@
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-row-gap: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .cards-main-box {
   padding-top: 30px;
   height: 300px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -81,8 +82,10 @@
 
 .post_card {
   display: flex;
-  width: 480px;
+  width: 44%;
   /* height: 221px; */
+  justify-content: space-between;
+  margin-bottom: 20px;
   flex-shrink: 0;
   border-radius: 10px;
   background: #fff;
@@ -92,13 +95,13 @@
 }
 
 .post_text {
-  width: 273px;
+  /* width: 273px; */
   /* height: 147px; */
   flex-shrink: 0;
   color: #555;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Rubik;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
@@ -107,9 +110,9 @@
 }
 
 .post_image {
-  margin-left: 20px;
-  height: 180px;
-  width: 180px;
+  /* padding-left: 20px; */
+  /* height: 180px; */
+  width: 40%;
   flex-shrink: 0;
   border-radius: 5px;
   /* background: url('/postImg.png'), lightgray 50% / cover no-repeat; */
