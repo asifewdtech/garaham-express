@@ -56,7 +56,8 @@ const Navbar = () => {
               >
                 <Image
                   src={brandLogo}
-                  width={270}
+                  width={270} 
+                  height={70}
                   alt='brandlogo'
                 />
               </Typography>
@@ -71,7 +72,7 @@ const Navbar = () => {
                   display: { xs: 'flex', md: 'none' },
                   flexGrow: 1,
                   fontFamily: 'monospace',
-                  fontWeight: 700,
+                  // fontWeight: 700,
                   letterSpacing: '.3rem',
                   color: 'inherit',
                   textDecoration: 'none',
@@ -80,6 +81,7 @@ const Navbar = () => {
                 <Image
                   src={brandLogo}
                   width={200}
+                  height={50}
                   alt='brandlogo'
                 />
               </Typography>

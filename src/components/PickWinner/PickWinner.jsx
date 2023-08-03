@@ -10,7 +10,7 @@ const PickWinner = () => {
       {" "}
       Clik on the button to choose a comment!
     </Typography>
-    <div>
+    <div style={{textAlign:'center'}}>
       <Box>
           <Image
             alt='trophy'
