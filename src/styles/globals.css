@@ -715,9 +715,6 @@ a {
 }
 
 @media only screen and (max-width: 768px) {
-  .winnerSecMain {
-      /* padding-top: 30px; */
-  }
 
   .borderRadius {
       width: 80% !important;
@@ -769,8 +766,6 @@ a {
 .winnerContentSec1 img {
   width: 127px;
 }
-
-.widhetMain_inner {}
 
 .bck-white {
   box-shadow: 0px 1px 21px 3px rgba(0, 0, 0, 0.05);
