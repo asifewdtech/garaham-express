@@ -157,27 +157,28 @@
 
 @media only screen and (max-width: 768px) {
   .cards {
-    grid-template-columns: 100%;
-    overflow-y: hidden;
+    grid-template-columns: 98%;
+    /* overflow-y: hidden; */
+    padding-left: 3%;
   }
 
   .cards-main-box {
     height: auto;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
   }
 
   .post_text {
-    width: 169px;
+    width: 100%;
     font-size: 12px;
     font-weight: 400;
     line-height: 17px;
   }
   .post_image {
-    width: 111px;
+    width: 40%;
     height: 111px;
   }
   .post_card {
-    width: 318px;
+    width: 90%;
     padding: 15px;
   }
   .cmnts_count {
@@ -185,5 +186,12 @@
     font-size: 12px;
   }
 }
+
+@media only screen and (max-width: 1200px)  {
+  .side_container {
+    display: none;
+  }
+}
+
 
 /* select post from facebook page css ends */

@@ -15,7 +15,7 @@ body {
   /* height: 413px; */
   flex-shrink: 0;
   border-radius: 15px;
-  background: #fff;
+  background: brown;
   margin: auto;
   box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
   /* margin-right: 4%; */
@@ -98,9 +98,7 @@ body {
 
 @media only screen and (max-width: 768px) {
   .SP_container {
- 
     max-width: 100%;
-
   }
 
   .CP_inner_container {
@@ -147,5 +145,11 @@ body {
   .CP_heading {
     font-size: 28px;
     line-height: 30px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+  .CP_inner_container {
+    width: 100% !important;
   }
 }

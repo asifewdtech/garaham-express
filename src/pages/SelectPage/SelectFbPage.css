@@ -185,7 +185,9 @@
   .custom-select {
     width: 95%;
     height: 48px;
-    padding-left: 10px;
+    /* padding-left: 10px; */
+    margin: auto;
+    
   }
 
   .content_div {

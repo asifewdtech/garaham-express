@@ -263,7 +263,7 @@ const ChooseOptionContent = () => {
             <div>
               <legend className="legend">BgColor</legend>
               <select
-                className="input_field"
+                className="input_field min_screen"
                 name="minimumTags"
                 value={proOptions.bgColor}
                 onChange={handleProcustomizaion}
@@ -278,7 +278,7 @@ const ChooseOptionContent = () => {
             <div>
               <legend className="legend">Confetti style</legend>
               <select
-                className="input_field"
+                className="input_field min_screen"
                 name="minimumTags"
                 value={proOptions.bgColor}
                 onChange={handleProcustomizaion}

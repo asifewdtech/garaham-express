@@ -114,7 +114,7 @@
   }
 
   .header-p {
-    width: 347px !important;
+    width: 100% !important;
     height: 124px !important;
     flex-shrink: 0 !important;
     color: #7B88A8 !important;
