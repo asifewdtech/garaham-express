@@ -199,7 +199,7 @@ input[type='file'] {
 
 .logo_file_container {
   width: 63px;
-  height: 40px;
+  height: 60px;
   flex-shrink: 0;
   border: none;
   border-radius: 5px 5px 0px 0px;
@@ -245,8 +245,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .custom-number-input-arrows{
   position: absolute;
-  right: 37%;
-  top: 11px;
+  top: 4px;
+
+  right: 160px;
 }
 .custom-number-input{
   position: relative;
@@ -257,6 +258,7 @@ input[type="number"]::-webkit-outer-spin-button {
 @media only screen and (max-width: 768px) {
   .logo_file_container {
     width: 90% !important;
+    height: 60px;
   }
   .text_inputs {
     grid-template-columns: 1fr;
@@ -268,14 +270,16 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .input_field {
-    width: 85%;
+    width: 90%;
+    height: 40px;
   }
 
   .advanced {
     width: 90%;
   }
   .custom-number-input-arrows{
-    right: 32px;
+    right: 39px;
+    top: 4px;
   }
   .next , .prev {
     font-size: 16px;
@@ -292,8 +296,8 @@ input[type="number"]::-webkit-outer-spin-button {
   }
   .custom-number-input-arrows{
     position: absolute;
-    right: 39%;
-    top: 11px;
+    right: 169px;
+    top: 4px;
   }
 }
 
@@ -306,5 +310,10 @@ input[type="number"]::-webkit-outer-spin-button {
 @media only screen and (min-width: 570px) and (max-width: 768px) {
   .custom-number-input-arrows{
     right: 12%;
+  }
+}
+@media only screen and (min-width: 1450px) {
+  .custom-number-input-arrows{
+    right: 41%;
   }
 }
