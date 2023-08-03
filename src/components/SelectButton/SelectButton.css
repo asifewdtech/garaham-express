@@ -60,7 +60,7 @@
         font-weight: 500;
         line-height: 20px;
         letter-spacing: -0.34px;
-        width: 115px;
+        /* width: 115px; */
     }
 
     .select-button-container {
