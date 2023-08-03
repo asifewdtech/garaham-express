@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Typography, Card, Box, CardContent, CardMedia  } from "@mui/material";
+import { Typography, Card, Box, Container, CardContent, CardMedia, Button  } from "@mui/material";
 import MySwitch from "../ConditionsForm/Switch";
 import { useRouter } from "next/router";
 import CustomNumberInput from "../CustomNumberInput";
 import Image from "next/image";
+import Link from "next/link";
 
 const ChooseOptionContent = () => {
 
@@ -263,7 +264,7 @@ const ChooseOptionContent = () => {
             <div>
               <legend className="legend">BgColor</legend>
               <select
-                className="input_field"
+                className="input_field min_screen"
                 name="minimumTags"
                 value={proOptions.bgColor}
                 onChange={handleProcustomizaion}
@@ -278,7 +279,7 @@ const ChooseOptionContent = () => {
             <div>
               <legend className="legend">Confetti style</legend>
               <select
-                className="input_field"
+                className="input_field min_screen"
                 name="minimumTags"
                 value={proOptions.bgColor}
                 onChange={handleProcustomizaion}
@@ -293,10 +294,16 @@ const ChooseOptionContent = () => {
           </>
         )}
       </div>
-      <div className="btns">
-        <button className="prev">Previous</button>
-        <button className="next">Next</button>
-      </div>
+      <Container maxWidth='xl' sx={{marginLeft: "-12px"}}>
+        <Box sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
+          <Link href='#'>
+            <Button variant="contained" className="go_back">Go Back</Button>
+          </Link>
+          <Link href='#'>
+            <Button variant="contained" className="save_btn">Save and Continue</Button>
+          </Link>
+        </Box>
+      </Container>
     </form>
   </>
 }

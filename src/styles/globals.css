@@ -98,9 +98,7 @@ body {
 
 @media only screen and (max-width: 768px) {
   .SP_container {
- 
     max-width: 100%;
-
   }
 
   .CP_inner_container {
@@ -135,11 +133,11 @@ body {
   }
 
   .go_back {
-    width: 165.73px;
+    width: 50%;
     height: 48px;
     font-size: 15px;
     margin-top: 20px;
-    margin-left: -15px;
+    margin-left: 0;
   }
 }
 
@@ -1252,5 +1250,11 @@ footer {
   .ellipseimg {
       right: -46px;
       top: 24px;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+  .CP_inner_container {
+    width: 100% !important;
   }
 }

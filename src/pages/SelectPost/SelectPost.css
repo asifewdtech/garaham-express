@@ -46,15 +46,16 @@
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-row-gap: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .cards-main-box {
   padding-top: 30px;
   height: 300px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -81,8 +82,10 @@
 
 .post_card {
   display: flex;
-  width: 480px;
+  width: 44%;
   /* height: 221px; */
+  justify-content: space-between;
+  margin-bottom: 20px;
   flex-shrink: 0;
   border-radius: 10px;
   background: #fff;
@@ -92,13 +95,13 @@
 }
 
 .post_text {
-  width: 273px;
+  /* width: 273px; */
   /* height: 147px; */
   flex-shrink: 0;
   color: #555;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Rubik;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
@@ -107,9 +110,9 @@
 }
 
 .post_image {
-  margin-left: 20px;
-  height: 180px;
-  width: 180px;
+  /* padding-left: 20px; */
+  /* height: 180px; */
+  width: 40%;
   flex-shrink: 0;
   border-radius: 5px;
   /* background: url('/postImg.png'), lightgray 50% / cover no-repeat; */
@@ -155,29 +158,59 @@
 
 /* MEDIA QUERY */
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 320px) and (max-width: 450px) {
   .cards {
-    grid-template-columns: 100%;
-    overflow-y: hidden;
+    padding-left: 3%;
+  }
+}
+
+@media only screen and (min-width: 451px) and (max-width: 600px) {
+  .cards {
+    padding-left: 5%;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 768px) {
+  .post_image {
+    width: 14% !important;
+    height: 100%;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 499px) {
+  .post_image {
+    width: 40% !important;
+    height: 111px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  .cards {
+    grid-template-columns: 98%;
+    /* overflow-y: hidden; */
+    padding-left: 3%;
   }
 
   .cards-main-box {
     height: auto;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
   }
 
   .post_text {
-    width: 169px;
+    width: 100%;
     font-size: 12px;
     font-weight: 400;
     line-height: 17px;
   }
-  .post_image {
-    width: 111px;
+  /* .post_image {
+    width: 40%;
     height: 111px;
-  }
+  } */
   .post_card {
-    width: 318px;
+    width: 90%;
     padding: 15px;
   }
   .cmnts_count {
@@ -185,5 +218,12 @@
     font-size: 12px;
   }
 }
+
+@media only screen and (max-width: 1200px)  {
+  .side_container {
+    display: none;
+  }
+}
+
 
 /* select post from facebook page css ends */

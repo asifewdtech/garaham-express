@@ -56,11 +56,11 @@
   line-height: 20px;
   /* 133.333% */
   letter-spacing: -0.34px;
-  margin-bottom: 16px;
+  margin-bottom: 5px;
 }
 
 .input_field {
-  width: 368px;
+  width: 60%;
   height: 40px;
   flex-shrink: 0;
   border: none;
@@ -96,6 +96,7 @@
   margin-top: 18px;
   /* justify-content: center; */
   align-items: center;
+  padding-left: 10px;
 }
 
 .switch_text {
@@ -113,9 +114,10 @@
   border-radius: 10px;
   background: #FFF;
   box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
-  width: 398px;
+  width: 63%;
   height: 54px;
   flex-shrink: 0;
+  padding-right: 5px;
 
 }
 
@@ -123,7 +125,7 @@
   color: #555;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Rubik;
-  font-size: 18px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
@@ -139,6 +141,7 @@
   display: flex;
   justify-content: left;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .myswitch {
@@ -195,7 +198,7 @@ input[type='file'] {
 }
 
 .logo_file_container {
-  width: 378px;
+  width: 63px;
   height: 40px;
   flex-shrink: 0;
   border: none;
@@ -242,7 +245,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .custom-number-input-arrows{
   position: absolute;
-  right: 147px;
+  right: 37%;
   top: 11px;
 }
 .custom-number-input{
@@ -251,7 +254,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* MEDIA QUERY */
 
-@media only screen and (min-width: 320px) and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
+  .logo_file_container {
+    width: 90% !important;
+  }
   .text_inputs {
     grid-template-columns: 1fr;
   }
@@ -262,11 +268,11 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
   .input_field {
-    width: 321px;
+    width: 85%;
   }
 
   .advanced {
-    width: 338px
+    width: 90%;
   }
   .custom-number-input-arrows{
     right: 32px;
@@ -274,5 +280,31 @@ input[type="number"]::-webkit-outer-spin-button {
   .next , .prev {
     font-size: 16px;
     font-weight: 600 !important;
+  }
+  .min_screen {
+    width: 93%;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1200px) {
+  .input_field {
+    width: 55% !important;
+  }
+  .custom-number-input-arrows{
+    position: absolute;
+    right: 39%;
+    top: 11px;
+  }
+}
+
+@media only screen and (min-width: 440px) and (max-width: 768px) {
+  .custom-number-input-arrows{
+    right: 10%;
+  }
+}
+
+@media only screen and (min-width: 570px) and (max-width: 768px) {
+  .custom-number-input-arrows{
+    right: 12%;
   }
 }
