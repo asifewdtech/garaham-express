@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
-        <MainPageHeader/>
+        {/* <MainPageHeader/> */}
         <CommentPicker />
       </main>
       

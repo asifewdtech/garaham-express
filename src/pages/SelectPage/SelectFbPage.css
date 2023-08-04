@@ -22,7 +22,7 @@
 .SP_heading {
   color: #444;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 36px;
   font-style: normal;
   font-weight: 500;
@@ -36,7 +36,7 @@
   padding-left: 13px;
   color: #555;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -109,7 +109,7 @@
   border-radius: 25px;
   background: #fff;
   box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
-  margin-top: -240px;
+  /* margin-top: -240px; */
 }
 
 .image_container {
@@ -125,7 +125,7 @@
 .contest {
   color: #1877f2;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 26px;
   font-style: normal;
   font-weight: 500;
@@ -138,7 +138,7 @@
 .page {
   color: #a0a0a0;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
   padding: 8px 30px;
@@ -169,7 +169,7 @@
 .fb-box-condition {
   color: #555;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -180,6 +180,13 @@
 }
 
 /* MEDIA QUERY */
+
+@media only screen and (min-width: 770px) {
+  .post_buttons {
+    width: 60%;
+    margin-left: 0;
+  }
+}
 
 @media only screen and (max-width: 768px) {
   .custom-select {
@@ -197,6 +204,8 @@
   .select_page {
     width: 100%;
     height: 47px;
+    font-size: 16px;
+    font-family: Roboto;
   }
   .side_container {
     width: 100%;
@@ -214,9 +223,6 @@
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1440px) {
-  .side_container {
-    margin-top: -180px;
-  }
   .contest {
     font-size: 20px;
   }

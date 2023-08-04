@@ -13,7 +13,7 @@
   margin-top: 50px;
   color: #5065a8;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 100px;
   font-style: normal;
   font-weight: 500;
@@ -24,7 +24,7 @@
 .winner_subheading {
   color: #555;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 36px;
   font-style: normal;
   font-weight: 500;
@@ -120,7 +120,7 @@
   height: 63px;
   flex-shrink: 0;
   color: #555;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -200,7 +200,7 @@ margin-left: 8px;
 }
 .new_winner{
     color: #FFF;
-font-family: Rubik;
+    font-family: 'Catamaran', sans-serif;
 font-size: 24px;
 font-style: normal;
 font-weight: 500;

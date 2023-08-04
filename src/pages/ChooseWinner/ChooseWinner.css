@@ -13,7 +13,7 @@
 .chooseWinner_heading {
   color: #444;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 36px;
   font-style: normal;
   font-weight: 500;
@@ -29,6 +29,7 @@
   align-items: center !important;
   justify-content: center !important;
   margin: 0 auto !important;
+  margin-left: 15px !important;
 }
 
 .timg {

@@ -39,7 +39,7 @@ const SelectFbPageCopy = () => {
   return (
     <>
       <Navbar />
-      <Header />
+      {/* <Header /> */}
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
           <Grid container spacing={2} className="select-button-container">
@@ -52,7 +52,7 @@ const SelectFbPageCopy = () => {
                     className={`list_items ${
                       selectTab === item ? "active_li" : null
                     }`}
-                  >{`${i + 1}. ${item}`}</Item>
+                  ><span className="button_list_number">{`${i + 1}.`}</span> {`${item}`}</Item>
                 </Grid>
               );
             })}
@@ -77,7 +77,7 @@ const SelectFbPageCopy = () => {
               <div className="side_text">
                 <Typography className="contest">Facebook Contest</Typography>
                 <div className="page">
-                  <Typography sx={{ pb: "10px", fontFamily: "Rubik" }}>
+                  <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Page
                   </Typography>
                   <Typography className="fb-box-condition">

@@ -14,7 +14,7 @@
 .form_heading {
   color: #444;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 36px;
   font-style: normal;
   font-weight: 500;
@@ -57,11 +57,12 @@
   /* 133.333% */
   letter-spacing: -0.34px;
   margin-bottom: 5px;
+  font-family: Rubik;
 }
 
 .input_field {
-  width: 60%;
-  height: 40px;
+  width: 90%;
+  height: 53px !important;
   flex-shrink: 0;
   border: none;
   border-radius: 5px 5px 0px 0px;
@@ -124,7 +125,7 @@
 .advanced p {
   color: #555;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
@@ -194,7 +195,7 @@ input[type='file'] {
   border-radius: 10px;
   color: white;
   margin-right: 10px;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
 }
 
 .logo_file_container {
@@ -214,7 +215,7 @@ input[type='file'] {
   width: 15rem;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
 }
 
 /* .scroll {
@@ -246,8 +247,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .custom-number-input-arrows{
   position: absolute;
   top: 4px;
-
-  right: 160px;
+  right: 45px;
 }
 .custom-number-input{
   position: relative;
@@ -278,7 +278,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 90%;
   }
   .custom-number-input-arrows{
-    right: 39px;
+    right: 43px;
     top: 4px;
   }
   .next , .prev {
@@ -292,11 +292,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 @media only screen and (min-width: 769px) and (max-width: 1200px) {
   .input_field {
-    width: 55% !important;
+    width: 90% !important;
   }
   .custom-number-input-arrows{
     position: absolute;
-    right: 169px;
+    right: 45px;
     top: 4px;
   }
 }
@@ -314,6 +314,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 @media only screen and (min-width: 1450px) {
   .custom-number-input-arrows{
-    right: 41%;
+    right: 85px;
   }
 }

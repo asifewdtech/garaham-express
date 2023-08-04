@@ -19,7 +19,7 @@
 height: 123.714px;
 flex-shrink: 0;
 color: rgba(80, 101, 168, 0.22);
-font-family: Rubik;
+font-family: 'Catamaran', sans-serif;
 font-size: 200px;
 font-style: normal;
 font-weight: 700;
@@ -138,7 +138,7 @@ height: 109.656px; */
   height: 63px;
   flex-shrink: 0;
   color: #555;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

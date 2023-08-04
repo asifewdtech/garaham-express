@@ -87,16 +87,7 @@ const ChooseOptionContent = () => {
         </div>
         <div>
           <legend className="legend">Number of winners</legend>
-          {/* <input
-            className="input_field"
-            placeholder="2"
-            name="input2"
-            type="number"
-            label="Input 2"
-            variant="outlined"
-            value={BasicConditions.input2}
-            onChange={handleChange}
-          /> */}
+          
           <CustomNumberInput value = {BasicConditions.winners}
                 onChange={handleChange}/>
         </div>
@@ -295,7 +286,7 @@ const ChooseOptionContent = () => {
         )}
       </div>
       <Container maxWidth='xl' sx={{marginLeft: "-12px"}}>
-        <Box sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
+        <Box className="post_buttons" sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
           <Link href='#'>
             <Button variant="contained" className="go_back">Go Back</Button>
           </Link>

@@ -2,15 +2,14 @@
 .commentPicker {
   color: #444;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
-  font-size: 32px;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 60px;
   font-style: normal;
-  font-weight: 400;
-  line-height: 70px;
+  font-weight: 500;
+  /* line-height: 70px; */
   /* 218.75% */
-  letter-spacing: -1.34px;
-  margin: auto;
-  margin-top: 15px;
+  letter-spacing: -0.7px;
+  /* margin: auto; */
   display: flex;
   justify-content: center;
   margin-top: 45px !important;
@@ -102,7 +101,7 @@
   .header-cp {
     color: #555;
     font-feature-settings: 'clig' off, 'liga' off !important;
-    font-family: Rubik !important;
+    font-family: 'Catamaran', sans-serif !important;
     font-size: 38px !important;
     font-style: normal !important;
     font-weight: 500 !important;
@@ -120,7 +119,7 @@
     color: #7B88A8 !important;
     text-align: center !important;
     font-feature-settings: 'clig' off, 'liga' off !important;
-    font-family: Rubik !important;
+    font-family: 'Catamaran', sans-serif !important;
     font-size: 18px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -131,7 +130,7 @@
   .commentPicker {
     color: #444;
     font-feature-settings: 'clig' off, 'liga' off !important;
-    font-family: Rubik !important;
+    font-family: 'Catamaran', sans-serif !important;
     font-size: 24px !important;
     font-style: normal !important;
     font-weight: 400 !important;

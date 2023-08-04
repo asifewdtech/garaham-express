@@ -38,7 +38,9 @@ const SelectButton = () => {
     <Grid container spacing={2} className='select-button-container'>
       {selectButtons.map((item, i) => {
         return <Grid item xs={3} key={i}>
-          <Item onClick={handleSelect} data-tab={item} className={`list_items ${selectTab === item ? "active_li" : null}`}>{`${i + 1}. ${item}`}</Item>
+          <Item onClick={handleSelect} data-tab={item} className={`list_items ${selectTab === item ? "active_li" : null}`}>
+            <span className="button_list_number">{`${i + 1}.`}</span> {`${item}`}
+          </Item>
         </Grid>
       })}
     </Grid>

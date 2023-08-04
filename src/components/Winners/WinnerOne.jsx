@@ -27,10 +27,10 @@ const WinnerOne = ({ count }) => {
     <div className="col-lg-4 m-auto widthMain">
       <h2 className="prizeWinner text-center">1</h2>
       <div className="d-flex justify-content-center align-items-center winnerContentSec1">
-        <img src="/trophy.png" alt="" />
+        <img src="/newwinnertrophy.png" alt="" />
         <div className="yellowBorder marginImg">
-          <h2 className="py-3 px-4 winnerTitle text-primary mb-0">
-            Graham Caldwell
+          <h2 style={{color: "#ECC57B"}} className="py-3 px-4 winnerTitle text-primary mb-0">
+          Sara Marshall
           </h2>
         </div>
       </div>
@@ -51,11 +51,11 @@ const WinnerOne = ({ count }) => {
           </div>
         </div>
         <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
-        <img src="/winner.png" alt="" />
+        <img src="/commentdp.png" alt="" />
 
           <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
-            <h6 className="text-primary winnerTitleScnd mb-0">
-              Graham Caldwell
+            <h6 style={{color: '#555'}} className="winnerTitleScnd mb-0">
+            Sara Marshall
             </h6>
             <p className="mb-0 mt-2 mt-sm-2 mt-lg-0">Test Comment 🎈🎊🎉</p>
           </div>
@@ -65,11 +65,11 @@ const WinnerOne = ({ count }) => {
     <div className="col-lg-4 m-auto widthMain">
       <h2 className="prizeWinner text-center winnerSecMain">2</h2>
       <div className="d-flex justify-content-center align-items-center winnerContentSec1 ">
-      <img src="/trophy.png" alt="" />
+      <img src="/newwinnertrophy.png" alt="" />
 
         <div className="yellowBorder marginImg">
-          <h2 className="py-3 px-3 winnerTitle text-primary mb-0">
-            Graham Caldwell
+          <h2 className="text-primary py-3 px-3 winnerTitle mb-0">
+          Sara Marshall
           </h2>
         </div>
       </div>
@@ -90,10 +90,10 @@ const WinnerOne = ({ count }) => {
           </div>
         </div>
         <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
-          <img src="/winner.png" alt="" />
+          <img src="/commentdp.png" alt="" />
           <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
-            <h6 className="text-primary winnerTitleScnd mb-0">
-              Graham Caldwell
+            <h6 style={{color: '#555'}} className="winnerTitleScnd mb-0">
+            Sara Marshall
             </h6>
             <p className="mb-0 mt-2 mt-sm-2 mt-lg-0">Test Comment 🎈🎊🎉</p>
           </div>
@@ -105,11 +105,11 @@ const WinnerOne = ({ count }) => {
         3
       </h2>
       <div className="d-flex justify-content-center align-items-center winnerContentSec1 ">
-      <img src="/trophy.png" alt="" />
+      <img src="/newwinnertrophy.png" alt="" />
 
         <div className="yellowBorder marginImg">
           <h2 className="py-3 px-3 winnerTitle text-primary mb-0">
-            Graham Caldwell
+          Sara Marshall
           </h2>
         </div>
       </div>
@@ -130,11 +130,11 @@ const WinnerOne = ({ count }) => {
           </div>
         </div>
         <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
-        <img src="/winner.png" alt="" />
+        <img src="/commentdp.png" alt="" />
 
           <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
-            <h6 className="text-primary winnerTitleScnd mb-0">
-              Graham Caldwell
+            <h6 style={{color: '#555'}} className="winnerTitleScnd mb-0">
+            Sara Marshall
             </h6>
             <p className="mb-0 mt-2 mt-sm-2 mt-lg-0">Test Comment 🎈🎊🎉</p>
           </div>

@@ -10,7 +10,7 @@
   height: 123.714px;
   flex-shrink: 0;
   color: rgba(80, 101, 168, 0.22);
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 200px;
   font-style: normal;
   font-weight: 700;
@@ -58,7 +58,7 @@
   font-weight: 500;
   letter-spacing: -0.34px;
   margin: auto;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   /* padding-right: px; */
 }
 
@@ -85,7 +85,7 @@
   margin-left: 8px;
   margin-right: 18px;
   display: inline-block;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
 }
 
 #cmnt {
@@ -97,7 +97,7 @@
   /* 291.667% */
   letter-spacing: -0.34px;
   width: 13rem;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
 }
 
 #ellipse {
@@ -122,7 +122,7 @@
   height: 63px;
   flex-shrink: 0;
   color: #555;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -186,7 +186,7 @@
   height: 63px;
   flex-shrink: 0;
   color: #555;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;

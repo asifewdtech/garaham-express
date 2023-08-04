@@ -8,7 +8,7 @@ const CommentPicker = () => {
   return (
     <Container maxWidth="xl" sx={{paddingBottom: '20px'}}>
       <Typography className="commentPicker">
-        Start by  Choosing a Platform
+      Choose a Platform
       </Typography>
       <Grid style={{ cursor: "pointer", justifyContent: "center" }} container>
         <Grid className="logo_box_main" item xl={2} lg={2} md={4}  xs={6}>

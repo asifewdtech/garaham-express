@@ -1,62 +1,76 @@
 import React from "react";
 import { Box, Typography, Container, Paper, Grid, Button } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
 import WinnerOne from "@/components/Winners/WinnerOne";
 import Navbar from "@/components/AppBar/AppBar";
 const Winner = () => {
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   }));
-  return <>
-    <Navbar />
-    <Container maxWidth>
-      <Box className="winner_container">
-        <Box className="winner">
-          <Typography className="winner_heading">And the WINNER is</Typography>
-          <Typography className="winner_subheading">
-            Congrats! Your winner has been picked!
-          </Typography>
+  return (
+    <>
+      <Navbar />
+      <Container maxWidth>
+        <Box className="winner_container">
+          <Box className="winner">
+            <Typography className="winner_heading">
+              And the WINNER is
+            </Typography>
+            <Typography className="winner_subheading">
+              Congrats! Your winner has been picked!
+            </Typography>
 
-          {/* Winner list starts */}
-          {/* <div className="winners_list">
+            {/* Winner list starts */}
+            {/* <div className="winners_list">
             <WinnerOne count={1} />
             <WinnerOne count={2} />
             <WinnerOne count={3} />
           </div> */}
-          <WinnerOne/>
-          {/* Winner list starts */}
-        </Box>
-        <Box className="footer1">
-          <Link style={{ textDecoration: 'none', color: 'white' }} href='/SelectPage/SelectFbPage'>
-            <Typography className="new_contest active">
-              Start a New Contest{" "}
-            </Typography>
-          </Link>
-          <div className="share">
-            <Typography>Share the results</Typography>
-            <div className="svg-container"></div>
-            <Link href="#" className="share_link">
-              https://sweepwidg
-            </Link>
-            <div>
-              <Image src="/copy.png" width="24" height="24" alt="copy"></Image>
-            </div>
-          </div>
-          <div className="pick">
-            <Link style={{ textDecoration: 'none', color: 'white' }} href='/ChooseWinner/ChooseWinner'>
-              <Typography className="new_winner">
-                Pick Another Winner
+            <WinnerOne />
+            {/* Winner list starts */}
+          </Box>
+          <Box className="footer1">
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              href="/SelectPage/SelectFbPage"
+            >
+              <Typography className="new_contest active">
+                Start a New Contest{" "}
               </Typography>
             </Link>
-          </div>
-        </Box>
-        {/* <Container maxWidth='xl'>
+            <div className="share">
+              <Typography>Share the results</Typography>
+              <div className="svg-container"></div>
+              <div className="share_link">
+                <Link href="#">https://viralkit.io/c</Link>
+              </div>
+              <div style={{paddingLeft: "15px", paddingTop: "10px"}}>
+                <Image
+                  src="/copy.png"
+                  width="24"
+                  height="24"
+                  alt="copy"
+                ></Image>
+              </div>
+            </div>
+            <div className="pick">
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                href="/ChooseWinner/ChooseWinner"
+              >
+                <Typography className="new_winner">
+                  Pick Another Winner
+                </Typography>
+              </Link>
+            </div>
+          </Box>
+          {/* <Container maxWidth='xl'>
           <div className="share share_copy">
             <Typography>Share the results</Typography>
             <div className="svg-container"></div>
@@ -76,9 +90,10 @@ const Winner = () => {
             </Link>
           </Box>
         </Container> */}
-      </Box>
-    </Container>
-  </>
+        </Box>
+      </Container>
+    </>
+  );
 };
 
 export default Winner;

@@ -12,7 +12,7 @@ const MySwitch = styled(Switch)(({ theme }) => ({
     borderRadius: "50%",
     backgroundColor: "#555555",
     // boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.23)",
-    marginTop: "-5px",
+    marginTop: "-6.5px",
     marginLeft: "-4px",
   },
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -24,7 +24,7 @@ const MySwitch = styled(Switch)(({ theme }) => ({
     "& + .MuiSwitch-track": {
       opacity: 1,
       backgroundColor: "#F6F9FF",
-      border: "2px #cccecf solid", // Border effect
+      border: "1px #cccecf solid", // Border effect
     },
   },
   "& .MuiSwitch-track": {
@@ -33,7 +33,7 @@ const MySwitch = styled(Switch)(({ theme }) => ({
     borderRadius: 16,
     height: "87%",
     border: "2px #cccecf solid",
-    boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.23)",
+    // boxShadow: "0px 3px 3px rgba(0, 0, 0, 0.23)",
   },
 }));
 

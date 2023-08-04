@@ -2,6 +2,7 @@ import { Box,Card, Typography, CardContent, CardMedia , Button } from "@mui/mate
 import Link from "next/link";
 import Image from "next/image";
 import trophy from '@/assets/images/winner.png'
+import newtrophy from '@/assets/images/newtrophy.png';
 
 
 const PickWinner = () => {
@@ -15,7 +16,7 @@ const PickWinner = () => {
           <Image
             alt='trophy'
             className='trophy1'
-            src={trophy}
+            src={newtrophy}
           />
    <div className="text-center">
    <Link href='/Winner/Winner' >

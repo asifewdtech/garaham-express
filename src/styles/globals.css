@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@100;200;300;400;500;600;700;800;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
   margin: 0 !important;
-  font-family: Rubik !important;
+  font-family: 'Catamaran', sans-serif !important;
+  background-color: #FAFBFA;;
 }
 
 .SP_container {
@@ -14,9 +16,10 @@ body {
   width: 70%;
   /* height: 413px; */
   flex-shrink: 0;
-  border-radius: 15px;
+  border-radius: 0 15px 15px 15px !important;
   background: #fff;
   margin: auto;
+  margin-top: 0;
   box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
   /* margin-right: 4%; */
   margin-left: 0;
@@ -52,16 +55,16 @@ body {
 }
 
 .save_btn {
-  border-radius: 10px;
-  background: #3e63cf;
+  border-radius: 6px;
+  background: #0000BA;
   box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
   width: 197px;
   height: 57px;
   flex-shrink: 0;
   color: #fff;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
-  font-size: 17px;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 20px;
   font-style: normal;
   font-weight: 500;
   letter-spacing: -0.34px;
@@ -70,16 +73,16 @@ body {
 }
 
 .go_back {
-  border-radius: 10px;
-  background: #E8EEFF;
+  border-radius: 6px;
+  background: #E1E1FF;
   box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
   width: 197px;
   height: 57px;
   flex-shrink: 0;
   color: #3E63CF;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Rubik;
-  font-size: 17px;
+  font-family: 'Catamaran', sans-serif;
+  font-size: 20px;
   font-style: normal;
   font-weight: 500;
   letter-spacing: -0.34px;
@@ -96,9 +99,29 @@ body {
 }
 /* MEDIA QUERY */
 
+@media only screen and (max-width: 698px) {
+  .CP_inner_container {
+    border-radius: 0 0 15px 15px !important;
+  }
+
+  .go_back {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 768px) {
+  .CP_inner_container {
+    border-radius: 15px !important;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .SP_container {
     max-width: 100%;
+  }
+
+  .prizeWinner {
+    font-size: 150px !important;
   }
 
   .CP_inner_container {
@@ -114,13 +137,17 @@ body {
     font-size: 22px;
     line-height: 24px;
     padding-left: 10px;
+    font-weight: 700;
+    font-family: Catamaran;
   }
 
   .CP_sub_heading {
-    font-size: 19px;
+    font-size: 16px;
     padding-left: 10px;
     padding-top: 8px;
     padding-bottom: 15px;
+    font-weight: 400;
+    font-family: Roboto;
     /* margin-top: -12px; */
   }
 
@@ -133,25 +160,25 @@ body {
   }
 
   .go_back {
-    width: 50%;
+    /* width: 50%; */
     height: 48px;
     font-size: 15px;
     margin-top: 20px;
-    margin-left: 0;
+    margin-left: 15px;
   }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1550px) {
   .CP_heading {
-    font-size: 28px;
-    line-height: 30px;
+    font-size: 36px;
+    line-height: 40px;
   }
 }
 
 .prizeWinner {
-  font-size: 100px;
+  font-size: 200px;
 
-  color: #5065A838;
+  color: #E1E1FF;
   text-align: center;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
@@ -170,7 +197,7 @@ body {
 }
 
 .yellowBorder {
-  border: 6px solid #EAB700;
+  border: 6px solid #ECC57B;
   border-radius: 15px;
   border-left: 0px;
   background: #F6F9FF;
@@ -266,7 +293,7 @@ body {
   margin-top: 3rem !important;
 }
 .text-primary {
-  color: #3E63CF !important;
+  color: #ECC57B !important;
 }
 .text-center {
   text-align: center !important;
@@ -353,7 +380,7 @@ body {
 
 
 /* @font-face {
-  font-family: Rubik;
+font-family: 'Catamaran', sans-serif;
   src: url('../fonts/Rubik-VariableFont_wght.ttf');
 } */
 
@@ -361,10 +388,15 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Rubik;
+  font-family: 'Catamaran', sans-serif;
 }
 
-
+/* .share_link {
+  background-color: #0000BA !important;
+  padding: 6px 10px;
+  color: #fff;
+  border-radius: 10px;
+} */
 
 li {
   list-style: none;
@@ -736,9 +768,9 @@ a {
 }
 
 .prizeWinner {
-  font-size: 100px;
+  font-size: 200px;
   font-weight: 700;
-  color: #5065A838;
+  color: #E1E1FF;
 }
 
 .mainImg {
@@ -988,7 +1020,7 @@ input[type="file"]::file-selector-button {
 }
 
 .yellowBorder {
-  border: 6px solid #EAB700;
+  border: 6px solid #ECC57B;
   border-radius: 15px;
   border-left: 0px;
   background: #F6F9FF;

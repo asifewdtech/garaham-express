@@ -51,11 +51,11 @@ const SelectPostContent = () => {
     {
       content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
       image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
     }
+    // {
+    //   content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
+    //   image: "/postImg.png"
+    // }
   ];
 
   const handleSelectCard = (index) => {
@@ -96,11 +96,11 @@ const SelectPostContent = () => {
           </Card>
         })}
       </Box>
-        <Box sx={{ display: { xs: 'flex', justifyContent: 'center' } }}>
+        {/* <Box sx={{ display: { xs: 'flex', justifyContent: 'center' } }}>
           <Link href='#'>
             <Button variant="contained" className="save_btn">Load More Posts</Button>
           </Link>
-        </Box>
+        </Box> */}
       {/* <Container maxWidth='xl'>
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Link href='/SelectConditions/SelectConditions'>
@@ -109,7 +109,7 @@ const SelectPostContent = () => {
         </Box>
       </Container> */}
       <Container maxWidth='xl'>
-        <Box sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
+        <Box className="post_buttons" sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
           <Link href='#'>
             <Button variant="contained" className="go_back">Go Back</Button>
           </Link>
