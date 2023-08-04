@@ -34,7 +34,7 @@ const WinnerOne = ({ count }) => {
           </h2>
         </div>
       </div>
-      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5">
+      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5" style={{marginLeft:"17px", paddingLeft: "12px"}}>
         <div className="position-relative tooltipMain">
           <div className="tooltipSection" style={{ opacity: 0 }}>
             <p className="tooltipdesc position-relative p-4 mb-0">
@@ -73,7 +73,7 @@ const WinnerOne = ({ count }) => {
           </h2>
         </div>
       </div>
-      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5">
+      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5" style={{marginLeft:"17px", paddingLeft: "12px"}}>
         <div className="position-relative tooltipMain">
           <div className="tooltipSection toolSectMain" style={{ opacity: 0 }}>
             <p className="tooltipdesc toolSectMainDesc position-relative p-4 mb-0">
@@ -113,7 +113,7 @@ const WinnerOne = ({ count }) => {
           </h2>
         </div>
       </div>
-      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5">
+      <div className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 mt-5" style={{marginLeft:"17px", paddingLeft: "12px"}}>
         <div className="position-relative tooltipMain">
           <div className="tooltipSectionMain" style={{ opacity: 0 }}>
             <p className="tooltipdescMain position-relative p-4 mb-0">

@@ -587,7 +587,7 @@ a {
   }
 
   .ellipseimg {
-      right: -17px !important;
+      right: -21px !important;
       top: 28px !important;
 
   }
@@ -979,7 +979,7 @@ input[type="file"]::file-selector-button {
 }
 
 .ellipseimg {
-  right: -56px;
+  right: -26px;
   top: 45px;
   display: flex;
   align-items: center;
@@ -1104,7 +1104,7 @@ footer {
   }
 
   .ellipseimg {
-    right: -23px;
+    right: -26px;
     top: 34px;
   }
 
@@ -1243,7 +1243,7 @@ footer {
   }
 
   .ellipseimg {
-      right: -46px;
+      right: -25px;
       top: 24px;
   }
 }
