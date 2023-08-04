@@ -112,6 +112,7 @@
 
 .post_image {
   /* padding-left: 20px; */
+  object-fit: contain;
   height: 111px;
   width: 40%;
   flex-shrink: 0;
@@ -158,6 +159,12 @@
 }
 
 /* MEDIA QUERY */
+
+@media only screen and (min-width: 900px) {
+  .post_text {
+    font-size: 15px;
+  }
+}
 
 @media only screen and (min-width: 320px) and (max-width: 450px) {
   .cards {
