@@ -47,13 +47,14 @@
 
 .cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .cards-main-box {
   padding-top: 30px;
   height: 300px;
+  padding-right: 15px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -82,7 +83,7 @@
 
 .post_card {
   display: flex;
-  width: 44%;
+  width: 48%;
   /* height: 221px; */
   justify-content: space-between;
   margin-bottom: 20px;
@@ -101,7 +102,7 @@
   color: #555;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Rubik;
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
@@ -111,7 +112,7 @@
 
 .post_image {
   /* padding-left: 20px; */
-  /* height: 180px; */
+  height: 111px;
   width: 40%;
   flex-shrink: 0;
   border-radius: 5px;
@@ -122,7 +123,7 @@
   color: #A0A0A0;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Rubik;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
