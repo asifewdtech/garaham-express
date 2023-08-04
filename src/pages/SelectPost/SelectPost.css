@@ -113,7 +113,7 @@
 .post_image {
   /* padding-left: 20px; */
   object-fit: contain;
-  height: 111px;
+  height: 161px;
   width: 40%;
   flex-shrink: 0;
   border-radius: 5px;
