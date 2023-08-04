@@ -38,7 +38,7 @@ const Winner = () => {
           <Box className="footer1">
             <Link
               style={{ textDecoration: "none", color: "white" }}
-              href="/SelectPage/SelectFbPage"
+              href="/SelectPage/SelectFbPageCopy"
             >
               <Typography className="new_contest active">
                 Start a New Contest{" "}
@@ -62,7 +62,7 @@ const Winner = () => {
             <div className="pick">
               <Link
                 style={{ textDecoration: "none", color: "white" }}
-                href="/ChooseWinner/ChooseWinner"
+                href="/SelectPage/SelectFbPageCopy"
               >
                 <Typography className="new_winner">
                   Pick Another Winner
