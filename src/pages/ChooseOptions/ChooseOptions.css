@@ -115,7 +115,7 @@
   border-radius: 10px;
   background: #FFF;
   box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
-  width: 63%;
+  width: 90%;
   height: 54px;
   flex-shrink: 0;
   padding-right: 5px;
@@ -125,7 +125,7 @@
 .advanced p {
   color: #555;
   font-feature-settings: 'clig' off, 'liga' off;
-  font-family: 'Catamaran', sans-serif;
+  font-family: 'Rubik';
   font-size: 15px;
   font-style: normal;
   font-weight: 400;

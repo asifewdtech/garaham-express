@@ -1,7 +1,6 @@
-import { Box, Button, Typography, Container } from "@mui/material";
+import { Box, Typography, Container } from "@mui/material";
 import React from "react";
 import Navbar from "@/components/AppBar/AppBar";
-import Header from "@/components/Header/Header";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -14,19 +13,24 @@ import PickWinner from "@/components/PickWinner/PickWinner";
 
 const SelectFbPageCopy = () => {
   const [selectTab, setselectedTab] = useState("Select a page");
-  const [currentTabIndex, setcurrentTabIndex] = useState(0)
-  
-const arrayOfComponents = [SelectPageContent, SelectPostContent, ChooseOptionContent, PickWinner];
-const decrement=(e)=>{
-  e.preventDefault()
- currentTabIndex!==0? setcurrentTabIndex(currentTabIndex-1): null
-}
-const increment=(e)=>{
-  e.preventDefault()
- currentTabIndex!==arrayOfComponents.length? setcurrentTabIndex(currentTabIndex+1): null
+  const [currentTabIndex, setcurrentTabIndex] = useState(0);
 
-}
-
+  const arrayOfComponents = [
+    SelectPageContent,
+    SelectPostContent,
+    ChooseOptionContent,
+    PickWinner,
+  ];
+  const decrement = (e) => {
+    e.preventDefault();
+    currentTabIndex !== 0 ? setcurrentTabIndex(currentTabIndex - 1) : null;
+  };
+  const increment = (e) => {
+    e.preventDefault();
+    currentTabIndex !== arrayOfComponents.length
+      ? setcurrentTabIndex(currentTabIndex + 1)
+      : null;
+  };
 
   // BUTTONS
   const selectButtons = [
@@ -48,12 +52,11 @@ const increment=(e)=>{
     e.preventDefault();
     const tab = e.target.dataset.tab;
     setselectedTab(tab);
-  setcurrentTabIndex(i)
+    setcurrentTabIndex(i);
   };
   return (
     <>
       <Navbar />
-      {/* <Header /> */}
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
           <Grid container spacing={2} className="select-button-container">
@@ -61,34 +64,34 @@ const increment=(e)=>{
               return (
                 <Grid item xs={3} key={i}>
                   <Item
-                  disabled={i>currentTabIndex}
-                    onClick={(e)=>handleSelect(e, i)}
+                    disabled={i > currentTabIndex}
+                    onClick={(e) => handleSelect(e, i)}
                     data-tab={item}
                     className={`list_items ${
                       currentTabIndex === i ? "active_li" : null
                     }`}
-                  ><span className="button_list_number"> {`${i + 1}.`}</span> {`${item}`}</Item>
+                  >
+                    <span className="button_list_number"> {`${i + 1}.`}</span>{" "}
+                    {`${item}`}
+                  </Item>
                 </Grid>
               );
             })}
           </Grid>
           <div className="content_div">
             <div className="CP_inner_container">
-
-            
-      {arrayOfComponents.map((Component, index) => (
-        index === currentTabIndex ? <Component decrement={decrement} increment={increment} key={index} /> : null
-      ))}
-    
-    
-          {/* 
-              {selectTab === "Select a page" && <SelectPageContent />}
-              {selectTab === "Select a post" && <SelectPostContent />}
-              {selectTab === "Choose options" && <ChooseOptionContent />}
-              {selectTab === "Pick a winner" && <PickWinner />} */}
+              {arrayOfComponents.map((Component, index) =>
+                index === currentTabIndex ? (
+                  <Component
+                    decrement={decrement}
+                    increment={increment}
+                    key={index}
+                  />
+                ) : null
+              )}
             </div>
 
-             <div className="side_container">
+            <div className="side_container">
               <div className="image_container">
                 <Image
                   width="115"
@@ -103,21 +106,43 @@ const increment=(e)=>{
                   <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Page
                   </Typography>
-                  <Typography className="fb-box-condition">
+                  <Typography sx={{pb: '15px'}} className="fb-box-condition">
                     Test Page
                   </Typography>
-                  {/* <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                  <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Post
                   </Typography>
                   <div className="side_card_box">
-                    <Typography>
+                    <Typography className="sideboxcardtext">
                       Three months ago I started this project with the idea to
                       create a community for vegans...
                     </Typography>
-                  </div> */}
+                    <img
+                      src="/postImg.png"
+                      className="sideboximg"
+                      alt="post-img"
+                    />
+                  </div>
+                  <Typography
+                    sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}
+                  >
+                    Conditions
+                  </Typography>
+                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
+                    New Year Giveaway
+                  </Typography>
+                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
+                    2 Winners
+                  </Typography>
+                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
+                    Minimum 3 posts
+                  </Typography>
+                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
+                    Minimum 3 tags
+                  </Typography>
                 </div>
-              </div> 
-             </div>
+              </div>
+            </div>
           </div>
         </Box>
       </Container>
