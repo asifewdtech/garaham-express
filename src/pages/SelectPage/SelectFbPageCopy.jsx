@@ -20,7 +20,6 @@ const arrayOfComponents = [SelectPageContent, SelectPostContent, ChooseOptionCon
 const decrement=(e)=>{
   e.preventDefault()
  currentTabIndex!==0? setcurrentTabIndex(currentTabIndex-1): null
-
 }
 const increment=(e)=>{
   e.preventDefault()
@@ -107,7 +106,7 @@ const increment=(e)=>{
                   <Typography className="fb-box-condition">
                     Test Page
                   </Typography>
-                  <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                  {/* <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Post
                   </Typography>
                   <div className="side_card_box">
@@ -115,25 +114,13 @@ const increment=(e)=>{
                       Three months ago I started this project with the idea to
                       create a community for vegans...
                     </Typography>
-                  </div>
+                  </div> */}
                 </div>
               </div> 
              </div>
           </div>
         </Box>
       </Container>
-      {/* <div className="side_container">
-      <div className="image_container">
-        <Image width="115" height="115" alt="fblogo" src="/fbround.png" />
-      </div>
-      <div className="side_text">
-        <Typography className="contest">Facebook Contest</Typography>
-        <div className="page">
-          <Typography sx={{ pb: "10px", fontFamily: "Rubik" }}>Page</Typography>
-          <Typography className="fb-box-condition">Test Page</Typography>
-        </div>
-      </div>
-    </div> */}
     </>
   );
 };

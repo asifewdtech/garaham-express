@@ -13,9 +13,9 @@ const CommentPicker = () => {
       <Grid style={{ cursor: "pointer", justifyContent: "center" }} container>
         <Grid className="logo_box_main" item xl={2} lg={2} md={4}  xs={6}>
           <div className="logo_box">
-            <Link href='/SelectPage/SelectFbPageCopy'>
+            {/* <Link href='/SelectPage/SelectFbPageCopy'> */}
               <img className="logo_img" src="/ig.png" alt="logos" />
-            </Link>
+            {/* </Link> */}
           </div>
         </Grid>
         <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={4}  xs={6}>
@@ -27,23 +27,23 @@ const CommentPicker = () => {
         </Grid>
         <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={4} xs={6}>
           <div className="logo_box">
-            <Link href='/SelectPage/SelectFbPageCopy'>
+            {/* <Link href='/SelectPage/SelectFbPageCopy'> */}
               <img className="logo_img" src="/twitter.png" alt="logos" />
-            </Link>
+            {/* </Link> */}
           </div>
         </Grid>
         <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={4}  xs={6}>
           <div className="logo_box">
-            <Link href='/SelectPage/SelectFbPageCopy'>
+            {/* <Link href='/SelectPage/SelectFbPageCopy'> */}
               <img className="logo_img" src="/yt.png" alt="logos" />
-            </Link>
+            {/* </Link> */}
           </div>
         </Grid>
         <Grid  className="logo_box_main" style={{ cursor: "pointer" }} sx={{display: {xs: 'flex', md: "block", justifyContent: "center"}}} item xl={2} lg={2} md={4}  xs={6}>
           <div className="logo_box">
-            <Link href='/SelectPage/SelectFbPageCopy'>
+            {/* <Link href='/SelectPage/SelectFbPageCopy'> */}
               <img className="logo_img" src="/tiktok.png" alt="logos" />
-            </Link>
+            {/* </Link> */}
           </div>
         </Grid>
       </Grid>
