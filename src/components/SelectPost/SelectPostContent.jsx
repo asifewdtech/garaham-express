@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const SelectPostContent = () => {
+const SelectPostContent = ({decrement, increment}) => {
 
   // const [selectTab, setselectedTab] = useState("select-post");
   const [selectCard, setselectedCard] = useState(null);
@@ -99,10 +99,10 @@ const SelectPostContent = () => {
       <Container maxWidth='xl'>
         <Box className="post_buttons" sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
           <Link href='#'>
-            <Button variant="contained" className="go_back">Go Back</Button>
+            <Button variant="contained" className="go_back" onClick={decrement}>Go Back</Button>
           </Link>
           <Link href='#'>
-            <Button variant="contained" className="save_btn">Save and Continue</Button>
+            <Button variant="contained" className="save_btn" onClick={increment} >Save and Continue</Button>
           </Link>
         </Box>
       </Container>

@@ -6,7 +6,7 @@ import CustomNumberInput from "../CustomNumberInput";
 import Image from "next/image";
 import Link from "next/link";
 
-const ChooseOptionContent = () => {
+const ChooseOptionContent = ({decrement, increment}) => {
 
   const [showAdvanceOptions, setshowAdvanceOptions] = useState(false);
   const [showProCustomize, setshowProCustomize] = useState(false);
@@ -288,10 +288,10 @@ const ChooseOptionContent = () => {
       <Container maxWidth='xl' sx={{marginLeft: "-12px"}}>
         <Box className="post_buttons" sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
           <Link href='#'>
-            <Button variant="contained" className="go_back">Go Back</Button>
+            <Button variant="contained" className="go_back" onClick={decrement}>Go Back</Button>
           </Link>
           <Link href='#'>
-            <Button variant="contained" className="save_btn">Save and Continue</Button>
+            <Button variant="contained" className="save_btn" onClick={increment}>Save and Continue</Button>
           </Link>
         </Box>
       </Container>
