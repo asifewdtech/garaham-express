@@ -312,7 +312,7 @@ input[type="number"]::-webkit-outer-spin-button {
     right: 12%;
   }
 }
-@media only screen and (min-width: 1450px) {
+@media only screen and (min-width: 1550px) {
   .custom-number-input-arrows{
     right: 85px;
   }
