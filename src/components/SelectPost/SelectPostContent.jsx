@@ -96,18 +96,6 @@ const SelectPostContent = () => {
           </Card>
         })}
       </Box>
-        {/* <Box sx={{ display: { xs: 'flex', justifyContent: 'center' } }}>
-          <Link href='#'>
-            <Button variant="contained" className="save_btn">Load More Posts</Button>
-          </Link>
-        </Box> */}
-      {/* <Container maxWidth='xl'>
-        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Link href='/SelectConditions/SelectConditions'>
-            <Button variant="contained" className="save_btn">Save and Continue</Button>
-          </Link>
-        </Box>
-      </Container> */}
       <Container maxWidth='xl'>
         <Box className="post_buttons" sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>
           <Link href='#'>

@@ -52,7 +52,10 @@ const SelectFbPageCopy = () => {
                     className={`list_items ${
                       selectTab === item ? "active_li" : null
                     }`}
-                  ><span className="button_list_number">{`${i + 1}.`}</span> {`${item}`}</Item>
+                  >
+                    <span className="button_list_number">{`${i + 1}.`}</span>{" "}
+                    {`${item}`}
+                  </Item>
                 </Grid>
               );
             })}
@@ -83,7 +86,17 @@ const SelectFbPageCopy = () => {
                   <Typography className="fb-box-condition">
                     Test Page
                   </Typography>
+                  <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                    Post
+                  </Typography>
+                  <div className="side_card_box">
+                    <Typography>
+                      Three months ago I started this project with the idea to
+                      create a community for vegans...
+                    </Typography>
+                  </div>
                 </div>
+                {/* CARDS */}
               </div>
             </div>
           </div>

@@ -172,11 +172,15 @@
   font-family: 'Catamaran', sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 20px;
   /* 111.111% */
   letter-spacing: -0.34px;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
+}
+
+.side_card_box {
+
 }
 
 /* MEDIA QUERY */
@@ -226,6 +230,9 @@
   .contest {
     font-size: 20px;
   }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1100px) {
   .page, .fb-box-condition {
     font-size: 16px;
   }
