@@ -214,7 +214,6 @@ const ChooseOptionContent = ({ decrement, increment }) => {
               <div>
                 <legend className="legend">Block list</legend>
                 <textarea
-                  style={{ height: "auto" }}
                   className="input_field"
                   name="blockList"
                   value={advancedConditions.blockList}
@@ -225,8 +224,6 @@ const ChooseOptionContent = ({ decrement, increment }) => {
               <div>
                 <div className="exclude switch">
                   <MySwitch
-                    // checked={checked}
-                    // onChange={handleChange}
                     inputProps={{ "aria-label": "controlled" }}
                   />
                   <Typography className="switch_text">
@@ -281,29 +278,15 @@ const ChooseOptionContent = ({ decrement, increment }) => {
                 </div>
               </div>
               <div>
-                <legend className="legend">Filter by mention</legend>
-                <input
-                  className="input_field"
-                  type="datetime-local"
-                  name="phrases"
-                  value={advancedConditions.phrases}
-                  onChange={handleAdvanceChange}
-                  placeholder="phrases"
-                />
-              </div>
-              <div>
-                <legend className="legend">BgColor</legend>
+                <legend className="legend">Background Color</legend>
                 <select
                   className="input_field min_screen"
                   name="minimumTags"
                   value={proOptions.bgColor}
                   onChange={handleProcustomizaion}
                 >
-                  <option value="">1</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                  <option value="">Magenta</option>
+                  <option value="1">Test</option>
                 </select>
               </div>
               <div>
@@ -314,12 +297,21 @@ const ChooseOptionContent = ({ decrement, increment }) => {
                   value={proOptions.bgColor}
                   onChange={handleProcustomizaion}
                 >
-                  <option value="">1</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
+                  <option value="">Rainbow</option>
+                  <option value="1">Test</option>
                 </select>
+              </div>
+              <div>
+                <legend className="legend">Set a timer (Countdown)</legend>
+                <input
+                  className="input_field"
+                  // type="datetime-local"
+                  type="time"
+                  name="phrases"
+                  value={advancedConditions.phrases}
+                  onChange={handleAdvanceChange}
+                  placeholder="phrases"
+                />
               </div>
             </>
           )}
