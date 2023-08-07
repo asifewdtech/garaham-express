@@ -14,6 +14,20 @@ import PickWinner from "@/components/PickWinner/PickWinner";
 
 const SelectFbPageCopy = () => {
   const [selectTab, setselectedTab] = useState("Select a page");
+  const [currentTabIndex, setcurrentTabIndex] = useState(0)
+  
+const arrayOfComponents = [SelectPageContent, SelectPostContent, ChooseOptionContent, PickWinner];
+const decrement=(e)=>{
+  e.preventDefault()
+ currentTabIndex!==0? setcurrentTabIndex(currentTabIndex-1): null
+
+}
+const increment=(e)=>{
+  e.preventDefault()
+ currentTabIndex!==arrayOfComponents.length? setcurrentTabIndex(currentTabIndex+1): null
+
+}
+
 
   // BUTTONS
   const selectButtons = [
@@ -31,10 +45,11 @@ const SelectFbPageCopy = () => {
     color: theme.palette.text.secondary,
   }));
 
-  const handleSelect = (e) => {
+  const handleSelect = (e, i) => {
     e.preventDefault();
     const tab = e.target.dataset.tab;
     setselectedTab(tab);
+  setcurrentTabIndex(i)
   };
   return (
     <>
@@ -47,25 +62,34 @@ const SelectFbPageCopy = () => {
               return (
                 <Grid item xs={3} key={i}>
                   <Item
-                    onClick={handleSelect}
+                  disabled={i>currentTabIndex}
+                    onClick={(e)=>handleSelect(e, i)}
                     data-tab={item}
                     className={`list_items ${
-                      selectTab === item ? "active_li" : null
+                      currentTabIndex === i ? "active_li" : null
                     }`}
-                  ><span className="button_list_number">{`${i + 1}.`}</span> {`${item}`}</Item>
+                  ><span className="button_list_number"> {`${i + 1}.`}</span> {`${item}`}</Item>
                 </Grid>
               );
             })}
           </Grid>
           <div className="content_div">
             <div className="CP_inner_container">
+
+            
+      {arrayOfComponents.map((Component, index) => (
+        index === currentTabIndex ? <Component decrement={decrement} increment={increment} key={index} /> : null
+      ))}
+    
+    
+          {/* 
               {selectTab === "Select a page" && <SelectPageContent />}
               {selectTab === "Select a post" && <SelectPostContent />}
               {selectTab === "Choose options" && <ChooseOptionContent />}
-              {selectTab === "Pick a winner" && <PickWinner />}
+              {selectTab === "Pick a winner" && <PickWinner />} */}
             </div>
 
-            <div className="side_container">
+             <div className="side_container">
               <div className="image_container">
                 <Image
                   width="115"
@@ -84,8 +108,8 @@ const SelectFbPageCopy = () => {
                     Test Page
                   </Typography>
                 </div>
-              </div>
-            </div>
+              </div> 
+             </div>
           </div>
         </Box>
       </Container>

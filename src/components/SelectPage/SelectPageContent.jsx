@@ -1,7 +1,7 @@
 import { Box, Button, Typography, Container } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
-const SelectPageContent = () => {
+const SelectPageContent = ({decrement, increment}) => {
   return (
     <>
       {/* <div style={{ display: "flex" }}> */}
@@ -22,7 +22,7 @@ const SelectPageContent = () => {
             </select>
           </div>
           <Link href="#">
-            <Button variant="contained" className="save_btn">
+            <Button variant="contained" className="save_btn" onClick={increment}>
               Save and Continue
             </Button>
           </Link>
