@@ -67,6 +67,15 @@ const SelectFbPageCopy = () => {
     setselectedTab(tab);
     setcurrentTabIndex(i);
   };
+  function truncatePost(post) {
+    const truncatedIdLength = 100;
+    if (post.length <= truncatedIdLength) {
+      return post;
+    } else {
+      return post.substring(0, truncatedIdLength) + "...";
+    }
+  }
+  
   return (
     <>
       <Navbar />
@@ -129,7 +138,10 @@ const SelectFbPageCopy = () => {
                   </Typography>
                   {contestData.postText?.length !==0 ?  <div className="side_card_box">
                     <Typography className="sideboxcardtext">
-                      {contestData.postText}
+                      {/* {contestData.postText} */}
+                      {
+                        truncatePost(contestData.postText)
+                      }
                     </Typography>
                     <img
                       src={contestData.img}
@@ -151,7 +163,7 @@ const SelectFbPageCopy = () => {
                       className="fb-box-condition"
                       key={key}
                     >
-                       { value !==  '' ?value : ""}
+                    {value!==''? value:''}
 
                     </Typography>
                   ))}

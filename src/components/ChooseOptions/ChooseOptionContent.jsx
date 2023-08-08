@@ -18,7 +18,7 @@ const ChooseOptionContent = ({ decrement, increment, setContestData }) => {
   const [showProCustomize, setshowProCustomize] = useState(false);
   const [winners, setWinnersValue] = useState(0);
   const [posts, setPosts] = useState(0);
-  const [followers, setFollowers] = useState(0);
+  const [followers, setFollowers] = useState();
   // const [winners, setWinnersValue] = useState(0);
 
 
@@ -32,7 +32,7 @@ const ChooseOptionContent = ({ decrement, increment, setContestData }) => {
   const onSubmit = (data, e) => {
     console.log("Form Data:", data);
     console.log("on submit chala");
-    const dataToSend = { ...data, winners: winnersValue };
+    const dataToSend = { ...data };
     setContestData(prev => ({ ...prev, conditions:  dataToSend }));
     console.log(winnersValue); // This might not have the updated value
   
