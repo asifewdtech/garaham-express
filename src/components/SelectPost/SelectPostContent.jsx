@@ -3,29 +3,29 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const SelectPostContent = ({decrement, increment}) => {
+const SelectPostContent = ({decrement, increment, setContestData}) => {
 
   // const [selectTab, setselectedTab] = useState("select-post");
+  // const [activeCard, setActiceCard] = useState(null);
   const [selectCard, setselectedCard] = useState(null);
-  const [activeCard, setActiceCard] = useState(null);
 
   // CARD IMAGES
-
   const cardContent = [
     {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       image: "/postImg.png"
     },
     {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
+      content: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      image: "/postImg.png"
+    },
+    // Add more objects with different content texts here
+    {
+      content: "Another example text for the content property.",
       image: "/postImg.png"
     },
     {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
+      content: "Yet another different text to replace the content.",
       image: "/postImg.png"
     },
     {
@@ -52,16 +52,12 @@ const SelectPostContent = ({decrement, increment}) => {
       content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
       image: "/postImg.png"
     }
-    // {
-    //   content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-    //   image: "/postImg.png"
-    // }
+ 
   ];
-
-  const handleSelectCard = (index) => {
-    // console.log(e.target)
-    setselectedCard(index);
-    // setActiceCard(selectCard === index);
+  const handleSelectCard = (e,card, i) => {
+    e.preventDefault();
+    setselectedCard(i);
+    setContestData(prev=>({ ...prev, postText:card.content, img:card.image}))
   }
 
   return <>
@@ -75,10 +71,10 @@ const SelectPostContent = ({decrement, increment}) => {
     <div className="cards-main-box" style={{ paddingBottom: "30px" }}>
       <Box className='cards'>
         {cardContent.map((card, i) => {
-          return <Card key={i} onClick={() => handleSelectCard(i)} className={`post_card ${selectCard === i ? "active_card" : ""}`}>
+          return <Card key={i} onClick={(e) => handleSelectCard(e, card, i)} className={`post_card ${selectCard === i ? "active_card" : ""}`}>
             <Box sx={{ display: 'flex', flexDirection: 'column', width: "50%" }}>
               <CardContent sx={{ padding: 0 }}>
-                <Typography variant="subtitle1" color="text.secondary" component="div" className='post_text'>
+                <Typography  variant="subtitle1" color="text.secondary" component="div" className='post_text'>
                   {card.content}
                 </Typography>
               </CardContent>

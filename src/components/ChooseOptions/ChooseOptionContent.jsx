@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   Typography,
   Card,
@@ -11,64 +12,35 @@ import {
 import MySwitch from "../ConditionsForm/Switch";
 import { useRouter } from "next/router";
 import CustomNumberInput from "../CustomNumberInput";
-import Image from "next/image";
-import Link from "next/link";
 
-const ChooseOptionContent = ({ decrement, increment }) => {
+const ChooseOptionContent = ({ decrement, increment, setContestData }) => {
   const [showAdvanceOptions, setshowAdvanceOptions] = useState(false);
   const [showProCustomize, setshowProCustomize] = useState(false);
-  // console.log(showAdvanceOptions)
+  const [winners, setWinnersValue] = useState(0);
+  const [posts, setPosts] = useState(0);
+  const [followers, setFollowers] = useState(0);
+  // const [winners, setWinnersValue] = useState(0);
 
-  const router = useRouter();
+
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
-  const [BasicConditions, setBasicConditions] = useState({
-    input1: "",
-    input2: "",
-    input3: "",
-    input4: "",
-    radioInput: "option1",
-  });
-  const [advancedConditions, setadvancedConditions] = useState({
-    words: "",
-    phrases: "",
-    minimumTags: "",
-    mention: "",
-    blockList: "",
-  });
-  const [proOptions, setproOptions] = useState({
-    logo: "",
-    date: "",
-    bgColor: "",
-    style: "",
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBasicConditions((prevBasicConditions) => ({
-      ...prevBasicConditions,
-      [name]: value,
-    }));
-  };
-  const handleAdvanceChange = (e) => {
-    const { name, value } = e.target;
-    setadvancedConditions((prevBasicConditions) => ({
-      ...prevBasicConditions,
-      [name]: value,
-    }));
-  };
-  const handleProcustomizaion = (e) => {
-    const { name, value } = e.target;
-    setproOptions((prevBasicConditions) => ({
-      ...prevBasicConditions,
-      [name]: value,
-    }));
-  };
+  // using reactHookForm
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const winnersValue = watch('winners');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(BasicConditions);
+  const onSubmit = (data, e) => {
+    console.log("Form Data:", data);
+    console.log("on submit chala");
+    const dataToSend = { ...data, winners: winnersValue };
+    setContestData(prev => ({ ...prev, conditions:  dataToSend }));
+    console.log(winnersValue); // This might not have the updated value
+  
+    // Instead, use data from state
+    console.log(data.winners); // Make sure the field name matches the "winners" field in your form
+    increment(e)
   };
+  
 
   return (
     <>
@@ -78,16 +50,13 @@ const ChooseOptionContent = ({ decrement, increment }) => {
       </Typography>
       <Typography className="CP_sub_heading">Basic Conditions</Typography>
       {/* FORM */}
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={handleSubmit(onSubmit)} className="form">
         <div className="text_inputs">
           <div>
             <legend className="legend">Giveaway Title</legend>
             <input
               className="input_field"
-              name="input1"
-              label="Input 1"
-              value={BasicConditions.input1}
-              onChange={handleChange}
+              {...register("title")}
               placeholder="New Year Giveaway"
             />
           </div>
@@ -95,30 +64,27 @@ const ChooseOptionContent = ({ decrement, increment }) => {
             <legend className="legend">Number of winners</legend>
 
             <CustomNumberInput
-              value={BasicConditions.winners}
-              onChange={handleChange}
+             onChange={setWinnersValue}
+              className="input_field"
+              value={winnersValue}
+              {...register("winners")}
+              placeholder="Number of winners"
             />
           </div>
           <div>
             <legend className="legend">Censor Words</legend>
             <input
               className="input_field"
-              name="input3"
-              label="Input 3"
-              value={BasicConditions.input3}
-              onChange={handleChange}
-              placeholder="Word"
+              {...register("words")}
+              placeholder="Censor words"
             />
           </div>
           <div>
             <legend className="legend">Filter by hashtag #</legend>
             <input
               className="input_field"
-              name="input4"
-              label="Input 4"
-              value={BasicConditions.input4}
-              onChange={handleChange}
-              placeholder="#peace"
+              {...register("hashtag")}
+              placeholder="@peace"
             />
           </div>
           <div className="exclude switch">
@@ -145,6 +111,7 @@ const ChooseOptionContent = ({ decrement, increment }) => {
           </div>
           {showAdvanceOptions && (
             <>
+            <div></div>
               <div style={{ paddingBottom: "10px" }} className="exclude switch">
                 <MySwitch
                   // checked={checked}
@@ -159,66 +126,62 @@ const ChooseOptionContent = ({ decrement, increment }) => {
                 <legend className="legend">Minimum Posts</legend>
 
                 <CustomNumberInput
-                  value={BasicConditions.winners}
-                  onChange={handleChange}
+                    onChange={setPosts}
+                    className="input_field"
+                    value={posts}
+                    {...register("posts")}
+                    placeholder="1"
                 />
               </div>
               <div>
                 <legend className="legend">Search for words</legend>
                 <input
-                  className="input_field"
-                  name="words"
-                  value={advancedConditions.words}
-                  onChange={handleAdvanceChange}
-                  placeholder="words"
+                 className="input_field"
+                 {...register("words")}
+                 placeholder="words"
                 />
               </div>
               <div>
                 <legend className="legend">Minimum Followers</legend>
 
                 <CustomNumberInput
-                  value={BasicConditions.winners}
-                  onChange={handleChange}
+                onChange={setFollowers}
+                className="input_field"
+                value={followers}
+                {...register("followers")}
+                placeholder="0"
                 />
               </div>
               <div>
                 <legend className="legend">Required phrases</legend>
                 <input
-                  className="input_field"
-                  name="phrases"
-                  value={advancedConditions.phrases}
-                  onChange={handleAdvanceChange}
-                  placeholder="phrases"
+                   className="input_field"
+                   {...register("phrases")}
+                   placeholder="phrases"
                 />
               </div>
               <div>
                 <legend className="legend">Minimum Tags</legend>
                 <input
-                  className="input_field"
-                  name="minimumTags"
-                  value={advancedConditions.minimumTags}
-                  onChange={handleAdvanceChange}
-                  placeholder="Minimum Tags"
+                   className="input_field"
+                   {...register("minimum_tags")}
+                   placeholder="minimum tags"
                 />
               </div>
               <div>
                 <legend className="legend">Filter by mention</legend>
                 <input
-                  className="input_field"
-                  name="mention"
-                  value={advancedConditions.mention}
-                  onChange={handleAdvanceChange}
-                  placeholder="@mention"
+                   className="input_field"
+                   {...register("mentions")}
+                   placeholder="@mention"
                 />
               </div>
               <div>
                 <legend className="legend">Block list</legend>
                 <textarea
-                  className="input_field"
-                  name="blockList"
-                  value={advancedConditions.blockList}
-                  onChange={handleAdvanceChange}
-                  placeholder="@mention"
+                 className="input_field"
+                 {...register("block_list")}
+                 placeholder="Block lists"
                 ></textarea>
               </div>
               <div>
@@ -244,32 +207,30 @@ const ChooseOptionContent = ({ decrement, increment }) => {
             </>
           )}
         </div>
-          <div className="switch" style={{paddingBottom: '20px'}}>
-            <div className="switch_container advanced" style={{width: '43%'}}>
-              <MySwitch
-                {...label}
-                // checked={/* Your checked value from form data */}
-                onChange={() => setshowProCustomize(!showProCustomize)}
-              />
-              <Typography className="switch_text pro">
-                Pro Version Customization - Branding
-              </Typography>
-            </div>
+        <div className="switch" style={{ paddingBottom: "20px" }}>
+          <div className="switch_container advanced" style={{ width: "43%" }}>
+            <MySwitch
+              {...label}
+              // checked={/* Your checked value from form data */}
+              onChange={() => setshowProCustomize(!showProCustomize)}
+            />
+            <Typography className="switch_text pro">
+              Pro Version Customization - Branding
+            </Typography>
           </div>
+        </div>
         <div className="text_inputs">
-          {showProCustomize && (
+        {showProCustomize && (
             <>
               <div>
                 <legend className="legend">Logo</legend>
                 <div className="logo_file_container">
                   <input
-                    id="logo"
-                    className="input_field"
-                    name="logo"
-                    type="file"
-                    value={proOptions.logo}
-                    onChange={handleProcustomizaion}
-                    placeholder="logo"
+                   name="logo"
+                   type="file"
+                  className="input_field"
+                  {...register("logo")}
+                  placeholder="logo"
                   />
                   <label for="logo" className="file_logo">
                     Choose file
@@ -281,24 +242,22 @@ const ChooseOptionContent = ({ decrement, increment }) => {
                 <legend className="legend">Background Color</legend>
                 <select
                   className="input_field min_screen"
-                  name="minimumTags"
-                  value={proOptions.bgColor}
-                  onChange={handleProcustomizaion}
+                  {...register("background_color")}
+                  placeholder="Bg color"
                 >
-                  <option value="">Magenta</option>
-                  <option value="1">Test</option>
+                  <option value="Magenta">Magenta</option>
+                  <option value="Test">Test</option>
                 </select>
               </div>
               <div>
                 <legend className="legend">Confetti style</legend>
                 <select
                   className="input_field min_screen"
-                  name="minimumTags"
-                  value={proOptions.bgColor}
-                  onChange={handleProcustomizaion}
+                  {...register("style")}
+                  placeholder="1"
                 >
-                  <option value="">Rainbow</option>
-                  <option value="1">Test</option>
+                  <option value="Rainbow">Rainbow</option>
+                  <option value="Test">Test</option>
                 </select>
               </div>
               <div>
@@ -307,21 +266,20 @@ const ChooseOptionContent = ({ decrement, increment }) => {
                   className="input_field"
                   // type="datetime-local"
                   type="time"
-                  name="phrases"
-                  value={advancedConditions.phrases}
-                  onChange={handleAdvanceChange}
-                  placeholder="phrases"
+                  {...register("timer")}
+                  placeholder=""
                 />
               </div>
             </>
           )}
-        </div>
+          
+          {/* show pro options here */}</div>
         <Container maxWidth="xl" sx={{ marginLeft: "-12px" }}>
           <Box
             className="post_buttons"
             sx={{ display: { xs: "flex", justifyContent: "space-around" } }}
           >
-            <Link href="#">
+            {/* <Link href="#"> */}
               <Button
                 variant="contained"
                 className="go_back"
@@ -329,16 +287,12 @@ const ChooseOptionContent = ({ decrement, increment }) => {
               >
                 Go Back
               </Button>
-            </Link>
-            <Link href="#">
-              <Button
-                variant="contained"
-                className="save_btn"
-                onClick={increment}
-              >
+            {/* </Link> */}
+            {/* <Link href="#"> */}
+              <Button type="submit" variant="contained" className="save_btn">
                 Save and Continue
               </Button>
-            </Link>
+            {/* </Link> */}
           </Box>
         </Container>
       </form>

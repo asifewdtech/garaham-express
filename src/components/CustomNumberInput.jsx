@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 const CustomNumberInput = (props) => {
   const [value, setValue] = useState(props.value || '');

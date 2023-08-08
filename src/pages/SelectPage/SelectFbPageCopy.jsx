@@ -14,7 +14,20 @@ import PickWinner from "@/components/PickWinner/PickWinner";
 const SelectFbPageCopy = () => {
   const [selectTab, setselectedTab] = useState("Select a page");
   const [currentTabIndex, setcurrentTabIndex] = useState(0);
+  const [contestData, setContestData] = useState({
+    page: "",
+    postText: "",
+    img: "",
+    conditions: {},
+  });
+  console.log(contestData.conditions);
+  // dynamic content for side container
+  const saveContestData = (e) => {
+    console.log(e.target.name);
+    // console.log(e.target.value)
+  };
 
+  // conditionally rendering the components
   const arrayOfComponents = [
     SelectPageContent,
     SelectPostContent,
@@ -83,6 +96,8 @@ const SelectFbPageCopy = () => {
               {arrayOfComponents.map((Component, index) =>
                 index === currentTabIndex ? (
                   <Component
+                    setContestData={setContestData}
+                    saveContestData={saveContestData}
                     decrement={decrement}
                     increment={increment}
                     key={index}
@@ -106,29 +121,42 @@ const SelectFbPageCopy = () => {
                   <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Page
                   </Typography>
-                  <Typography sx={{pb: '15px'}} className="fb-box-condition">
-                    Test Page
+                  <Typography sx={{ pb: "15px" }} className="fb-box-condition">
+                    {contestData.page}
                   </Typography>
                   <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Post
                   </Typography>
-                  <div className="side_card_box">
+                  {contestData.postText?.length !==0 ?  <div className="side_card_box">
                     <Typography className="sideboxcardtext">
-                      Three months ago I started this project with the idea to
-                      create a community for vegans...
+                      {contestData.postText}
                     </Typography>
                     <img
-                      src="/postImg.png"
+                      src={contestData.img}
                       className="sideboximg"
                       alt="post-img"
                     />
-                  </div>
+                  </div> :''}
+
+                 
                   <Typography
                     sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}
                   >
                     Conditions
                   </Typography>
-                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
+
+                  {Object.entries(contestData?.conditions).map(([key, value]) => (
+                    <Typography
+                      sx={{ pb: "5px" }}
+                      className="fb-box-condition"
+                      key={key}
+                    >
+                       { value !==  '' ?value : ""}
+
+                    </Typography>
+                  ))}
+
+                  {/* <Typography sx={{pb: '5px'}} className="fb-box-condition">
                     New Year Giveaway
                   </Typography>
                   <Typography sx={{pb: '5px'}} className="fb-box-condition">
@@ -139,7 +167,7 @@ const SelectFbPageCopy = () => {
                   </Typography>
                   <Typography sx={{pb: '5px'}} className="fb-box-condition">
                     Minimum 3 tags
-                  </Typography>
+                  </Typography> */}
                 </div>
               </div>
             </div>
