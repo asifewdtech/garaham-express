@@ -2,15 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Typography,
-  Card,
   Box,
   Container,
-  CardContent,
-  CardMedia,
   Button,
 } from "@mui/material";
 import MySwitch from "../ConditionsForm/Switch";
-import { useRouter } from "next/router";
 import CustomNumberInput from "../CustomNumberInput";
 
 const ChooseOptionContent = ({ decrement, increment, setContestData }) => {
