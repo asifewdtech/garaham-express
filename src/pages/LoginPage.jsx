@@ -1,22 +1,20 @@
+import { LoginSocialFacebook } from 'reactjs-social-login';
+import { FacebookLoginButton } from 'react-social-login-buttons';
 
 const LoginPage = () => {
-  const responseFacebook = (response) => {
-    console.log('login-response' , response)
-  }
 
-  const componentClicked = (data) => {
-    console.log('user-data' , data);
-  }
   return (
     <div>
       <h1>Login Page</h1>
-      <FacebookLogin 
-      appId="259412120318115"
-      autoLoad={true}
-      fields="name,email,picture"
-      onClick={componentClicked}
-      callback={responseFacebook}
-      />
+      <LoginSocialFacebook
+      appId='614802087391122'
+      onResolve={(response) => {
+        console.log(response, 'response');
+      }}
+      onReject={(error) => {console.log(error, 'error');}}
+      >
+        <FacebookLoginButton />
+      </LoginSocialFacebook>
     </div>
   );
 };
