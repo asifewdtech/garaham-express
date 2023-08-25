@@ -1,5 +1,10 @@
 .select-button-container {
     width: fit-content;
+    margin-left: -5px !important
+}
+
+.btn-grid {
+    padding-left: 5px !important;
 }
 
 .list_items {
@@ -23,7 +28,7 @@
 
 .active_li {
     color: #0000BA !important;
-    background: #f0f4ff !important;
+    background: #FBFBFF !important;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1) !important;
 }
 

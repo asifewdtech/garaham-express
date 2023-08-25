@@ -84,7 +84,7 @@ const SelectFbPageCopy = () => {
           <Grid container spacing={2} className="select-button-container">
             {selectButtons.map((item, i) => {
               return (
-                <Grid item xs={3} key={i}>
+                <Grid className="btn-grid" item xs={3} key={i}>
                   <Item
                     disabled={i > currentTabIndex}
                     onClick={(e) => handleSelect(e, i)}

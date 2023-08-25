@@ -114,7 +114,7 @@
 .advanced {
   border-radius: 10px;
   background: #FFF;
-  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+  /* box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07); */
   width: 90%;
   height: 54px;
   flex-shrink: 0;
@@ -142,7 +142,8 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .myswitch {
@@ -238,18 +239,20 @@ input[type='file'] {
 input[type="number"] {
   position: relative;
 }
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.custom-number-input-arrows{
+.custom-number-input-arrows {
   position: absolute;
   top: 4px;
   right: 45px;
 }
-.custom-number-input{
+
+.custom-number-input {
   position: relative;
 }
 
@@ -260,6 +263,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 90% !important;
     height: 60px;
   }
+
   .text_inputs {
     grid-template-columns: 1fr;
   }
@@ -277,14 +281,18 @@ input[type="number"]::-webkit-outer-spin-button {
   .advanced {
     width: 90% !important;
   }
-  .custom-number-input-arrows{
+
+  .custom-number-input-arrows {
     right: 43px;
     top: 4px;
   }
-  .next , .prev {
+
+  .next,
+  .prev {
     font-size: 16px;
     font-weight: 600 !important;
   }
+
   .min_screen {
     width: 93%;
   }
@@ -294,7 +302,8 @@ input[type="number"]::-webkit-outer-spin-button {
   .input_field {
     width: 90% !important;
   }
-  .custom-number-input-arrows{
+
+  .custom-number-input-arrows {
     position: absolute;
     right: 45px;
     top: 4px;
@@ -302,18 +311,19 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media only screen and (min-width: 440px) and (max-width: 768px) {
-  .custom-number-input-arrows{
+  .custom-number-input-arrows {
     right: 10%;
   }
 }
 
 @media only screen and (min-width: 570px) and (max-width: 768px) {
-  .custom-number-input-arrows{
+  .custom-number-input-arrows {
     right: 12%;
   }
 }
+
 @media only screen and (min-width: 1550px) {
-  .custom-number-input-arrows{
+  .custom-number-input-arrows {
     right: 85px;
   }
 }

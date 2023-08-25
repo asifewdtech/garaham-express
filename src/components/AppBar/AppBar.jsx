@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import brandLogo from "../../assets/images/Viraly-logo-new1 1.png";
+import { useRouter } from "next/router";
 // import Header from '../Header/Header';
 
 const pages = ["Try It", "Features", "Blog", "Help Docs", "Princing", "Login"];
@@ -34,6 +35,8 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const router = useRouter();
 
   return (
     <>
@@ -98,7 +101,12 @@ const Navbar = () => {
                   {pages.map((page) => (
                     <Button
                       key={page}
-                      onClick={handleCloseNavMenu}
+                      onClick={() => {
+                        handleCloseNavMenu();
+                        if(page === 'Login'){
+                          router.push('/LoginPage')
+                        }
+                      }}
                       className="nav-btns"
                     >
                       {page}
