@@ -182,10 +182,10 @@
   font-size: 20px;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-ou
 }
-
+/* 
 input[type='file'] {
   display: none;
-}
+} */
 
 .file_logo {
   background-color: #3E63CF;
@@ -199,7 +199,7 @@ input[type='file'] {
   font-family: 'Catamaran', sans-serif;
 }
 
-.logo_file_container {
+/* .logo_file_container {
   width: 63px;
   height: 60px;
   flex-shrink: 0;
@@ -209,7 +209,6 @@ input[type='file'] {
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
-  /* line-height: 20px;  */
   letter-spacing: -0.34px;
   padding-left: 14px;
   padding-top: 20px;
@@ -217,7 +216,7 @@ input[type='file'] {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: 'Catamaran', sans-serif;
-}
+} */
 
 /* .scroll {
   height: 600px;

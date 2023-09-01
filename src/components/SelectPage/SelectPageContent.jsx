@@ -1,13 +1,35 @@
-import { Box, Button, Typography,} from "@mui/material";
+import { Button, Typography,} from "@mui/material";
 import Link from "next/link";
-import { useState } from "react";
-const SelectPageContent = ({ increment, setContestData}) => {
-const [page, setPage] = useState('')
+import axios from "axios";
 
+const SelectPageContent = ({ increment, setContestData, pages, setPosts}) => {
 
-const handlePageChange = (e) => {
-  setContestData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+const handlePageChange = async (e) => {
+
+  const selectedValue = e.target.value;
+  const [id, page] = selectedValue.split('-'); 
+  await handlePage(id);
+  setContestData(prev => ({ ...prev, [e.target.name]:  page}));
 };
+
+const handlePage = async (id) => {
+  const formData = new FormData();
+  
+  formData.append("page_id", id);
+  formData.append("resource", "facebook");
+
+  try {
+    const response = await axios.post(
+      "http://localhost/viralyIO/api/includes/actions.php",
+      formData
+    );
+    console.log(response)
+    setPosts(response?.data.data)
+  } catch (error) {
+    console.log(error);
+  }
+  
+}
 
   return (
     <>
@@ -20,11 +42,13 @@ const handlePageChange = (e) => {
             Choose your Facebook page
           </Typography>
           <div className="custom-select">
-      <select className="select_page" name="page" value={page} onChange={(e)=>handlePageChange(e)}>
-        <option>Test Page</option>
-        <option>Test 1</option>
-        <option>Test 2</option>
-        <option>Test 3</option>
+      <select className="select_page" name="page" onChange={(e)=>handlePageChange(e)}>
+        <option value="select">
+          Select your page
+        </option>
+        {pages.map(page => {
+         return <option key={page.id} value={`${page.id}-${page.page}`}>{page.page}</option>
+        })}
       </select>
     </div>
           <Link href="#">

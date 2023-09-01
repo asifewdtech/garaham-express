@@ -10,20 +10,26 @@ import SelectPageContent from "@/components/SelectPage/SelectPageContent";
 import SelectPostContent from "@/components/SelectPost/SelectPostContent";
 import ChooseOptionContent from "@/components/ChooseOptions/ChooseOptionContent";
 import PickWinner from "@/components/PickWinner/PickWinner";
+import { useEffect } from "react";
+import axios from "axios";
 
 const SelectFbPageCopy = () => {
   const [selectTab, setselectedTab] = useState("Select a page");
   const [currentTabIndex, setcurrentTabIndex] = useState(0);
+  const [pages, setPages] = useState(null);
+  const [posts, setPosts] = useState(null);
+  const [postId, setPostId] = useState(null);
+  const [commentData, setCommentData] = useState(null);
+  // console.log(posts, postId)
+  let myPages = []
   const [contestData, setContestData] = useState({
     page: "",
     postText: "",
     img: "",
     conditions: {},
   });
-  console.log(contestData.conditions);
   // dynamic content for side container
   const saveContestData = (e) => {
-    console.log(e.target.name);
     // console.log(e.target.value)
   };
 
@@ -75,7 +81,34 @@ const SelectFbPageCopy = () => {
       return post.substring(0, truncatedIdLength) + "...";
     }
   }
-  
+
+  useEffect(() => {
+    const fetchPages = async () => {
+      const formData = new FormData();
+      formData.append("user_id", "#41fd5994c08918b5889c82c05b2723aa");
+      formData.append("resource", "facebook");
+
+      try {
+        const response = await axios.post(
+          "http://localhost/viralyIO/api/includes/actions.php",
+          formData
+        );
+        setPages(response?.data.pages)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPages();
+  }, []);
+
+  for(const page in pages) {
+    // myPages.push({`${page}: ${pages[page]}`});
+    myPages.push({
+      id: page,
+      page: pages[page]
+    })
+  }
+
   return (
     <>
       <Navbar />
@@ -110,6 +143,13 @@ const SelectFbPageCopy = () => {
                     decrement={decrement}
                     increment={increment}
                     key={index}
+                    pages={myPages}
+                    setPosts= {setPosts}
+                    posts= {posts}
+                    setPostId = {setPostId}
+                    postId = {postId}
+                    setCommentData = {setCommentData}
+                    commentData = {commentData}
                   />
                 ) : null
               )}
@@ -136,37 +176,38 @@ const SelectFbPageCopy = () => {
                   <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Post
                   </Typography>
-                  {contestData.postText?.length !==0 ?  <div className="side_card_box">
-                    <Typography className="sideboxcardtext">
-                      {/* {contestData.postText} */}
-                      {
-                        truncatePost(contestData.postText)
-                      }
-                    </Typography>
-                    <img
-                      src={contestData.img}
-                      className="sideboximg"
-                      alt="post-img"
-                    />
-                  </div> :''}
+                  {contestData.postText?.length !== 0 ? (
+                    <div className="side_card_box">
+                      <Typography className="sideboxcardtext">
+                        {truncatePost(contestData.postText)}
+                      </Typography>
+                      <img
+                        src={contestData.img}
+                        className="sideboximg"
+                        alt="post-img"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
-                 
                   <Typography
                     sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}
                   >
                     Conditions
                   </Typography>
 
-                  {Object.entries(contestData?.conditions).map(([key, value]) => (
-                    <Typography
-                      sx={{ pb: "5px" }}
-                      className="fb-box-condition"
-                      key={key}
-                    >
-                    {value!==''? value:''}
-
-                    </Typography>
-                  ))}
+                  {Object.entries(contestData?.conditions).map(
+                    ([key, value]) => (
+                      <Typography
+                        sx={{ pb: "5px" }}
+                        className="fb-box-condition"
+                        key={key}
+                      >
+                        {value !== "" ? value : ""}
+                      </Typography>
+                    )
+                  )}
 
                   {/* <Typography sx={{pb: '5px'}} className="fb-box-condition">
                     New Year Giveaway

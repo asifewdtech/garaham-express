@@ -1,0 +1,8 @@
+{
+    "require": {
+        "php": "^7.3 | ^8.0",
+        "facebook/graph-sdk": "^5.1.4",
+        "guzzlehttp/guzzle": "^7.5",
+        "phpoffice/phpspreadsheet": "^1.28"
+    }
+}

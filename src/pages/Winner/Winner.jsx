@@ -5,6 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import WinnerOne from "@/components/Winners/WinnerOne";
 import Navbar from "@/components/AppBar/AppBar";
+import { useRouter } from 'next/router';
+import { useState , useEffect} from "react";
+
 const Winner = () => {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -13,6 +16,19 @@ const Winner = () => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+  const [commentsArray, setCommentsArray] = useState(null);
+  const router = useRouter();
+
+  const serializedData = router.query.data;
+  useEffect(() => {
+    if(serializedData) {
+      const arrayOfObjects = JSON.parse(decodeURIComponent(serializedData));
+      setCommentsArray(arrayOfObjects);
+      console.log(arrayOfObjects );
+    }
+  }, [])
+  
+
   return (
     <>
       <Navbar />
@@ -25,14 +41,7 @@ const Winner = () => {
             <Typography className="winner_subheading">
               Congrats! Your winner has been picked!
             </Typography>
-
-            {/* Winner list starts */}
-            {/* <div className="winners_list">
-            <WinnerOne count={1} />
-            <WinnerOne count={2} />
-            <WinnerOne count={3} />
-          </div> */}
-            <WinnerOne />
+            <WinnerOne commentsArray = {commentsArray}/>
             {/* Winner list starts */}
           </Box>
           <Box className="footer1">

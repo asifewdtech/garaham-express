@@ -3,10 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const SelectPostContent = ({decrement, increment, setContestData}) => {
-
-  // const [selectTab, setselectedTab] = useState("select-post");
-  // const [activeCard, setActiceCard] = useState(null);
+const SelectPostContent = ({decrement, increment, setContestData, posts, setPostId}) => {
+  console.log(posts);
   const [selectCard, setselectedCard] = useState(null);
 
   // CARD IMAGES
@@ -57,7 +55,8 @@ const SelectPostContent = ({decrement, increment, setContestData}) => {
   const handleSelectCard = (e,card, i) => {
     e.preventDefault();
     setselectedCard(i);
-    setContestData(prev=>({ ...prev, postText:card.content, img:card.image}))
+    setPostId(card.post_id)
+    setContestData(prev=>({ ...prev, postText:card.message, img:card.media_url}))
   }
 
   return <>
@@ -70,12 +69,12 @@ const SelectPostContent = ({decrement, increment, setContestData}) => {
     </Typography>
     <div className="cards-main-box" style={{ paddingBottom: "30px" }}>
       <Box className='cards'>
-        {cardContent.map((card, i) => {
+        {posts?.map((card, i) => {
           return <Card key={i} onClick={(e) => handleSelectCard(e, card, i)} className={`post_card ${selectCard === i ? "active_card" : ""}`}>
             <Box sx={{ display: 'flex', flexDirection: 'column', width: "50%" }}>
               <CardContent sx={{ padding: 0 }}>
                 <Typography  variant="subtitle1" color="text.secondary" component="div" className='post_text'>
-                  {card.content}
+                  {card.message}
                 </Typography>
               </CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
@@ -85,7 +84,7 @@ const SelectPostContent = ({decrement, increment, setContestData}) => {
             </Box>
             <CardMedia
               component="img"
-              image={card.image}
+              image={card.media_url}
               alt="post image"
               className="post_image"
             />

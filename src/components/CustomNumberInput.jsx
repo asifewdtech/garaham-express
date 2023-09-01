@@ -45,6 +45,7 @@ const CustomNumberInput = (props) => {
         value={value}
         onChange={handleChange}
         placeholder='1'
+        name={props.name}
       />
       <div className="custom-number-input-arrows">
         <div className="arrow up" onClick={handleIncrement}>
