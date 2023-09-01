@@ -14,8 +14,7 @@ const PickWinner = ({commentData}) => {
   const router = useRouter();
 
   const handleNavigation = () => {
-    // Pass data using the `query` parameter
-    router.push(`/Winner/Winner?data=${serializedData}`);
+    router.push(`/facebook/winners?data=${serializedData}`);
   };
   return (
     <>
@@ -27,11 +26,9 @@ const PickWinner = ({commentData}) => {
         <Box>
           <Image alt="trophy" className="trophy1" src={newtrophy} />
           <div className="text-center">
-            {/* <Link href="/Winner/Winner"> */}
               <Button onClick={handleNavigation} variant="contained" className="save_btn">
                 Choose a Winner
               </Button>
-            {/* </Link> */}
           </div>
         </Box>
       </div>

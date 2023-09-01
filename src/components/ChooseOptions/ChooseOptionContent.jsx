@@ -14,7 +14,7 @@ const ChooseOptionContent = ({
   const [showAdvanceOptions, setshowAdvanceOptions] = useState(false);
   const [showProCustomize, setshowProCustomize] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState('');
   console.log(isChecked);
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
@@ -53,6 +53,7 @@ const ChooseOptionContent = ({
     formData.append("resource", "facebook");
     
     formData.append("post_id", postId);
+    console.log(formData);
   
     try {
       const response = await axios.post(
@@ -124,9 +125,9 @@ const ChooseOptionContent = ({
               <input
                 className="input_field"
                 type="number"
-                placeholder="1"
+                placeholder= "1"
                 name="winners"
-                {...register("winners")}
+                {...register("winners", { defaultValue: 1 })}
               />
               <div className="custom-number-input-arrows">
                 <div className="arrow up" onClick={handleIncrement}>
@@ -378,7 +379,7 @@ const ChooseOptionContent = ({
                     className="input_field"
                     onChange={(e) => setLogoFile(e.target.files[0])}
                   />
-                  {logoFile && <p>Selected File: {logoFile?.name}</p>}
+                  {logoFile && <p style={{display: "none"}}>Selected File: {logoFile?.name}</p>}
                 </div>
               </div>
               <div>

@@ -66,7 +66,7 @@ const SelectPost = () => {
     const tab = e.target.dataset.tab;
     setselectedTab(tab);
     if(tab === "select-page"){
-      router.push('http://localhost:3000/SelectPage/SelectFbPage')
+      router.push('http://localhost:3000/facebook/giveaway')
     }else if(tab === "select-post"){
       router.push('http://localhost:3000/SelectPost/SelectPost')
     }

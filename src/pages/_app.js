@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import "@/components/AppBar/AppBar.css";
 import "@/components/CommentPicker/CommentPicker.css";
-import "@/pages/SelectPage/SelectFbPage.css";
+import "@/pages/facebook/SelectFbPage.css";
 import "@/pages/SelectPost/SelectPost.css";
 import "@/pages/Winner/Winner.css";
 import "@/pages/ChooseWinner/ChooseWinner.css";

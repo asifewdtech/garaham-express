@@ -17,7 +17,7 @@ const CommentPicker = () => {
         </Grid>
         <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={4}  xs={6}>
           <div className="logo_box">
-            <Link href='/SelectPage/SelectFbPageCopy'>
+            <Link href='/facebook/giveaway'>
               <img className="logo_img" src="/fb.png" alt="logos" />
             </Link>
           </div>

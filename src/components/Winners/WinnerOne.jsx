@@ -93,7 +93,7 @@ const WinnerOne = ({ count, commentsArray }) => {
                       </div>
                     </div>
                     <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
-                      <img src="/commentdp.png" alt="" />
+                      <img src={item.profilepic ? item.profilepic : "https://static.thenounproject.com/png/4035892-200.png"}  alt="" />
 
                       <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
                         <h6
@@ -110,7 +110,7 @@ const WinnerOne = ({ count, commentsArray }) => {
                   </div>
                 </div>;
               })
-            : <h1>Not Comments Here</h1>}
+            : null}
           {/* <div className="col-lg-4 m-auto widthMain">
             <h2 className="prizeWinner text-center winnerSecMain">2</h2>
             <div className="d-flex justify-content-center align-items-center winnerContentSec1 ">

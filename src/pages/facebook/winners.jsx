@@ -32,22 +32,21 @@ const Winner = () => {
   return (
     <>
       <Navbar />
-      <Container maxWidth>
+      <Container maxWidth sx={{pb: "15px"}}>
         <Box className="winner_container">
           <Box className="winner">
             <Typography className="winner_heading">
               And the WINNER is
             </Typography>
             <Typography className="winner_subheading">
-              Congrats! Your winner has been picked!
+              {commentsArray ? "Congrats! Your winner has been picked!" : "No Comments here"}
             </Typography>
             <WinnerOne commentsArray = {commentsArray}/>
-            {/* Winner list starts */}
           </Box>
           <Box className="footer1">
             <Link
               style={{ textDecoration: "none", color: "white" }}
-              href="/SelectPage/SelectFbPageCopy"
+              href="/facebook/giveaway"
             >
               <Typography className="new_contest active">
                 Start a New Contest{" "}
@@ -71,7 +70,7 @@ const Winner = () => {
             <div className="pick">
               <Link
                 style={{ textDecoration: "none", color: "white" }}
-                href="/SelectPage/SelectFbPageCopy"
+                href="/facebook/giveaway"
               >
                 <Typography className="new_winner">
                   Pick Another Winner
@@ -79,26 +78,6 @@ const Winner = () => {
               </Link>
             </div>
           </Box>
-          {/* <Container maxWidth='xl'>
-          <div className="share share_copy">
-            <Typography>Share the results</Typography>
-            <div className="svg-container"></div>
-            <Link href="#" className="share_link">
-              https://sweepwidg
-            </Link>
-            <div>
-              <Image src="/copy.png" width='24' height='24' className="copy_box" alt="copy"></Image>
-            </div>
-          </div>
-          <Box sx={{ display: { xs: 'flex', justifyContent: 'space-around', md: 'none' }, marginLeft: "30px" }}>
-            <Link href='#'>
-              <Button variant="contained" className="go_back">Go Back</Button>
-            </Link>
-            <Link href='/SelectConditions/SelectConditions'>
-              <Button variant="contained" className="save_btn">Save and Continue</Button>
-            </Link>
-          </Box>
-        </Container> */}
         </Box>
       </Container>
     </>

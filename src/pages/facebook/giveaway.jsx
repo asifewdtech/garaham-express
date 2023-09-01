@@ -208,19 +208,6 @@ const SelectFbPageCopy = () => {
                       </Typography>
                     )
                   )}
-
-                  {/* <Typography sx={{pb: '5px'}} className="fb-box-condition">
-                    New Year Giveaway
-                  </Typography>
-                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
-                    2 Winners
-                  </Typography>
-                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
-                    Minimum 3 posts
-                  </Typography>
-                  <Typography sx={{pb: '5px'}} className="fb-box-condition">
-                    Minimum 3 tags
-                  </Typography> */}
                 </div>
               </div>
             </div>
