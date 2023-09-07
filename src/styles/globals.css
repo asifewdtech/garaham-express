@@ -1285,3 +1285,16 @@ footer {
     width: 100% !important;
   }
 }
+
+@media (min-width: 1px) {
+  .footer1 {
+    display: none;
+  }
+}
+
+/* Hide the buttons container when inside an iframe */
+@media (min-width: 1px) {
+  .inside-iframe .footer1 {
+    display: none;
+  }
+}
