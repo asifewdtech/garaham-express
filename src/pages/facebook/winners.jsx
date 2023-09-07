@@ -84,7 +84,9 @@ const Winner = () => {
                 Start a New Contest{" "}
               </Typography>
             </Link>
-            <div className="share">
+            <div style={{
+                  cursor: "pointer",
+                }} onClick={handleCopyIframeCode} className="share">
               <Typography>Share the results</Typography>
               <div className="svg-container"></div>
               <div className="share_link">
@@ -102,7 +104,6 @@ const Winner = () => {
                   width="24"
                   height="24"
                   alt="copy"
-                  onClick={handleCopyIframeCode}
                 ></Image>
               </div>
             </div>
