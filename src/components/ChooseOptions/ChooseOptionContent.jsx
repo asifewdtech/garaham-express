@@ -15,7 +15,6 @@ const ChooseOptionContent = ({
   const [showProCustomize, setshowProCustomize] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
   const [isChecked, setIsChecked] = useState('');
-  console.log(isChecked);
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
 
@@ -53,15 +52,15 @@ const ChooseOptionContent = ({
     formData.append("resource", "facebook");
     
     formData.append("post_id", postId);
-    console.log(formData);
   
     try {
       const response = await axios.post(
         "http://localhost/viralyIO/api/includes/actions.php",
         formData
       );
-      console.log(response);
-      setCommentData(response?.data)
+      if(response?.data.success) {
+        setCommentData(response?.data)
+      }
     } catch (error) {
       console.log(error);
     }
@@ -329,10 +328,11 @@ const ChooseOptionContent = ({
               <div>
                 <legend className="legend">Block list</legend>
                 <textarea
+                  style={{marginBottom: "-10px"}}
                   className="input_field"
                   name="blocks"
                   {...register("blocks")}
-                  placeholder="Block lists"
+                  placeholder="Write user names seperated by commas (,)"
                 ></textarea>
               </div>
               <div>

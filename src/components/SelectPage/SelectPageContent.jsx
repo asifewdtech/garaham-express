@@ -23,8 +23,9 @@ const handlePage = async (id) => {
       "http://localhost/viralyIO/api/includes/actions.php",
       formData
     );
-    console.log(response)
-    setPosts(response?.data.data)
+    if(response?.data.success){
+      setPosts(response?.data.data)
+    }
   } catch (error) {
     console.log(error);
   }

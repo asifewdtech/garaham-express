@@ -1,57 +1,13 @@
 import { Box, Button, Typography, Container, Card, CardMedia, CardContent, } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const SelectPostContent = ({decrement, increment, setContestData, posts, setPostId}) => {
-  console.log(posts);
+const SelectPostContent = ({decrement, increment, setContestData, posts, setPostId, commentData}) => {
+  
   const [selectCard, setselectedCard] = useState(null);
 
-  // CARD IMAGES
-  const cardContent = [
-    {
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      image: "/postImg.png"
-    },
-    {
-      content: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      image: "/postImg.png"
-    },
-    // Add more objects with different content texts here
-    {
-      content: "Another example text for the content property.",
-      image: "/postImg.png"
-    },
-    {
-      content: "Yet another different text to replace the content.",
-      image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
-    },
-    {
-      content: "Three months ago I started this project with the idea to create a community for vegans, plant based eaters, vegetarians and veg-curious people. A website that will answer all your questions and you will be able to find ...",
-      image: "/postImg.png"
-    }
- 
-  ];
   const handleSelectCard = (e,card, i) => {
     e.preventDefault();
     setselectedCard(i);
@@ -69,7 +25,7 @@ const SelectPostContent = ({decrement, increment, setContestData, posts, setPost
     </Typography>
     <div className="cards-main-box" style={{ paddingBottom: "30px" }}>
       <Box className='cards'>
-        {posts?.map((card, i) => {
+        {posts ? posts?.map((card, i) => {
           return <Card key={i} onClick={(e) => handleSelectCard(e, card, i)} className={`post_card ${selectCard === i ? "active_card" : ""}`}>
             <Box sx={{ display: 'flex', flexDirection: 'column', width: "50%" }}>
               <CardContent sx={{ padding: 0 }}>
@@ -80,7 +36,7 @@ const SelectPostContent = ({decrement, increment, setContestData, posts, setPost
               <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
 
               </Box>
-              <Typography className='cmnts_count'>• &nbsp;  4 comments &nbsp; • </Typography>
+              <Typography className='cmnts_count'>• &nbsp;  {commentData ? commentData.data.length : 4} comments &nbsp; • </Typography>
             </Box>
             <CardMedia
               component="img"
@@ -89,7 +45,7 @@ const SelectPostContent = ({decrement, increment, setContestData, posts, setPost
               className="post_image"
             />
           </Card>
-        })}
+        }): <CircularProgress />}
       </Box>
       <Container maxWidth='xl'>
         <Box className="post_buttons" sx={{ display: { xs: 'flex', justifyContent: 'space-around' } }}>

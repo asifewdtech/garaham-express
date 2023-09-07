@@ -551,7 +551,7 @@
         	}
         }        
         
-        function getSpecificColumnData($table, $conditions, $value)
+        function getSpecificColumnData($table, $conditions, $requireColumns)
         {
         	
         	$whereConditions = "";
@@ -568,9 +568,10 @@
         
         	$stmt = $this->getInstance()->query($sql);
         	if ($stmt) {
-        
         		while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        			$arr[] = $data[$value];
+					$requireData = [];
+					foreach($requireColumns as $column){ $requestData[$column] = $data[$column]; }
+        			$arr[] = $requestData;
         		}
         
         	}
@@ -971,19 +972,21 @@
 					$maincolor = $requestData['maincolor'];
 				}
 				$uniqueusersIds = [];
-				$badwords = '';
 				if (isset($requestData['badwords']) && !empty($requestData['badwords'])) {
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, "message"))->data as $comment) {
-						if (str_contains(preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($comment)), preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($requestData['badwords'])))) {
-							$badwords .= "'".$comment."'" . ',';
+					$badwords = [];
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData) {
+						if ($this->searchFromString(preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($commentsData->message)), preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($requestData['badwords'])))) {
+							$badwords[]= $commentsData->id;
 						}
 					}
-					$badwords = substr($badwords, 0, -3);
-					$requireQuery.=" and message NOT IN('{$badwords}')";
+					if(count($badwords)>0){
+						$badwords = implode(',',$badwords);
+						$requireQuery.=" and message NOT IN($badwords)";
+					}
 				}
 				$hashtags = '';
 				if (isset($requestData['hashtags']) && !empty($requestData['hashtags'])) {
-					if (!str_contains($requestData['hashtags'], "#")) {
+					if (!$this->searchFromString($requestData['hashtags'], "#")) {
 						$hashtags = "#" . $requestData['hashtags'];
 					} else {
 						$hashtags = $requestData['hashtags'];
@@ -1021,52 +1024,58 @@
 					$words = $requestData['words'];
 					$requireQuery.= " and message like '%{$words}%'";
 				}
-				$mintags = '';
 				if (isset($requestData['mintags']) && !empty($requestData['mintags'])) {
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, "message"))->data as $comment) {
-						if (str_contains(preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($comment)), "#")) {
-							if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($comment)))) >= $requestData['mintags'] && (isset($requestData['duplicatetag']) && explode(' ', $comment) == array_unique(explode(' ', $comment)))) {
-								$mintags .= $comment . '","';
-							} else if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($comment)))) >= $requestData['mintags'] && !isset($requestData['duplicatetag'])) {
-								$mintags .= "'".$comment."'" . ',';
+					$mintags = [];
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData->message) {
+						if ($this->searchFromString(preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)), "#")) {
+							if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)))) >= $requestData['mintags'] && (isset($requestData['duplicatetag']) && explode(' ', $commentsData->message) == array_unique(explode(' ', $commentsData->message)))) {
+								$mintags[]= $commentsData->id;
+							} else if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)))) >= $requestData['mintags'] && !isset($requestData['duplicatetag'])) {
+								$mintags[]= $commentsData->id;
 							}
 						}
 					}
-					$mintags = substr($mintags, 0, -3);
-					$requireQuery.=" and message IN('{$mintags}')";
+					// $mintags = substr($mintags, 0, -3);
+					if(count($mintags)>0){
+						$mintags = implode(',',$mintags);
+						$requireQuery.=" and id IN($mintags)";
+					}
 				}
-				$phrases = [];
 				if (isset($requestData['phrases']) && !empty($requestData['phrases'])) {
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, "message"))->data as $comment) {
-						if (strpos($comment, $requestData['phrases']) !== false) {
-							$phrases[] .= "'{$comment}'";
+					$phrases = [];
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData) {
+						if (strpos($commentsData->message, $requestData['phrases']) !== false) {
+							$phrases[] = $commentsData->id;
 						}
 					}
-					$phrases = implode(',',$phrases);
-					$requireQuery.=" and message IN($phrases)";
+
+					if(count($phrases)>0){
+						$phrases = implode(',',$phrases);
+						$requireQuery.=" and id IN($phrases)";
+					}
 				}
-				$mentions = '';
 				if (isset($requestData['mentions']) && !empty($requestData['mentions'])) {
-					if (!str_contains($requestData['mentions'], "@")) {
+					$mentions = '';
+					if (!$this->searchFromString($requestData['mentions'], "@")) {
 						$mentions = "@" . $requestData['mentions'];
 					} else {
 						$mentions = $requestData['mentions'];
 					}
 					$requireQuery.=" and message like '%{$mentions}%'";
 				}
-				$blocks = '';
 				if (isset($requestData['blocks']) && !empty($requestData['blocks'])) {
-					$blocks = implode('","', explode(",", $requestData['blocks']));
+					$blocks = implode("','", explode(",", $requestData['blocks']));
 					$requireQuery.=" and from_name NOT IN ('{$blocks}')";
 				}
-				$uniqueusers = [];
 				if (isset($requestData['uniqueusers']) && !empty($requestData['uniqueusers'])) {
+					$uniqueusers = [];
 					foreach (json_decode($this->getGroupedData("comments", $cond, "from_name"))->data as $comment) {
 						$uniqueusers[] = $comment->id;
 					}
-			
-					$uniqueusers = implode(",",$uniqueusers);
-					$requireQuery.=" and id IN({$uniqueusers})";
+					if(count($uniqueusers)>0){
+						$uniqueusers = implode(",",$uniqueusers);
+						$requireQuery.=" and id IN({$uniqueusers})";
+					}
 				}
 				
 				$requireQuery.=" ORDER BY RAND() LIMIT 0, $numberOfWinners";
@@ -1088,16 +1097,20 @@
 					$keyfilter = $requestData['keyfilter'];
 					$requireQuery.=" and message like '%{$keyfilter}%'";
 				}
-				$phrases = '';
 				if (isset($requestData['phrases']) && !empty($requestData['phrases'])) {
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, "message"))->data as $comment) {
-						// if (str_contains($comment, $requestData['phrases'])) {
-						if (strstr($comment, $requestData['phrases'])) {
-							$phrases .= $comment . "','";
+					$phrases = [];
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentData) {
+						// if ($this->searchFromString($commentData, $requestData['phrases'])) {
+						if (strstr($commentData['message'], $requestData['phrases'])) {
+							// $phrases .= $commentData['id'] . "','";
+							$phrases[] = $commentData['id'];
 						}
 					}
-					$phrases = substr($phrases, 0, -3);
-					$requireQuery.=" and message IN('{$phrases}')";
+
+					if(count($phrases)>0){
+						$phrases = implode(',',$phrases);
+						$requireQuery.=" and id IN($phrases)";
+					}
 				}
 
 				if (isset($requestData['firstComment']) && !empty($requestData['firstComment'])) {
@@ -1115,27 +1128,34 @@
 				    }
 				}
 
-				$nPhrases = '';
 				if (isset($requestData['nPhrases']) && !empty($requestData['nPhrases'])) {
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, "message"))->data as $comment) {
-						if (str_contains($comment, $requestData['nPhrases'])) {
-							// echo $comment."<br>";
-							$nPhrases .= $comment . "','";
+					$nPhrases = [];
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData) {
+						if ($this->searchFromString($commentsData->message, $requestData['nPhrases'])) {
+							// echo $commentsData->message."<br>";
+							$nPhrases[] = $commentsData->id;
 						}
 					}
-					$nPhrases = substr($nPhrases, 0, -3);
-					$requireQuery.=" and message NOT IN('{$nPhrases}')";
+
+					if(count($nPhrases)>0){
+						$nPhrases = implode(',',$nPhrases);
+						$requireQuery.=" and id NOT IN($nPhrases)";
+					}
+					
 				}
-				$banComment = '';
 				if (isset($requestData['banComment']) && !empty($requestData['banComment'])) {
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, "message"))->data as $comment) {
-						if (str_contains($comment, $requestData['banComment'])) {
-							// echo $comment;
-							$banComment .= $comment . "','";
+					$banComment = [];
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData) {
+						if ($this->searchFromString($commentsData->message, $requestData['banComment'])) {
+							// echo $commentsData->message;
+							$banComment[] = $commentsData->id;
 						}
 					}
-					$banComment = substr($banComment, 0, -3);
-					$requireQuery.=" and message NOT IN('{$banComment}')";
+
+					if(count($banComment)>0){
+						$banComment = implode(',',$banComment);
+						$requireQuery.=" and id NOT IN($banComment)";
+					}
 				}
 
 				if (isset($requestData['endDate']) && !empty($requestData['endDate'])) {
@@ -1167,9 +1187,6 @@
 				// print_r($requireQuery);
 				// die();
 				return json_encode(['success' => true, 'data' => $comments]);
-				// echo "<pre>";
-				// print_r($comments);
-				// die();
 			}
 	
 			if (isset($requestData['twitter_filter'])) {
@@ -1193,15 +1210,20 @@
 					$blocks = implode("','", explode(",", $requestData['block']));
 					$requireQuery.=" and name NOT IN ('{$blocks}')";
 				}
-				$avatar = '';
+
 				if (isset($requestData['avatar']) && !empty($requestData['avatar'])) {
-					foreach (json_decode($this->getSpecificColumnData("retweets", array("tweet_id" => $tweet_id), "profile_image_url"))->data as $tweet) {
-						if (str_contains($tweet, "default_profile_normal.png")) {
-							$avatar .= $tweet . "','";
+					$avatar = [];
+					foreach (json_decode($this->getSpecificColumnData("retweets", array("tweet_id" => $tweet_id), ["id","profile_image_url"]))->data as $tweetsData) {
+						if ($this->searchFromString($tweetsData->profile_image_url, "default_profile_normal.png")) {
+							$avatar[]= $tweetsData->id;
 						}
 					}
-					$avatar = substr($avatar, 0, -3);
-					$requireQuery.=" and profile_image_url NOT IN('{$avatar}')";
+
+					if(count($avatar)>0){
+						$avatar = implode(',',$avatar);
+						$requireQuery.=" and id NOT IN($avatar)";
+					}
+			
 				}
 
 				if(isset($requestData['description']) && !empty($requestData['description'])){
@@ -1228,6 +1250,13 @@
 			} 
 
 			return json_encode(['success' => true, 'data' => $comments]);
+		}
+
+		// search string from given string
+		function searchFromString($fromString, $targetString){
+			$fromString = strtolower($fromString);
+			$targetString = strtolower($targetString);
+			return preg_match("/\b" . preg_quote($targetString, '/') . "\b/i", $fromString);
 		}
     }
     

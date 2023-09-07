@@ -1,12 +1,12 @@
 import React from "react";
-import { Box, Typography, Container, Paper, Grid, Button } from "@mui/material";
+import { Box, Typography, Container, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link";
 import WinnerOne from "@/components/Winners/WinnerOne";
 import Navbar from "@/components/AppBar/AppBar";
-import { useRouter } from 'next/router';
-import { useState , useEffect} from "react";
+// import { useRouter } from 'next/router';
+import { useState } from "react";
 
 const Winner = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -17,16 +17,16 @@ const Winner = () => {
     color: theme.palette.text.secondary,
   }));
   const [commentsArray, setCommentsArray] = useState(null);
-  const router = useRouter();
+  // const router = useRouter();
 
-  const serializedData = router.query.data;
-  useEffect(() => {
-    if(serializedData) {
-      const arrayOfObjects = JSON.parse(decodeURIComponent(serializedData));
-      setCommentsArray(arrayOfObjects);
-      console.log(arrayOfObjects );
-    }
-  }, [])
+  // const serializedData = router.query.data || null;
+  // useEffect(() => {
+  //   if(serializedData) {
+  //     const arrayOfObjects = JSON.parse(decodeURIComponent(serializedData));
+  //     setCommentsArray(arrayOfObjects);
+      // console.log(arrayOfObjects );
+  //   }
+  // }, []);
   
 
   return (
@@ -39,9 +39,13 @@ const Winner = () => {
               And the WINNER is
             </Typography>
             <Typography className="winner_subheading">
-              {commentsArray ? "Congrats! Your winner has been picked!" : "No Comments here"}
+              {commentsArray ? "Congrats! Your winner has been picked!" : "No Winner here"}
+              {/* Congrats! Your winner has been picked! */}
             </Typography>
-            <WinnerOne commentsArray = {commentsArray}/>
+            <WinnerOne 
+            commentsArray = {commentsArray}
+            setCommentsArray ={setCommentsArray}
+            />
           </Box>
           <Box className="footer1">
             <Link
