@@ -5,35 +5,24 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import brandLogo from "../../assets/images/Viraly-logo-new1 1.png";
 import { useRouter } from "next/router";
-// import Header from '../Header/Header';
 
 const pages = ["Try It", "Features", "Blog", "Help Docs", "Princing", "Login"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   const router = useRouter();
@@ -83,7 +72,6 @@ const Navbar = () => {
                     display: { xs: "flex", md: "none" },
                     flexGrow: 1,
                     fontFamily: "monospace",
-                    // fontWeight: 700,
                     letterSpacing: ".3rem",
                     color: "inherit",
                     textDecoration: "none",
@@ -164,8 +152,6 @@ const Navbar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      {/* Banner with background image and centered content */}
-      {/* <Header /> */}
     </>
   );
 };
