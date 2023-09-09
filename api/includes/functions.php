@@ -975,13 +975,14 @@
 				if (isset($requestData['badwords']) && !empty($requestData['badwords'])) {
 					$badwords = [];
 					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData) {
-						if ($this->searchFromString(preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($commentsData->message)), preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($requestData['badwords'])))) {
+						// if ($this->searchFromString(preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($commentsData->message)), preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($requestData['badwords'])))) {
+						if ($this->searchFromString($commentsData->message, $requestData['badwords'])) {
 							$badwords[]= $commentsData->id;
 						}
 					}
 					if(count($badwords)>0){
 						$badwords = implode(',',$badwords);
-						$requireQuery.=" and message NOT IN($badwords)";
+						$requireQuery.=" and id NOT IN($badwords)";
 					}
 				}
 				$hashtags = '';
@@ -1026,13 +1027,19 @@
 				}
 				if (isset($requestData['mintags']) && !empty($requestData['mintags'])) {
 					$mintags = [];
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData->message) {
-						if ($this->searchFromString(preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)), "#")) {
-							if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)))) >= $requestData['mintags'] && (isset($requestData['duplicatetag']) && explode(' ', $commentsData->message) == array_unique(explode(' ', $commentsData->message)))) {
-								$mintags[]= $commentsData->id;
-							} else if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)))) >= $requestData['mintags'] && !isset($requestData['duplicatetag'])) {
-								$mintags[]= $commentsData->id;
-							}
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData) {
+						// if ($this->searchFromString(preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)), "#")) {
+						// 	if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)))) >= $requestData['mintags'] && (isset($requestData['duplicatetag']) && explode(' ', $commentsData->message) == array_unique(explode(' ', $commentsData->message)))) {
+						// 		$mintags[]= $commentsData->id;
+						// 	} else if (count(explode(' #', preg_replace("/[^a-zA-Z0-9 #]+/", "", html_entity_decode($commentsData->message)))) >= $requestData['mintags'] && !isset($requestData['duplicatetag'])) {
+						// 		$mintags[]= $commentsData->id;
+						// 	}
+						// }
+
+						if (count(explode(' #', $commentsData->message)) >= $requestData['mintags'] && (isset($requestData['duplicatetag']) && explode(' ', $commentsData->message) == array_unique(explode(' ', $commentsData->message)))) {
+							$mintags[]= $commentsData->id;
+						} else if (count(explode(' #', $commentsData->message)) >= $requestData['mintags'] && !isset($requestData['duplicatetag'])) {
+							$mintags[]= $commentsData->id;
 						}
 					}
 					// $mintags = substr($mintags, 0, -3);
