@@ -9,12 +9,12 @@ const ChooseOptionContent = ({
   increment,
   setContestData,
   postId,
-  setCommentData
+  setCommentData,
 }) => {
   const [showAdvanceOptions, setshowAdvanceOptions] = useState(false);
   const [showProCustomize, setshowProCustomize] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
-  const [isChecked, setIsChecked] = useState('');
+  const [isChecked, setIsChecked] = useState("");
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
 
@@ -26,46 +26,47 @@ const ChooseOptionContent = ({
   } = useForm();
 
   const onSubmit = async (data, e) => {
-  
     const dataToSend = { ...data };
     setContestData((prev) => ({ ...prev, conditions: dataToSend }));
-  
+
     increment(e);
-    
+
     const formData = new FormData();
 
-    formData.append("title", data.title ? data.title : '' ) ;
-    formData.append("winners", data.winners ? data.winners : '');
-    formData.append("badwords", data.badwords ? data.badwords : '');
-    formData.append("hashtags", data.hashtags ? data.hashtags : '');
-    formData.append("postCount", data.postCount ? data.postCount : '');
-    formData.append("words", data.words ? data.words : '');
-    formData.append("followers", data.followers ? data.followers : '');
-    formData.append("phrases", data.phrases ? data.phrases : '');
-    formData.append("mintags", data.mintags ? data.mintags : '');
-    formData.append("mentions", data.mentions ? data.mentions : '');
-    formData.append("blocks", data.blocks ? data.blocks : '');
-    formData.append("uniqueusers", isChecked)
-    formData.append("fb_insta_filter", data.fb_insta_filter ? data.fb_insta_filter : '');
-  
-    formData.append("profilepic", logoFile?.name ? logoFile.name : '');
+    formData.append("title", data.title ? data.title : "");
+    formData.append("winners", data.winners ? data.winners : "");
+    formData.append("badwords", data.badwords ? data.badwords : "");
+    formData.append("hashtags", data.hashtags ? data.hashtags : "");
+    formData.append("postCount", data.postCount ? data.postCount : "");
+    formData.append("words", data.words ? data.words : "");
+    formData.append("followers", data.followers ? data.followers : "");
+    formData.append("phrases", data.phrases ? data.phrases : "");
+    formData.append("mintags", data.mintags ? data.mintags : "");
+    formData.append("mentions", data.mentions ? data.mentions : "");
+    formData.append("blocks", data.blocks ? data.blocks : "");
+    formData.append("uniqueusers", isChecked);
+    formData.append(
+      "fb_insta_filter",
+      data.fb_insta_filter ? data.fb_insta_filter : ""
+    );
+
+    formData.append("profilepic", logoFile?.name ? logoFile.name : "");
     formData.append("resource", "facebook");
-    
+
     formData.append("post_id", postId);
-  
+
     try {
       const response = await axios.post(
         "http://localhost/viralyIO/api/includes/actions.php",
         formData
       );
-      if(response?.data.success) {
-        setCommentData(response?.data)
+      if (response?.data.success) {
+        setCommentData(response?.data);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   const handleIncrement = () => {
     const newValue = Number(value) + 1;
@@ -124,7 +125,7 @@ const ChooseOptionContent = ({
               <input
                 className="input_field"
                 type="number"
-                placeholder= "1"
+                placeholder="1"
                 name="winners"
                 {...register("winners", { defaultValue: 1 })}
               />
@@ -174,7 +175,7 @@ const ChooseOptionContent = ({
             <input
               className="input_field"
               {...register("hashtags")}
-              placeholder="@peace"
+              placeholder="#peace"
               name="hashtags"
             />
           </div>
@@ -328,7 +329,7 @@ const ChooseOptionContent = ({
               <div>
                 <legend className="legend">Block list</legend>
                 <textarea
-                  style={{marginBottom: "-10px"}}
+                  style={{ marginBottom: "-10px" }}
                   className="input_field"
                   name="blocks"
                   {...register("blocks")}
@@ -379,7 +380,11 @@ const ChooseOptionContent = ({
                     className="input_field"
                     onChange={(e) => setLogoFile(e.target.files[0])}
                   />
-                  {logoFile && <p style={{display: "none"}}>Selected File: {logoFile?.name}</p>}
+                  {logoFile && (
+                    <p style={{ display: "none" }}>
+                      Selected File: {logoFile?.name}
+                    </p>
+                  )}
                 </div>
               </div>
               <div>
@@ -432,16 +437,12 @@ const ChooseOptionContent = ({
             className="post_buttons"
             sx={{ display: { xs: "flex", justifyContent: "space-around" } }}
           >
-            {/* <Link href="#"> */}
             <Button variant="contained" className="go_back" onClick={decrement}>
               Go Back
             </Button>
-            {/* </Link> */}
-            {/* <Link href="#"> */}
             <Button type="submit" variant="contained" className="save_btn">
               Save and Continue
             </Button>
-            {/* </Link> */}
           </Box>
         </Container>
       </form>

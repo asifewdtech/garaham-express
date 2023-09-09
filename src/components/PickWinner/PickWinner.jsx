@@ -3,7 +3,6 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import Link from "next/link";
 import Image from "next/image";
 import newtrophy from "@/assets/images/newtrophy.png";
 import { useRouter } from 'next/router';

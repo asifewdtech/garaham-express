@@ -116,7 +116,6 @@ const Navbar = () => {
                     aria-haspopup="true"
                     onClick={handleOpenNavMenu}
                   >
-                    {/* <MenuIcon /> */}
                     <CustomMenuIcon />
                     <div>
                       <img src="" alt="" />

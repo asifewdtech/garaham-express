@@ -19,19 +19,7 @@ const SelectButton = () => {
   const handleSelect = (e) => {
     e.preventDefault();
     const tab = e.target.dataset.tab;
-    // console.log(tab);
     setselectedTab(tab);
-    // if(tab === selectButtons[0]){
-    //   router.push('http://localhost:3001/SelectPage/SelectFbPage')
-    // }else if(tab === selectButtons[1]){
-    //   router.push('http://localhost:3001/SelectPost/SelectPost')
-    // }
-    // else if(tab === selectButtons[2]){
-    //   router.push('http://localhost:3001/SelectConditions/SelectConditions')
-    // }
-    // else if(tab === selectButtons[3]){
-    //   router.push('http://localhost:3001/ChooseWinner/ChooseWinner')
-    // }
   }
 
   return <>

@@ -1,10 +1,6 @@
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { Card, Grid, CardContent, Hidden } from "@mui/material";
-// import socialimg from '@/assets/images/socail-img.png';
-// import path from '@/assets/images/path.png';
-// import deal from '@/assets/images/deal.png';
-// import increase from '@/assets/images/increase.png';
 
 const Header = () => {
   return <>

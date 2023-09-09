@@ -1,9 +1,3 @@
-/* @media only screen and (min-width: 320px) and (max-width: 650px) {
-    .banner, .main-banner {
-        display: none;
-    }
-} */
-
 .banner {
     background-image: url(../../assets/images/waves.png);
     background-color: #E8EEFF;
