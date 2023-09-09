@@ -65,10 +65,9 @@ const Winner = () => {
               And the WINNER is
             </Typography>
             <Typography className="winner_subheading">
-              {commentsArray
+              {commentsArray !== null && commentsArray.length === 0
                 ? "Congrats! Your winner has been picked!"
                 : "No Winner here"}
-              {/* Congrats! Your winner has been picked! */}
             </Typography>
             <WinnerOne
               commentsArray={commentsArray}
@@ -78,15 +77,21 @@ const Winner = () => {
           <Box className="footer1">
             <Link
               style={{ textDecoration: "none", color: "white" }}
-              href="/facebook/giveaway"
-            >
-              <Typography className="new_contest active">
+              href="/">
+              <Typography
+                style={{ cursor: "pointer" }}
+                className="new_contest active"
+              >
                 Start a New Contest{" "}
               </Typography>
             </Link>
-            <div style={{
+            <div 
+              style={{
                   cursor: "pointer",
-                }} onClick={handleCopyIframeCode} className="share">
+                }} 
+                onClick={handleCopyIframeCode}
+                className="share"
+            >
               <Typography>Share the results</Typography>
               <div className="svg-container"></div>
               <div className="share_link">
@@ -110,9 +115,15 @@ const Winner = () => {
             <div className="pick">
               <Link
                 style={{ textDecoration: "none", color: "white" }}
-                href="/facebook/giveaway"
+                href={{
+                  pathname: "/facebook/giveaway",
+                  query: { tab: 2 },
+                }}
               >
-                <Typography className="new_winner">
+                <Typography 
+                  style={{ cursor: "pointer" }}
+                  className="new_winner"
+                >
                   Pick Another Winner
                 </Typography>
               </Link>

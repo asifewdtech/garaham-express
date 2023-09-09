@@ -1,13 +1,43 @@
+import { useState, useEffect } from "react";
 import { Button, Typography } from "@mui/material";
 import Link from "next/link";
 import axios from "axios";
 
-const SelectPageContent = ({ increment, setContestData, pages, setPosts }) => {
+const SelectPageContent = ({ 
+  increment, 
+  setContestData, 
+  pages, 
+  setPosts, 
+  contestData, 
+}) => {
+  const [selectedPageId, setSelectedPageId] = useState(null);
+  // console.log(selectedPageId)
+  useEffect(() => {
+    const selectedPage = localStorage.getItem("selectedPage");
+    // console.log(selectedPage)
+    if (selectedPage) {
+      const id = JSON.parse(selectedPage);
+      setSelectedPageId(parseInt(id));
+    }
+  }, []);
+
   const handlePageChange = async (e) => {
     const selectedValue = e.target.value;
     const [id, page] = selectedValue.split("-");
+
+    localStorage.setItem("selectedPage", JSON.stringify(id));
+    localStorage.setItem("pagecontent", JSON.stringify(page));
+    localStorage.removeItem("selectedConditions");
+    localStorage.removeItem("selectedPost");
+
     await handlePage(id);
-    setContestData((prev) => ({ ...prev, [e.target.name]: page }));
+    setContestData((prev) => ({
+      ...prev,
+      page: page,
+      postText: "",
+      img: "",
+      conditions: {},
+    }));
   };
 
   const handlePage = async (id) => {
@@ -23,6 +53,7 @@ const SelectPageContent = ({ increment, setContestData, pages, setPosts }) => {
       );
       if (response?.data.success) {
         setPosts(response?.data.data);
+        localStorage.setItem("posts", JSON.stringify(response?.data.data));
       }
     } catch (error) {
       console.log(error);
@@ -41,10 +72,16 @@ const SelectPageContent = ({ increment, setContestData, pages, setPosts }) => {
           name="page"
           onChange={(e) => handlePageChange(e)}
         >
-          <option value="select">Select your page</option>
+          <option defaultValue={!selectedPageId} value="select">
+            Select your page
+          </option>
           {pages.map((page) => {
             return (
-              <option key={page.id} value={`${page.id}-${page.page}`}>
+              <option
+                key={page.id}
+                selected={selectedPageId == page.id} 
+                value={`${page.id}-${page.page}`}
+                >
                 {page.page}
               </option>
             );
@@ -52,7 +89,12 @@ const SelectPageContent = ({ increment, setContestData, pages, setPosts }) => {
         </select>
       </div>
       <Link href="#">
-        <Button variant="contained" className="save_btn" onClick={increment}>
+        <Button
+          disabled={!contestData.page} 
+          variant="contained" 
+          className="save_btn" 
+          onClick={increment}
+          >
           Save and Continue
         </Button>
       </Link>

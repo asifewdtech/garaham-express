@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
   const [showEntries, setshowEntries] = useState(false);
   const [direction, setdirection] = useState("entry_right");
-  // const [commentsArray, setCommentsArray] = useState(null);
   console.log(commentsArray , 'arrayOfObjects')
 
   const handleHover = (e) => {

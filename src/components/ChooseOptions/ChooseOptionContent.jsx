@@ -9,12 +9,14 @@ const ChooseOptionContent = ({
   increment,
   setContestData,
   postId,
+  contestData,
   setCommentData,
 }) => {
   const [showAdvanceOptions, setshowAdvanceOptions] = useState(false);
   const [showProCustomize, setshowProCustomize] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
   const [isChecked, setIsChecked] = useState("");
+  const [value, setValue] = useState(0)
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
 
@@ -23,9 +25,12 @@ const ChooseOptionContent = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: contestData.conditions });
 
   const onSubmit = async (data, e) => {
+    data
+      ? localStorage.setItem("selectedConditions", JSON.stringify(data))
+      : "";
     const dataToSend = { ...data };
     setContestData((prev) => ({ ...prev, conditions: dataToSend }));
 
@@ -123,9 +128,11 @@ const ChooseOptionContent = ({
             <legend className="legend">Number of winners</legend>
             <div className="custom-number-input">
               <input
+                defaultValue={1}
                 className="input_field"
                 type="number"
-                placeholder="1"
+                required
+                placeholder="0"
                 name="winners"
                 {...register("winners", { defaultValue: 1 })}
               />

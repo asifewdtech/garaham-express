@@ -1,3 +1,4 @@
+"use client";
 import { Box, Typography, Container } from "@mui/material";
 import React from "react";
 import Navbar from "@/components/AppBar/AppBar";
@@ -12,16 +13,19 @@ import ChooseOptionContent from "@/components/ChooseOptions/ChooseOptionContent"
 import PickWinner from "@/components/PickWinner/PickWinner";
 import { useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const SelectFbPageCopy = () => {
+  const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");
   const [currentTabIndex, setcurrentTabIndex] = useState(0);
   const [pages, setPages] = useState(null);
   const [posts, setPosts] = useState(null);
   const [postId, setPostId] = useState(null);
   const [commentData, setCommentData] = useState(null);
-  // console.log(posts, postId)
-  let myPages = []
+  const [visitedTabs, setVisitedTabs] = useState([0]);
+  console.log(posts);
+  let myPages = [];
   const [contestData, setContestData] = useState({
     page: "",
     postText: "",
@@ -32,8 +36,20 @@ const SelectFbPageCopy = () => {
   const saveContestData = (e) => {
     // console.log(e.target.value)
   };
-
   // conditionally rendering the components
+  useEffect(() => {
+    const tabFromQuery = parseInt(router.query.tab, 10);
+    if (
+      localStorage.getItem("pagecontent") &&
+      !isNaN(tabFromQuery) &&
+      tabFromQuery === 2
+    ) {
+      setcurrentTabIndex(tabFromQuery);
+    } else if (!isNaN(tabFromQuery) && tabFromQuery === 2) {
+      setcurrentTabIndex(0);
+    }
+  }, [router.query.tab]);
+
   const arrayOfComponents = [
     SelectPageContent,
     SelectPostContent,
@@ -46,9 +62,10 @@ const SelectFbPageCopy = () => {
   };
   const increment = (e) => {
     e.preventDefault();
-    currentTabIndex !== arrayOfComponents.length
-      ? setcurrentTabIndex(currentTabIndex + 1)
-      : null;
+    if (currentTabIndex !== arrayOfComponents.length) {
+      setcurrentTabIndex(currentTabIndex + 1);
+      setVisitedTabs((prev) => [...prev, currentTabIndex + 1]);
+    }
   };
 
   // BUTTONS
@@ -93,7 +110,7 @@ const SelectFbPageCopy = () => {
           "http://localhost/viralyIO/api/includes/actions.php",
           formData
         );
-        setPages(response?.data.pages)
+        setPages(response?.data.pages);
       } catch (error) {
         console.log(error);
       }
@@ -101,13 +118,56 @@ const SelectFbPageCopy = () => {
     fetchPages();
   }, []);
 
-  for(const page in pages) {
+  for (const page in pages) {
     // myPages.push({`${page}: ${pages[page]}`});
     myPages.push({
       id: page,
-      page: pages[page]
-    })
+      page: pages[page],
+    });
   }
+
+  useEffect(() => {
+    const pagetext = JSON.parse(localStorage.getItem("pagecontent"));
+    const posttext = JSON.parse(localStorage.getItem("selectedPost"));
+    const conditions = JSON.parse(localStorage.getItem("selectedConditions"));
+    const postId = JSON.parse(localStorage.getItem("postId"));
+    if (postId) {
+      if (typeof postId === "number") {
+        console.log(postId); // It's already a number
+      } else {
+        const parsedPostId = parseInt(postId, 10);
+        if (!isNaN(parsedPostId)) {
+          setPostId(postId);
+        } else {
+          console.log("postId is not a valid number");
+        }
+      }
+    }
+
+    const updatedContestData = { ...contestData };
+
+    if (posttext) {
+      updatedContestData.img = posttext.img;
+      updatedContestData.postText = posttext.postText;
+    }
+
+    if (pagetext) {
+      updatedContestData.page = pagetext;
+    }
+
+    if (conditions) {
+      updatedContestData.conditions = conditions;
+    }
+    setContestData(updatedContestData);
+  }, [posts]);
+
+  // Check if the page is being refreshed
+
+  useEffect(() => {
+    window.addEventListener("beforeunload", function (event) {
+      localStorage.clear();
+    });
+  }, []);
 
   return (
     <>
@@ -119,10 +179,16 @@ const SelectFbPageCopy = () => {
               return (
                 <Grid className="btn-grid" item xs={3} key={i}>
                   <Item
-                    disabled={i > currentTabIndex}
+                    as="button"
+                    disabled={
+                      !(
+                        contestData.conditions.winners ||
+                        visitedTabs.includes(i)
+                      )
+                    }
                     onClick={(e) => handleSelect(e, i)}
                     data-tab={item}
-                    className={`list_items ${
+                    className={`list_btns list_items ${
                       currentTabIndex === i ? "active_li" : null
                     }`}
                   >
@@ -138,18 +204,19 @@ const SelectFbPageCopy = () => {
               {arrayOfComponents.map((Component, index) =>
                 index === currentTabIndex ? (
                   <Component
+                    contestData={contestData}
                     setContestData={setContestData}
                     saveContestData={saveContestData}
                     decrement={decrement}
                     increment={increment}
                     key={index}
                     pages={myPages}
-                    setPosts= {setPosts}
-                    posts= {posts}
-                    setPostId = {setPostId}
-                    postId = {postId}
-                    setCommentData = {setCommentData}
-                    commentData = {commentData}
+                    setPosts={setPosts}
+                    posts={posts}
+                    setPostId={setPostId}
+                    postId={postId}
+                    setCommentData={setCommentData}
+                    commentData={commentData}
                   />
                 ) : null
               )}
@@ -171,6 +238,7 @@ const SelectFbPageCopy = () => {
                     Page
                   </Typography>
                   <Typography sx={{ pb: "15px" }} className="fb-box-condition">
+                    {" "}
                     {contestData.page}
                   </Typography>
                   <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>

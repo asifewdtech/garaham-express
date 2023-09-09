@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -8,18 +9,49 @@ import {
   CardContent,
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useState } from "react";
 import Link from "next/link";
 
 const SelectPostContent = ({
+  contestData,
   decrement,
   increment,
   setContestData,
   posts,
   setPostId,
   commentData,
+  setPosts,
 }) => {
   const [selectCard, setselectedCard] = useState(null);
+
+    // Load selected post and selectedCard from localStorage when the component mounts
+    useEffect(() => {
+      const selectedPost = localStorage.getItem("selectedPost");
+      const selectedCard = localStorage.getItem("selectedCard");
+  
+      if (selectedPost) {
+        const { postText, img, id } = JSON.parse(selectedPost);
+  
+        setPostId(id);
+        setContestData((prev) => ({ ...prev, postText, img }));
+      }
+  
+      if (selectedCard) {
+        setselectedCard(parseInt(selectedCard, 10));
+      }
+      const postId = localStorage.getItem("postId");
+      if (postId) {
+        setPostId(parseInt(postId, 10));
+      }
+    }, []);
+  
+    // Check if posts are available in localStorage, and use them if available
+    useEffect(() => {
+      const postsFromLocalStorage = localStorage.getItem("posts");
+      if (postsFromLocalStorage) {
+        const parsedPosts = JSON.parse(postsFromLocalStorage);
+        setPosts(parsedPosts);
+      }
+    }, [setPosts]);
 
   const handleSelectCard = (e, card, i) => {
     e.preventDefault();
@@ -30,6 +62,16 @@ const SelectPostContent = ({
       postText: card.message,
       img: card.media_url,
     }));
+    localStorage.setItem("postId", JSON.stringify(card.post_id));
+    localStorage.setItem(
+      "selectedPost",
+      JSON.stringify({
+        postText: card.message,
+        img: card.media_url,
+        id: card.post_id,
+      })
+    );
+    localStorage.setItem("selectedCard", i.toString());
   };
 
   return (
@@ -115,6 +157,7 @@ const SelectPostContent = ({
                 variant="contained"
                 className="save_btn"
                 onClick={increment}
+                disabled={!contestData.postText}
               >
                 Save and Continue
               </Button>

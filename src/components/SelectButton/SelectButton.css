@@ -24,6 +24,7 @@
     width: 160px;
     cursor: pointer;
     white-space: nowrap;
+    border: none  !important;
 }
 
 .active_li {
