@@ -24,7 +24,6 @@ const SelectFbPageCopy = () => {
   const [postId, setPostId] = useState(null);
   const [commentData, setCommentData] = useState(null);
   const [visitedTabs, setVisitedTabs] = useState([0]);
-  console.log(posts);
   let myPages = [];
   const [contestData, setContestData] = useState({
     page: "",
@@ -32,10 +31,12 @@ const SelectFbPageCopy = () => {
     img: "",
     conditions: {},
   });
+
   // dynamic content for side container
   const saveContestData = (e) => {
     // console.log(e.target.value)
   };
+
   // conditionally rendering the components
   useEffect(() => {
     const tabFromQuery = parseInt(router.query.tab, 10);
@@ -65,7 +66,7 @@ const SelectFbPageCopy = () => {
     if (currentTabIndex !== arrayOfComponents.length) {
       setcurrentTabIndex(currentTabIndex + 1);
       setVisitedTabs((prev) => [...prev, currentTabIndex + 1]);
-    }
+    } 
   };
 
   // BUTTONS
@@ -119,7 +120,6 @@ const SelectFbPageCopy = () => {
   }, []);
 
   for (const page in pages) {
-    // myPages.push({`${page}: ${pages[page]}`});
     myPages.push({
       id: page,
       page: pages[page],
@@ -133,7 +133,7 @@ const SelectFbPageCopy = () => {
     const postId = JSON.parse(localStorage.getItem("postId"));
     if (postId) {
       if (typeof postId === "number") {
-        console.log(postId); // It's already a number
+        console.log(postId);
       } else {
         const parsedPostId = parseInt(postId, 10);
         if (!isNaN(parsedPostId)) {

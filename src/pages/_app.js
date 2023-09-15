@@ -1,14 +1,14 @@
 import "@/styles/globals.css";
-import "@/components/AppBar/AppBar.css";
-import "@/components/CommentPicker/CommentPicker.css";
-import "@/pages/facebook/SelectFbPage.css";
-import "@/pages/SelectPost/SelectPost.css";
-import "@/pages/Winner/Winner.css";
-import "@/pages/ChooseWinner/ChooseWinner.css";
-import "@/pages/ChooseOptions/ChooseOptions.css";
-import "@/components/Winners/WinnerOne.css";
-import "@/components/SelectButton/SelectButton.css";
-import "@/components/Header/Header.css";
+import "@/assets/css/AppBar.css";
+import "@/assets/css/CommentPicker.css";
+import "@/assets/css/SelectFbPage.css";
+import "@/assets/css/SelectPost.css";
+import "@/assets/css/Winner.css";
+import "@/assets/css/ChooseWinner.css";
+import "@/assets/css/ChooseOptions.css";
+import "@/assets/css/WinnerOne.css";
+import "@/assets/css/SelectButton.css";
+import "@/assets/css/Header.css";
 import { StyledEngineProvider } from "@mui/material/styles";
 
 export default function App({ Component, pageProps }) {

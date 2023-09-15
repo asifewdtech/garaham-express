@@ -13,6 +13,7 @@ const PickWinner = ({ commentData }) => {
   const router = useRouter();
 
   const handleNavigation = () => {
+    
     // Store data in localStorage before navigating
     localStorage.setItem("myData", serializedData);
     router.push(`${commentData ? `/facebook/winners?data=${serializedData}` : "/facebook/giveaway"}`);

@@ -11,14 +11,16 @@ const SelectPageContent = ({
   contestData, 
 }) => {
   const [selectedPageId, setSelectedPageId] = useState(null);
-  // console.log(selectedPageId)
+
   useEffect(() => {
+    
     const selectedPage = localStorage.getItem("selectedPage");
-    // console.log(selectedPage)
+
     if (selectedPage) {
       const id = JSON.parse(selectedPage);
       setSelectedPageId(parseInt(id));
     }
+
   }, []);
 
   const handlePageChange = async (e) => {

@@ -16,6 +16,7 @@ const Winner = () => {
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+
   const [commentsArray, setCommentsArray] = useState(null);
   const router = useRouter();
 
@@ -45,6 +46,7 @@ const Winner = () => {
   };
 
   useEffect(() => {
+
     // Check if the code is running on the client-side
     if (typeof window !== "undefined") {
       // Code here that relies on the window object
@@ -53,6 +55,7 @@ const Winner = () => {
         document.body.classList.add("inside-iframe");
       }
     }
+    
   }, []);
 
   return (

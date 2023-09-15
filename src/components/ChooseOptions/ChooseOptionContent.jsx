@@ -20,7 +20,6 @@ const ChooseOptionContent = ({
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
 
-  // using reactHookForm
   const {
     register,
     handleSubmit,
@@ -50,6 +49,7 @@ const ChooseOptionContent = ({
     formData.append("mentions", data.mentions ? data.mentions : "");
     formData.append("blocks", data.blocks ? data.blocks : "");
     formData.append("uniqueusers", isChecked);
+    formData.append("duplicates", isChecked);
     formData.append(
       "fb_insta_filter",
       data.fb_insta_filter ? data.fb_insta_filter : ""
@@ -187,7 +187,7 @@ const ChooseOptionContent = ({
             />
           </div>
           <div className="exclude switch">
-            <MySwitch inputProps={{ "aria-label": "controlled" }} />
+            <MySwitch onChange={handleChange} inputProps={{ "aria-label": "controlled" }} />
             <Typography className="switch_text">Exclude Duplicates</Typography>
           </div>
         </div>
