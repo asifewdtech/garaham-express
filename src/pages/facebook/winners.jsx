@@ -64,10 +64,11 @@ const Winner = () => {
             <Typography className="winner_heading">
               And the WINNER is
             </Typography>
-            <Typography className="winner_subheading">
-              {commentsArray !== null && commentsArray.length === 0
+            <Typography className="winner_subheading" >
+              {/* {commentsArray !== null && commentsArray.length === 0
                 ? "Congrats! Your winner has been picked!"
-                : "No Winner here"}
+                : "No Winner here"} */}
+                Congrats! Your winner has been picked!
             </Typography>
             <WinnerOne
               commentsArray={commentsArray}

@@ -161,7 +161,7 @@ const SelectFbPageCopy = () => {
     setContestData(updatedContestData);
   }, [posts]);
 
-  // Check if the page is being refreshed
+ 
 
   useEffect(() => {
     window.addEventListener("beforeunload", function (event) {

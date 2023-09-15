@@ -86,7 +86,7 @@ const ChooseOptionContent = ({
 
   const postDecrement = () => {
     const newValue = +postCount - 1;
-    setValue('postCount', newValue);
+  newValue>=0? setValue('postCount', newValue): setValue('postCount', postCount);
   };
 
 
@@ -98,8 +98,7 @@ const ChooseOptionContent = ({
 
   const winnerDecrement = () => {
     const newValue = +winners - 1;
- 
-    setValue('winners', newValue);
+    newValue>=0? setValue('winners', newValue):  setValue('winners', winners);
   };
 
   const followersIncrement = () => {
@@ -109,8 +108,8 @@ const ChooseOptionContent = ({
 
   const followersDecrement = () => {
     const newValue = +followers-1 ;
- 
-    setValue('followers', newValue);
+    newValue>=0? setValue('followers', newValue):  setValue('followers', followers);
+    
   };
 
 
