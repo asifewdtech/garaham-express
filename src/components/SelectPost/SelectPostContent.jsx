@@ -23,8 +23,8 @@ const SelectPostContent = ({
 }) => {
   const [selectCard, setselectedCard] = useState(null);
 
-    // Load selected post and selectedCard from localStorage when the component mounts
     useEffect(() => {
+
       const selectedPost = localStorage.getItem("selectedPost");
       const selectedCard = localStorage.getItem("selectedCard");
   
@@ -38,19 +38,23 @@ const SelectPostContent = ({
       if (selectedCard) {
         setselectedCard(parseInt(selectedCard, 10));
       }
+
       const postId = localStorage.getItem("postId");
       if (postId) {
         setPostId(parseInt(postId, 10));
       }
+
     }, []);
   
     // Check if posts are available in localStorage, and use them if available
     useEffect(() => {
+
       const postsFromLocalStorage = localStorage.getItem("posts");
       if (postsFromLocalStorage) {
         const parsedPosts = JSON.parse(postsFromLocalStorage);
         setPosts(parsedPosts);
       }
+      
     }, [setPosts]);
 
   const handleSelectCard = (e, card, i) => {
