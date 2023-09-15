@@ -16,13 +16,15 @@ const ChooseOptionContent = ({
   const [showProCustomize, setshowProCustomize] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
   const [isChecked, setIsChecked] = useState("");
-  const [value, setValue] = useState(0)
+  // const [value, setValue] = useState(0)
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
 
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({ defaultValues: contestData.conditions });
 
@@ -72,35 +74,54 @@ const ChooseOptionContent = ({
       console.log(error);
     }
   };
+  let winners= watch('winners',1)
+  let postCount= watch('postCount', 0)
+  let followers= watch('followers', 0)
 
-  const handleIncrement = () => {
-    const newValue = Number(value) + 1;
-    setValue(newValue.toString());
-    if (props.onChange) {
-      const event = {
-        target: {
-          name: props.name,
-          value: newValue.toString(),
-        },
-      };
-      props.onChange(event);
-    }
+  const postIncrement = () => {
+    const newValue = +postCount + 1;
+    
+    setValue('postCount', newValue); 
   };
 
-  const handleDecrement = () => {
-    const newValue = Number(value) - 1;
-    setValue(newValue.toString());
-    if (props.onChange) {
-      const event = {
-        target: {
-          name: props.name,
-          value: newValue.toString(),
-        },
-      };
-      props.onChange(event);
-    }
+  const postDecrement = () => {
+    const newValue = +postCount - 1;
+    setValue('postCount', newValue);
   };
 
+
+
+  const winnerIncrement = () => {
+    const newValue = +winners + 1;
+    setValue('winners', newValue); 
+  };
+
+  const winnerDecrement = () => {
+    const newValue = +winners - 1;
+ 
+    setValue('winners', newValue);
+  };
+
+  const followersIncrement = () => {
+    const newValue = +followers + 1;
+    setValue('followers', newValue); 
+  };
+
+  const followersDecrement = () => {
+    const newValue = +followers-1 ;
+ 
+    setValue('followers', newValue);
+  };
+
+
+  const ispositive=(num)=>{
+    console.log(num)
+    num>=0?num-1:0
+  }
+
+
+  
+ 
   const handleChange = () => {
     setIsChecked(!isChecked);
   };
@@ -137,7 +158,7 @@ const ChooseOptionContent = ({
                 {...register("winners", { defaultValue: 1 })}
               />
               <div className="custom-number-input-arrows">
-                <div className="arrow up" onClick={handleIncrement}>
+                <div className="arrow up" onClick={winnerIncrement}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -151,7 +172,7 @@ const ChooseOptionContent = ({
                     />
                   </svg>
                 </div>
-                <div className="arrow down" onClick={handleDecrement}>
+                <div className="arrow down" onClick={winnerDecrement}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -219,12 +240,12 @@ const ChooseOptionContent = ({
                   <input
                     className="input_field"
                     type="number"
-                    placeholder="1"
+                    placeholder="0"
                     name="postCount"
                     {...register("postCount")}
                   />
                   <div className="custom-number-input-arrows">
-                    <div className="arrow up" onClick={handleIncrement}>
+                    <div className="arrow up" onClick={postIncrement}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"
@@ -238,7 +259,7 @@ const ChooseOptionContent = ({
                         />
                       </svg>
                     </div>
-                    <div className="arrow down" onClick={handleDecrement}>
+                    <div className="arrow down" onClick={postDecrement}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"
@@ -270,12 +291,12 @@ const ChooseOptionContent = ({
                   <input
                     className="input_field"
                     type="number"
-                    placeholder="1"
+                    placeholder="0"
                     name="followers"
                     {...register("followers")}
                   />
                   <div className="custom-number-input-arrows">
-                    <div className="arrow up" onClick={handleIncrement}>
+                    <div className="arrow up" onClick={followersIncrement}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"
@@ -289,7 +310,7 @@ const ChooseOptionContent = ({
                         />
                       </svg>
                     </div>
-                    <div className="arrow down" onClick={handleDecrement}>
+                    <div className="arrow down" onClick={followersDecrement}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="14"
