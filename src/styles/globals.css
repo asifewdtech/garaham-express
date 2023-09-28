@@ -88,14 +88,24 @@ body {
   letter-spacing: -0.34px;
   margin-top: 42px;
   text-transform: none !important;
+  border: none; 
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;  
+  cursor: pointer;
+  cursor:  pointer;
+  
 }
 
-.go_back:hover {
-  background: #E8EEFF;
+.go_back:hover, .go_back:active, .save_btn:active, .save_btn:hover {
+  background: #0303AB;
+  color: white  !important;
 }
 
 .text-center{
   text-align: center;
+}
+ .MuiSelect-iconOutlined, .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
+  display: none;
+
 }
 /* MEDIA QUERY */
 

@@ -46,6 +46,7 @@
   column-gap: 40px;
   row-gap: 20px;
   align-items: flex-end;
+ 
 }
 
 .legend {
@@ -79,7 +80,49 @@
   padding-left: 14px;
 
 }
+.select_File{
+  border-radius: 10px ;
+  border: none !important;
+  display:  flex;
+  align-items: center;
+  justify-content: space-between;
 
+}
+ 
+.select_File input {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 6px 28px 0px rgba(194, 194, 194, 0.75);
+  display: flex;
+  padding: 8px 5px;
+  background-color: #E8EEFF;
+  width: 80%;
+}
+
+.select_File input:focus {
+  border: none;
+}
+
+.file_logo {
+  background-color: #3E63CF;
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: white;
+  margin-right: 10px;
+  font-family: 'Catamaran', sans-serif;
+}
+
+.select_File p {
+  /* Add space between the selected file name and "Choose File" text */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+
+
+.input_field:focus{
+  outline: none;
+  border-bottom: 2px solid  #5065a8 ;
+}
 .input_field::placeholder {
   color: #6d6d6d;
   font-size: 15px;
@@ -97,7 +140,7 @@
   margin-top: 18px;
   /* justify-content: center; */
   align-items: center;
-  padding-left: 10px;
+  /* padding-left: 10px; */
 }
 
 .switch_text {
@@ -114,13 +157,45 @@
 .advanced {
   border-radius: 10px;
   background: #FFF;
-  /* box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07); */
-  width: 90%;
+  box-shadow: 3px 4px 17px 4px rgba(0, 0, 0, 0.07);
+  width: 91%;
   height: 54px;
   flex-shrink: 0;
   padding-right: 5px;
+  padding-left: 18px;
 
 }
+.not-allowed-cursor {
+  cursor: not-allowed;
+}
+
+.proplanMsg {
+  visibility: hidden;
+  margin-top: -20px;
+  left: 100px ;
+  color: red;
+  padding: 5px;
+  border-radius: 5px;
+  display: block;
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  transition:   opacity 0.3s ease-in-out ;
+}
+.switch:hover .proplanMsg {
+  visibility: visible;
+  opacity: 1;
+}
+.hidden{
+  display: hidden;
+  visibility: hidden;
+}
+
+.switch-wrapper {
+  position: relative;
+}
+
+
 
 .advanced p {
   color: #555;
@@ -144,6 +219,7 @@
   align-items: center;
   margin-bottom: 20px;
   margin-top: 20px;
+  padding-left: 18px;
 }
 
 .myswitch {
@@ -187,36 +263,6 @@ input[type='file'] {
   display: none;
 } */
 
-.file_logo {
-  background-color: #3E63CF;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-  border-radius: 10px;
-  color: white;
-  margin-right: 10px;
-  font-family: 'Catamaran', sans-serif;
-}
-
-/* .logo_file_container {
-  width: 63px;
-  height: 60px;
-  flex-shrink: 0;
-  border: none;
-  border-radius: 5px 5px 0px 0px;
-  background: #f6f9ff;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: -0.34px;
-  padding-left: 14px;
-  padding-top: 20px;
-  width: 15rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: 'Catamaran', sans-serif;
-} */
 
 /* .scroll {
   height: 600px;
@@ -259,7 +305,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 @media only screen and (max-width: 768px) {
   .logo_file_container {
-    width: 90% !important;
+    width: 60% !important;
     height: 60px;
   }
 
@@ -308,7 +354,15 @@ input[type="number"]::-webkit-outer-spin-button {
     top: 4px;
   }
 }
+.cstm_file_name{ 
+  display: inline;
+  position: absolute;
+  right: 45px;
+  color: gray;
+  display: flex;
+  bottom: 13px;
 
+}
 @media only screen and (min-width: 440px) and (max-width: 768px) {
   .custom-number-input-arrows {
     right: 10%;

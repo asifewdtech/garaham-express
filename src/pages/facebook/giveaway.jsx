@@ -221,8 +221,9 @@ const SelectFbPageCopy = () => {
                 ) : null
               )}
             </div>
-
-            <div className="side_container">
+{/* side cotainer starts  */}
+<div  className=""></div>
+            <div className="side_container  ">
               <div className="image_container">
                 <Image
                   width="115"
@@ -264,7 +265,7 @@ const SelectFbPageCopy = () => {
                   >
                     Conditions
                   </Typography>
-
+<div className="conditions">
                   {Object.entries(contestData?.conditions).map(
                     ([key, value]) => (
                       <Typography
@@ -276,6 +277,7 @@ const SelectFbPageCopy = () => {
                       </Typography>
                     )
                   )}
+                  </div>
                 </div>
               </div>
             </div>

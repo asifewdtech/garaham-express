@@ -35,16 +35,20 @@
   font-family: 'Catamaran', sans-serif;
   white-space: nowrap;
 }
-
 .signin-btn {
   background-color: #0000ba;
-  padding: 10px 15px;
+  padding: 14px 15px;
+  line-height: 1;
   margin-left: 15px;
   border-radius: 6px;
   font-family: 'Catamaran', sans-serif;
   white-space: nowrap;
   margin-right: 17px;
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
 }
+
 
 .right_btns {
   display: flex;
@@ -234,7 +238,4 @@
 .bottomCardInner-1{
   padding: 14px 34px 0 34px;
   padding-bottom: 0px !important;
-}
-.logo_box_main{
-  padding: 15px;
 }

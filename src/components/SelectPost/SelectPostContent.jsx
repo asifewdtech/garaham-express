@@ -149,6 +149,7 @@ const SelectPostContent = ({
           >
             <Link href="#">
               <Button
+              disableTouchRipple 
                 variant="contained"
                 className="go_back"
                 onClick={decrement}
@@ -158,6 +159,7 @@ const SelectPostContent = ({
             </Link>
             <Link href="#">
               <Button
+              disableTouchRipple 
                 variant="contained"
                 className="save_btn"
                 onClick={increment}

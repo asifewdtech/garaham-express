@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
 import MySwitch from "../ConditionsForm/Switch";
 import axios from "axios";
+import Tooltip from "@mui/material/Tooltip";
+import styled from "@emotion/styled";
 
 const ChooseOptionContent = ({
   decrement,
@@ -16,6 +18,7 @@ const ChooseOptionContent = ({
   const [showProCustomize, setshowProCustomize] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
   const [isChecked, setIsChecked] = useState("");
+  const [isPro, setisPro] = useState(false);
   // const [value, setValue] = useState(0)
 
   const label = { inputProps: { "aria-label": "Color switch demo" } };
@@ -74,53 +77,52 @@ const ChooseOptionContent = ({
       console.log(error);
     }
   };
-  let winners= watch('winners',1)
-  let postCount= watch('postCount', 0)
-  let followers= watch('followers', 0)
+  let winners = watch("winners", 1);
+  let postCount = watch("postCount", 0);
+  let followers = watch("followers", 0);
 
   const postIncrement = () => {
     const newValue = +postCount + 1;
-    
-    setValue('postCount', newValue); 
+
+    setValue("postCount", newValue);
   };
 
   const postDecrement = () => {
     const newValue = +postCount - 1;
-  newValue>=0? setValue('postCount', newValue): setValue('postCount', postCount);
+    newValue >= 0
+      ? setValue("postCount", newValue)
+      : setValue("postCount", postCount);
   };
-
-
 
   const winnerIncrement = () => {
     const newValue = +winners + 1;
-    setValue('winners', newValue); 
+    setValue("winners", newValue);
   };
 
   const winnerDecrement = () => {
     const newValue = +winners - 1;
-    newValue>=0? setValue('winners', newValue):  setValue('winners', winners);
+    newValue >= 0
+      ? setValue("winners", newValue)
+      : setValue("winners", winners);
   };
 
   const followersIncrement = () => {
     const newValue = +followers + 1;
-    setValue('followers', newValue); 
+    setValue("followers", newValue);
   };
 
   const followersDecrement = () => {
-    const newValue = +followers-1 ;
-    newValue>=0? setValue('followers', newValue):  setValue('followers', followers);
-    
+    const newValue = +followers - 1;
+    newValue >= 0
+      ? setValue("followers", newValue)
+      : setValue("followers", followers);
   };
 
+  const ispositive = (num) => {
+    console.log(num);
+    num >= 0 ? num - 1 : 0;
+  };
 
-  const ispositive=(num)=>{
-    console.log(num)
-    num>=0?num-1:0
-  }
-
-
-  
- 
   const handleChange = () => {
     setIsChecked(!isChecked);
   };
@@ -207,9 +209,138 @@ const ChooseOptionContent = ({
             />
           </div>
           <div className="exclude switch">
-            <MySwitch onChange={handleChange} inputProps={{ "aria-label": "controlled" }} />
+            <MySwitch
+              onChange={handleChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
             <Typography className="switch_text">Exclude Duplicates</Typography>
           </div>
+        </div>
+        {!isPro && (
+  <Tooltip
+  sx={{ bgcolor: 'red', color: 'white' }}
+    title="Subscribe to our pro plan to use more features"
+    placement="bottom-start"
+  >
+    <div className="switch">
+      <div
+        className="switch_container proplan advanced"
+        style={{ width: '43%', marginBottom: '20px' }}
+      >
+        <MySwitch
+          {...label}
+          className={isPro ? '' : 'not-allowed-cursor'}
+          disabled={!isPro}
+          onChange={() => setshowProCustomize(!showProCustomize)}
+        />
+
+        <Typography className="switch_text pro">
+          Pro Version Customization - Branding
+        </Typography>
+      </div>
+    </div>
+  </Tooltip>
+)}
+
+{isPro && (
+  <div className="switch">
+    <div
+      className="switch_container proplan advanced"
+      style={{ width: '43%', marginBottom: '20px' }}
+    >
+      <MySwitch
+        {...label}
+        className={isPro ? '' : 'not-allowed-cursor'}
+        disabled={!isPro}
+        onChange={() => setshowProCustomize(!showProCustomize)}
+      />
+
+      <Typography className="switch_text pro">
+        Pro Version Customization - Branding
+      </Typography>
+    </div>
+  </div>
+)}
+
+
+
+        <div className="text_inputs">
+          {isPro && showProCustomize && (
+            <>
+              <div>
+                <legend className="legend">Logo</legend>
+                <div className=" select_File">
+                  <input
+                    name="profilepic"
+                    type="file"
+                    accept="image/*"
+                    className="input_field"
+                    onChange={(e) => {
+                      const selectedFile = e.target.files[0];
+                      if (
+                        selectedFile &&
+                        selectedFile.type.startsWith("image/")
+                      ) {
+                        setLogoFile(selectedFile);
+                      } else {
+                        alert(
+                          "Invalid file type. Please select an image file."
+                        );
+                      }
+                    }}
+                  />
+
+                  {logoFile && (
+                    <p style={{ display: "none" }}>
+                      Selected File: {logoFile?.name}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div>
+                <legend className="legend">Background Color</legend>
+                <select
+                  className="input_field min_screen"
+                  {...register("background_color")}
+                  placeholder="Bg color"
+                >
+                  <option value="Magenta">Magenta</option>
+                  <option value="Test">Test</option>
+                </select>
+              </div>
+              <div>
+                <legend className="legend">Confetti style</legend>
+                <select
+                  className="input_field min_screen"
+                  {...register("style")}
+                  placeholder="1"
+                >
+                  <option value="Rainbow">Rainbow</option>
+                  <option value="Test">Test</option>
+                </select>
+              </div>
+              <div>
+                <legend className="legend">Set a timer (Countdown)</legend>
+                <input
+                  className="input_field"
+                  // type="datetime-local"
+                  type="time"
+                  {...register("timer")}
+                  placeholder=""
+                />
+              </div>
+            </>
+          )}
+
+          <input
+            type="hidden"
+            name="fb_insta_filter"
+            value="fb_insta_filter"
+            {...register("fb_insta_filter", {
+              defaultValue: "fb_insta_filter",
+            })}
+          />
+          {/* show pro options here */}
         </div>
 
         <div className="text_inputs">
@@ -226,8 +357,8 @@ const ChooseOptionContent = ({
           </div>
           {showAdvanceOptions && (
             <>
-              <div></div>
-              <div style={{ paddingBottom: "10px" }} className="exclude switch">
+              {/* <div></div> */}
+              <div style={{  }} className="exclude switch">
                 <MySwitch inputProps={{ "aria-label": "controlled" }} />
                 <Typography className="switch_text">
                   Must have following accounts
@@ -384,90 +515,26 @@ const ChooseOptionContent = ({
             </>
           )}
         </div>
-        <div className="switch" style={{ paddingBottom: "20px" }}>
-          <div className="switch_container advanced" style={{ width: "43%" }}>
-            <MySwitch
-              {...label}
-              onChange={() => setshowProCustomize(!showProCustomize)}
-            />
-            <Typography className="switch_text pro">
-              Pro Version Customization - Branding
-            </Typography>
-          </div>
-        </div>
-        <div className="text_inputs">
-          {showProCustomize && (
-            <>
-              <div>
-                <legend className="legend">Logo</legend>
-                <div className="logo_file_container">
-                  <input
-                    name="profilepic"
-                    type="file"
-                    className="input_field"
-                    onChange={(e) => setLogoFile(e.target.files[0])}
-                  />
-                  {logoFile && (
-                    <p style={{ display: "none" }}>
-                      Selected File: {logoFile?.name}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div>
-                <legend className="legend">Background Color</legend>
-                <select
-                  className="input_field min_screen"
-                  {...register("background_color")}
-                  placeholder="Bg color"
-                >
-                  <option value="Magenta">Magenta</option>
-                  <option value="Test">Test</option>
-                </select>
-              </div>
-              <div>
-                <legend className="legend">Confetti style</legend>
-                <select
-                  className="input_field min_screen"
-                  {...register("style")}
-                  placeholder="1"
-                >
-                  <option value="Rainbow">Rainbow</option>
-                  <option value="Test">Test</option>
-                </select>
-              </div>
-              <div>
-                <legend className="legend">Set a timer (Countdown)</legend>
-                <input
-                  className="input_field"
-                  // type="datetime-local"
-                  type="time"
-                  {...register("timer")}
-                  placeholder=""
-                />
-              </div>
-            </>
-          )}
 
-          <input
-            type="hidden"
-            name="fb_insta_filter"
-            value="fb_insta_filter"
-            {...register("fb_insta_filter", {
-              defaultValue: "fb_insta_filter",
-            })}
-          />
-          {/* show pro options here */}
-        </div>
         <Container maxWidth="xl" sx={{ marginLeft: "-12px" }}>
           <Box
             className="post_buttons"
             sx={{ display: { xs: "flex", justifyContent: "space-around" } }}
           >
-            <Button variant="contained" className="go_back" onClick={decrement}>
+            <Button
+              disableTouchRipple
+              variant="contained"
+              className="go_back"
+              onClick={decrement}
+            >
               Go Back
             </Button>
-            <Button type="submit" variant="contained" className="save_btn">
+            <Button
+              disableTouchRipple
+              type="submit"
+              variant="contained"
+              className="save_btn"
+            >
               Save and Continue
             </Button>
           </Box>
@@ -478,3 +545,10 @@ const ChooseOptionContent = ({
 };
 
 export default ChooseOptionContent;
+const CustomTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ tooltip: className }} />
+))(({ theme }) => ({
+  backgroundColor: "red", // Set the background color here
+  color: "white", // Set the text color here
+  // Add any other custom styles you need
+}));

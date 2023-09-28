@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Button, Typography } from "@mui/material";
+import { Button, MenuItem, Typography } from "@mui/material";
 import Link from "next/link";
 import axios from "axios";
-
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 const SelectPageContent = ({ 
   increment, 
   setContestData, 
@@ -11,6 +11,7 @@ const SelectPageContent = ({
   contestData, 
 }) => {
   const [selectedPageId, setSelectedPageId] = useState(null);
+  const [pageName, setpageName] = useState(null)
 
   useEffect(() => {
     
@@ -25,7 +26,9 @@ const SelectPageContent = ({
 
   const handlePageChange = async (e) => {
     const selectedValue = e.target.value;
+
     const [id, page] = selectedValue.split("-");
+setpageName(selectedValue)
 
     localStorage.setItem("selectedPage", JSON.stringify(id));
     localStorage.setItem("pagecontent", JSON.stringify(page));
@@ -61,7 +64,7 @@ const SelectPageContent = ({
       console.log(error);
     }
   };
-
+console.log(pageName)
   return (
     <>
       <Typography className="CP_heading"> Select your Facebook page</Typography>
@@ -69,29 +72,33 @@ const SelectPageContent = ({
         Choose your Facebook page
       </Typography>
       <div className="custom-select">
-        <select
-          className="select_page"
-          name="page"
-          onChange={(e) => handlePageChange(e)}
-        >
-          <option defaultValue={!selectedPageId} value="select">
-            Select your page
-          </option>
-          {pages.map((page) => {
-            return (
-              <option
-                key={page.id}
-                selected={selectedPageId == page.id} 
-                value={`${page.id}-${page.page}`}
-                >
-                {page.page}
-              </option>
-            );
-          })}
-        </select>
+
+      {/* <InputLabel htmlFor="demo-simple-select">Select your page</InputLabel> */}
+      <Select
+        id="demo-simple-select"
+        className="select_page"
+        name="page"
+        onChange={(e) => handlePageChange(e)}
+        value={pageName || ''}
+        displayEmpty  // This ensures the empty option is displayed
+      >
+        <MenuItem value="">Select your facebook page {/* Your placeholder text */}
+        </MenuItem>
+        {pages.map((page) => (
+          <MenuItem
+            key={page.id}
+            selected={selectedPageId === page.id}
+            value={`${page.id}-${page.page}`}
+          >
+            {page.page}
+          </MenuItem>
+        ))}
+      </Select>
+
       </div>
       <Link href="#">
         <Button
+        disableTouchRipple 
           disabled={!contestData.page} 
           variant="contained" 
           className="save_btn" 

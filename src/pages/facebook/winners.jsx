@@ -64,15 +64,17 @@ const Winner = () => {
       <Container maxWidth sx={{ pb: "15px" }}>
         <Box className="winner_container">
           <Box className="winner">
-            <Typography className="winner_heading">
-              And the WINNER is
-            </Typography>
+         
             <Typography className="winner_subheading" >
-              {/* {commentsArray !== null && commentsArray.length === 0
-                ? "Congrats! Your winner has been picked!"
-                : "No Winner here"} */}
-                Congrats! Your winner has been picked!
             </Typography>
+           
+  {commentsArray !== null && commentsArray.length === 0
+    ?<Typography  sx={{height:'500px'}} className="no_winner_subheading"> No winner available to be selected.</Typography>
+    : <>   <Typography className="winner_heading">
+    And the WINNER is
+  </Typography>  <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
+
+
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}

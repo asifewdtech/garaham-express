@@ -88,6 +88,7 @@ const Navbar = () => {
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                   {pages.map((page) => (
                     <Button
+                    disableTouchRipple 
                       key={page}
                       onClick={() => {
                         handleCloseNavMenu();

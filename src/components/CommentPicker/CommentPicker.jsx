@@ -9,30 +9,30 @@ const CommentPicker = () => {
       <Typography className="commentPicker">
       Choose a Platform
       </Typography>
-      <Grid style={{ cursor: "pointer", justifyContent: "center" }} container>
-        <Grid className="logo_box_main" item xl={2} lg={2} md={4}  xs={6}>
+      <Grid style={{ display:'flex', gap:'20px', cursor: "pointer", justifyContent: "center" }} container>
+        <Grid className="logo_box_main" item xl={2} lg={2} md={3}  xs={5}>
           <div className="logo_box">
               <img className="logo_img" src="/ig.png" alt="logos" />
           </div>
         </Grid>
-        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={4}  xs={6}>
+        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={3}  xs={5}>
           <div className="logo_box">
             <Link href='/facebook/giveaway'>
               <img className="logo_img" src="/fb.png" alt="logos" />
             </Link>
           </div>
         </Grid>
-        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={4} xs={6}>
+        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={3} xs={5}>
           <div className="logo_box">
               <img className="logo_img" src="/twitter.png" alt="logos" />
           </div>
         </Grid>
-        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={4}  xs={6}>
+        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} item xl={2} lg={2} md={3}  xs={5}>
           <div className="logo_box">
               <img className="logo_img" src="/yt.png" alt="logos" />
           </div>
         </Grid>
-        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} sx={{display: {xs: 'flex', md: "block", justifyContent: "center"}}} item xl={2} lg={2} md={4}  xs={6}>
+        <Grid  className="logo_box_main" style={{ cursor: "pointer" }} sx={{display: {xs: 'flex', md: "block", justifyContent: "center"}}} item xl={2} lg={2} md={3}  xs={5}>
           <div className="logo_box">
               <img className="logo_img" src="/tiktok.png" alt="logos" />
           </div>

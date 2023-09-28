@@ -28,7 +28,7 @@ const PickWinner = ({ commentData }) => {
         <Box>
           <Image alt="trophy" className="trophy1" src={newtrophy} />
           <div className="text-center">
-            <Button onClick={handleNavigation} variant="contained" className="save_btn">
+            <Button disableTouchRipple  onClick={handleNavigation} variant="contained" className="save_btn">
               Choose a Winner
             </Button>
           </div>
