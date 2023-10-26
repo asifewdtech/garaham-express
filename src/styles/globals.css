@@ -14,7 +14,7 @@ body {
 
 .CP_inner_container {
   width: 70%;
-  /* height: 413px; */
+  min-height:  711px;
   flex-shrink: 0;
   border-radius: 0 15px 15px 15px !important;
   background: #fff;
@@ -41,7 +41,7 @@ body {
 
 .CP_sub_heading {
   padding-top: 20px;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   color: #555;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Rubik;
@@ -70,6 +70,7 @@ body {
   letter-spacing: -0.34px;
   margin-top: 42px;
   text-transform: none !important;
+  border: none;
 }
 
 .go_back {
@@ -156,7 +157,7 @@ body {
     padding-left: 10px;
     padding-top: 8px;
     padding-bottom: 15px;
-    font-weight: 400;
+    font-weight: 700;
     font-family: Roboto;
     /* margin-top: -12px; */
   }
@@ -1306,5 +1307,22 @@ footer {
 @media (min-width: 1px) {
   .inside-iframe .footer1 {
     display: none;
+  }
+}
+
+
+/* Media query for screens with a maximum width of 768px */
+@media (max-width: 768px) {
+  .sm_col {
+    flex-direction: column;
+  }
+  .CP_heading {
+    font-size: 24px;
+  }
+  #main_heading{
+    padding-left: 0;
+  }
+  .yt_filter{
+    padding-top: 12px !important;
   }
 }

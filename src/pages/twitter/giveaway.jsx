@@ -7,15 +7,17 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
-import SelectPageContent from "@/components/Facebook/SelectPageContent";
-import SelectPostContent from "@/components/SelectPost/SelectPostContent";
-import ChooseOptionContent from "@/components/Facebook/ChooseOptionContent";
-import PickWinner from "@/components/Facebook/PickWinner";
 import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import SelectTwitterPost from "@/components/Twitter/SelectTwitterPost";
+import TwitterConditions from "@/components/Twitter/TwitterConditions";
+import PickWinner, { SideTwitterPost, TwitterPost } from "@/components/Twitter/PickWinner";
 
-const SelectFbPageCopy = () => {
+// import {PickWinner} from "@/components/Twitter/PickWinner";
+
+
+const TwitterGiveaway = () => {
   const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");
   const [currentTabIndex, setcurrentTabIndex] = useState(0);
@@ -26,7 +28,7 @@ const SelectFbPageCopy = () => {
   const [visitedTabs, setVisitedTabs] = useState([0]);
   let myPages = [];
   const [contestData, setContestData] = useState({
-    page: "",
+    link: "",
     postText: "",
     img: "",
     conditions: {},
@@ -36,7 +38,7 @@ const SelectFbPageCopy = () => {
   const saveContestData = (e) => {
     // console.log(e.target.value)
   };
-
+  console.log(contestData, "contestData")
   // conditionally rendering the components
   useEffect(() => {
     const tabFromQuery = parseInt(router.query.tab, 10);
@@ -52,10 +54,12 @@ const SelectFbPageCopy = () => {
   }, [router.query.tab]);
 
   const arrayOfComponents = [
-    SelectPageContent,
-    SelectPostContent,
-    ChooseOptionContent,
-    PickWinner,
+    //   SelectTwitterPost,
+    SelectTwitterPost,
+    TwitterConditions,
+    PickWinner
+
+
   ];
   const decrement = (e) => {
     e.preventDefault();
@@ -66,15 +70,15 @@ const SelectFbPageCopy = () => {
     if (currentTabIndex !== arrayOfComponents.length) {
       setcurrentTabIndex(currentTabIndex + 1);
       setVisitedTabs((prev) => [...prev, currentTabIndex + 1]);
-    } 
+    }
   };
 
   // BUTTONS
   const selectButtons = [
-    "Select a page",
-    "Select a post",
-    "Choose options",
+    "Post Link",
+    "Choose Conditions",
     "Pick a winner",
+
   ];
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -161,7 +165,7 @@ const SelectFbPageCopy = () => {
     setContestData(updatedContestData);
   }, [posts]);
 
- 
+
 
   useEffect(() => {
     window.addEventListener("beforeunload", function (event) {
@@ -177,7 +181,7 @@ const SelectFbPageCopy = () => {
           <Grid container spacing={2} className="select-button-container">
             {selectButtons.map((item, i) => {
               return (
-                <Grid className="btn-grid" item xs={3} key={i}>
+                <Grid className="btn-grid" item xs={4} key={i}>
                   <Item
                     as="button"
                     disabled={
@@ -188,9 +192,8 @@ const SelectFbPageCopy = () => {
                     }
                     onClick={(e) => handleSelect(e, i)}
                     data-tab={item}
-                    className={`list_btns list_items ${
-                      currentTabIndex === i ? "active_li" : null
-                    }`}
+                    className={`list_btns list_items ${currentTabIndex === i ? "active_li" : null
+                      }`}
                   >
                     <span className="button_list_number"> {`${i + 1}.`}</span>{" "}
                     {`${item}`}
@@ -221,63 +224,64 @@ const SelectFbPageCopy = () => {
                 ) : null
               )}
             </div>
-{/* side cotainer starts  */}
-<div  className=""></div>
+            {/* side cotainer starts  */}
+            <div className=""></div>
             <div className="side_container  ">
               <div className="image_container">
                 <Image
                   width="115"
                   height="115"
                   alt="fblogo"
-                  src="/fbround.png"
+                  src="/twitterCircle.png"
                 />
               </div>
               <div className="side_text">
-                <Typography className="contest">Facebook Contest</Typography>
+                <Typography className="contest">Twitter Contest</Typography>
                 <div className="page">
                   <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                    Page
+                    Link
                   </Typography>
-                  <Typography sx={{ pb: "15px" }} className="fb-box-condition">
+                  <p style={{ lineBreak: "anywhere", paddingBottom: "15px", whiteSpace: 'normal' }} className="fb-box-condition">
                     {" "}
-                    {contestData.page}
-                  </Typography>
-                  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                    Post
-                  </Typography>
-                  {contestData.postText?.length !== 0 ? (
-                    <div className="side_card_box">
-                      <Typography className="sideboxcardtext">
-                        {truncatePost(contestData.postText)}
-                      </Typography>
-                      <img
-                        src={contestData.img}
-                        className="sideboximg"
-                        alt="post-img"
-                      />
-                    </div>
+                    {contestData.link}
+                    {/* Copy the URL of the Twitter post that you would like to pick a comment from and paste it in the field below */}
+                  </p>
+
+                  {contestData.link?.length !== 0 ? (
+                    <>  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                      Post
+                    </Typography>
+                      <div className="sidePost">
+                        <SideTwitterPost />
+                      </div></>
+
                   ) : (
                     ""
                   )}
- 
-                  <Typography className="sideHeadings"
-                    sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}
-                  >
-                    Conditions
-                  </Typography>
-<div className="conditions">
-                  {Object.entries(contestData?.conditions).map(
-                    ([key, value]) => (
-                      <Typography
-                        sx={{ pb: "5px" }}
-                        className="fb-box-condition"
-                        key={key}
-                      >
-                        {value !== "" ? value : ""}
-                      </Typography>
-                    )
-                  )}
+
+
+{contestData?.conditions.winners  && (
+    <Typography className="sideHeadings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
+      Conditions
+    </Typography>
+  )}
+                  <div className="conditions">
+                   
+        
+                    {Object.entries(contestData?.conditions).map(
+                      ([key, value]) => (
+                        <>
+                          <Typography
+                            sx={{ pb: "5px" }}
+                            className="fb-box-condition"
+                            key={key}
+                          >
+                            {value !== "" ? value : ""}
+                          </Typography></>
+                      )
+                    )}
                   </div>
+                  
                 </div>
               </div>
             </div>
@@ -288,4 +292,4 @@ const SelectFbPageCopy = () => {
   );
 };
 
-export default SelectFbPageCopy;
+export default TwitterGiveaway;

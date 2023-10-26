@@ -7,7 +7,7 @@
 
 .SP_inner_container {
   width: 75.7%;
-  height: 413px;
+  height: 413px ;
   flex-shrink: 0;
   border-radius: 15px;
   background: #fff;
@@ -107,27 +107,27 @@
 
   width: 25%;
   flex-shrink: 0;
-  /* height: 550px; */
-  /* min */
-  min-height: 400px;
-  /* height: 420px; */
-  max-height: 550px;
+min-height: 689px;
+  height: max-content;
+  max-height: fit-content;
   border-radius: 25px;
   background: #fff;
   box-shadow: 0px 1px 37px 3px rgba(0, 0, 0, 0.05);
   /* margin-top: -240px; */
 }
 .conditions{
-  max-height: 130px;
+  max-height: 100px;
   
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .image_container {
   margin-top: -55px;
   text-align: center;
   width: 100%;
 }
-
+.sideHeadings{
+  font-size: 20px;
+}
 .contest {
   color: #1877f2;
   font-feature-settings: "clig" off, "liga" off;
@@ -139,6 +139,11 @@
   text-align: center;
 
   letter-spacing: -0.34px;
+}
+.insta_text{
+  color:#D90452 !important ;
+  font-size: 26px  !important;
+  
 }
 
 .page {
@@ -259,7 +264,11 @@
     font-size: 20px;
   }
 }
-
+@media only screen and (min-width: 1440px)  {
+  .contest {
+    font-size: 25px;
+  }
+}
 @media only screen and (min-width: 769px) and (max-width: 1100px) {
 
   .page,

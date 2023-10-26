@@ -9,6 +9,8 @@ import "@/assets/css/ChooseOptions.css";
 import "@/assets/css/WinnerOne.css";
 import "@/assets/css/SelectButton.css";
 import "@/assets/css/Header.css";
+import "@/assets/css/Twitter.css";
+
 import { StyledEngineProvider } from "@mui/material/styles";
 
 export default function App({ Component, pageProps }) {
@@ -16,5 +18,5 @@ export default function App({ Component, pageProps }) {
     <StyledEngineProvider injectFirst>
       <Component {...pageProps} />
     </StyledEngineProvider>
-  );
+  ); 
 }

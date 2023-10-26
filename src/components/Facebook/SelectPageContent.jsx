@@ -68,21 +68,32 @@ console.log(pageName)
   return (
     <>
       <Typography className="CP_heading"> Select your Facebook page</Typography>
-      <Typography className="CP_sub_heading">
+      <Typography className="CP_sub_heading ">
         Choose your Facebook page
       </Typography>
       <div className="custom-select">
 
-      {/* <InputLabel htmlFor="demo-simple-select">Select your page</InputLabel> */}
-      <Select
+      {/* <Select
         id="demo-simple-select"
         className="select_page"
         name="page"
         onChange={(e) => handlePageChange(e)}
         value={pageName || ''}
-        displayEmpty  // This ensures the empty option is displayed
+        displayEmpty  
+        MenuProps={{
+          style: { transform: 'translateY(4px)' },
+        }}
+        sx={{
+          '& ul': {
+            maxHeight: '88px',
+            display: 'inline-flex',
+            flexDirection: 'column',
+            gap: '18px',
+            overflowY: 'auto',
+          },
+        }}
       >
-        <MenuItem value="">Select your facebook page {/* Your placeholder text */}
+        <MenuItem sx={{}} value="">Select your facebook page 
         </MenuItem>
         {pages.map((page) => (
           <MenuItem
@@ -93,11 +104,41 @@ console.log(pageName)
             {page.page}
           </MenuItem>
         ))}
-      </Select>
+      </Select> */}
+
+<Select
+size="5"
+  id="demo-simple-select"
+  className="select_page select_scrollbar" 
+  name="page"
+  onChange={(e) => handlePageChange(e)}
+  value={pageName || ''}
+  displayEmpty
+  MenuProps={{
+    classes: { paper: "options-container  select_scrollbar" },
+  }}
+ 
+>
+<CustomMenuItem value="" id='placeholder_option' >Select your facebook page</CustomMenuItem>
+ {pages.map((page) => (
+    <CustomMenuItem
+      key={page.id}
+      selected={selectedPageId === page.id}
+      value={`${page.id}-${page.page}`}
+    >
+      {page.page}
+    </CustomMenuItem>
+  ))}
+</Select>
+
+
+
+
 
       </div>
       <Link href="#">
         <Button
+        sx={{marginTop:'42px'}}
         disableTouchRipple 
           disabled={!contestData.page} 
           variant="contained" 
@@ -112,3 +153,21 @@ console.log(pageName)
 };
 
 export default SelectPageContent;
+
+const CustomMenuItem = ({ children, ...props }) => (
+  <MenuItem
+    sx={{
+      color: 'var(--black-700-base, #3F3B3B)',
+      fontFeatureSettings: 'clig off, liga off',
+      fontFamily: 'Roboto',
+      fontSize: '16px',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      lineHeight: '28px',
+      padding: '10px 18px',
+    }}
+    {...props}
+  >
+    {children}
+  </MenuItem>
+);

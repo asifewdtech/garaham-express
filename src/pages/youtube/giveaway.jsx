@@ -7,15 +7,19 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
-import SelectPageContent from "@/components/Facebook/SelectPageContent";
-import SelectPostContent from "@/components/SelectPost/SelectPostContent";
-import ChooseOptionContent from "@/components/Facebook/ChooseOptionContent";
-import PickWinner from "@/components/Facebook/PickWinner";
 import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import SelectYoutubePost from "@/components/Youtube/SelectYoutubePost";
+import YoutubeConditions from "@/components/Youtube/YoutubeConditions";
+import PickWinner, { YTSidePost } from "@/components/Youtube/PickWinner";
 
-const SelectFbPageCopy = () => {
+
+
+// import {PickWinner} from "@/components/Twitter/PickWinner";
+
+
+const TwitterGiveaway = () => {
   const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");
   const [currentTabIndex, setcurrentTabIndex] = useState(0);
@@ -26,7 +30,7 @@ const SelectFbPageCopy = () => {
   const [visitedTabs, setVisitedTabs] = useState([0]);
   let myPages = [];
   const [contestData, setContestData] = useState({
-    page: "",
+    link: "",
     postText: "",
     img: "",
     conditions: {},
@@ -52,10 +56,14 @@ const SelectFbPageCopy = () => {
   }, [router.query.tab]);
 
   const arrayOfComponents = [
-    SelectPageContent,
-    SelectPostContent,
-    ChooseOptionContent,
-    PickWinner,
+// SelectInstaPost,
+// InstagramConditions,
+// PickWinner
+SelectYoutubePost,
+YoutubeConditions,
+PickWinner
+  
+
   ];
   const decrement = (e) => {
     e.preventDefault();
@@ -71,10 +79,10 @@ const SelectFbPageCopy = () => {
 
   // BUTTONS
   const selectButtons = [
-    "Select a page",
-    "Select a post",
-    "Choose options",
+    "Post Link",
+    "Choose Conditions",
     "Pick a winner",
+
   ];
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -177,7 +185,7 @@ const SelectFbPageCopy = () => {
           <Grid container spacing={2} className="select-button-container">
             {selectButtons.map((item, i) => {
               return (
-                <Grid className="btn-grid" item xs={3} key={i}>
+                <Grid className="btn-grid" item xs={4} key={i}>
                   <Item
                     as="button"
                     disabled={
@@ -223,44 +231,38 @@ const SelectFbPageCopy = () => {
             </div>
 {/* side cotainer starts  */}
 <div  className=""></div>
-            <div className="side_container  ">
+            <div  className="side_container  ">
               <div className="image_container">
                 <Image
                   width="115"
                   height="115"
                   alt="fblogo"
-                  src="/fbround.png"
+                  src="/ytround.png"
                 />
               </div>
               <div className="side_text">
-                <Typography className="contest">Facebook Contest</Typography>
+                <Typography   className="contest yt_text">YouTube Contest</Typography>
                 <div className="page">
-                  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                    Page
+                  <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                   Link
                   </Typography>
-                  <Typography sx={{ pb: "15px" }} className="fb-box-condition">
+                  <p style={{ lineBreak:"anywhere",  paddingBottom: "15px", whiteSpace: 'normal'   }} className="fb-box-condition">
                     {" "}
-                    {contestData.page}
+                    {contestData.link}
+                    {/* Copy the URL of the Twitter post that you would like to pick a comment from and paste it in the field below */}
+                  </p>
+                  <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                    Video
                   </Typography>
-                  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                    Post
-                  </Typography>
-                  {contestData.postText?.length !== 0 ? (
-                    <div className="side_card_box">
-                      <Typography className="sideboxcardtext">
-                        {truncatePost(contestData.postText)}
-                      </Typography>
-                      <img
-                        src={contestData.img}
-                        className="sideboximg"
-                        alt="post-img"
-                      />
-                    </div>
+               {contestData.link?.length !== 0 ? (
+                     <div>   <YTSidePost /> </div> 
+                  
+                  
                   ) : (
                     ""
                   )}
- 
-                  <Typography className="sideHeadings"
+
+                  <Typography
                     sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}
                   >
                     Conditions
@@ -288,4 +290,4 @@ const SelectFbPageCopy = () => {
   );
 };
 
-export default SelectFbPageCopy;
+export default TwitterGiveaway;

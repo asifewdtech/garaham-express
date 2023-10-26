@@ -69,7 +69,7 @@ const Winner = () => {
             </Typography>
            
   {commentsArray !== null && commentsArray.length === 0
-    ?<Typography  sx={{height:'500px'}} className="no_winner_subheading"> No winner available to be selected.</Typography>
+    ?<Typography  sx={{height:'500px'}} className="no_winner_subheading">Disclaimer: There is no winner for a Giveaway.</Typography>
     : <>   <Typography className="winner_heading">
     And the WINNER is
   </Typography>  <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}

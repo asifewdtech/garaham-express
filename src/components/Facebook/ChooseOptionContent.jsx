@@ -128,7 +128,7 @@ const ChooseOptionContent = ({
   };
 
   return (
-    <>
+    <div className="p_sm" >
       <Typography className="CP_heading">
         {" "}
         Select the conditions you want to apply on your giveaway
@@ -216,7 +216,7 @@ const ChooseOptionContent = ({
             <Typography className="switch_text">Exclude Duplicates</Typography>
           </div>
         </div>
-        {!isPro && (
+        {/* {!isPro && (
   <Tooltip
   sx={{ bgcolor: 'red', color: 'white' }}
     title="Subscribe to our pro plan to use more features"
@@ -260,88 +260,11 @@ const ChooseOptionContent = ({
       </Typography>
     </div>
   </div>
-)}
+)} */}
 
 
 
-        <div className="text_inputs">
-          {isPro && showProCustomize && (
-            <>
-              <div>
-                <legend className="legend">Logo</legend>
-                <div className=" select_File">
-                  <input
-                    name="profilepic"
-                    type="file"
-                    accept="image/*"
-                    className="input_field"
-                    onChange={(e) => {
-                      const selectedFile = e.target.files[0];
-                      if (
-                        selectedFile &&
-                        selectedFile.type.startsWith("image/")
-                      ) {
-                        setLogoFile(selectedFile);
-                      } else {
-                        alert(
-                          "Invalid file type. Please select an image file."
-                        );
-                      }
-                    }}
-                  />
-
-                  {logoFile && (
-                    <p style={{ display: "none" }}>
-                      Selected File: {logoFile?.name}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div>
-                <legend className="legend">Background Color</legend>
-                <select
-                  className="input_field min_screen"
-                  {...register("background_color")}
-                  placeholder="Bg color"
-                >
-                  <option value="Magenta">Magenta</option>
-                  <option value="Test">Test</option>
-                </select>
-              </div>
-              <div>
-                <legend className="legend">Confetti style</legend>
-                <select
-                  className="input_field min_screen"
-                  {...register("style")}
-                  placeholder="1"
-                >
-                  <option value="Rainbow">Rainbow</option>
-                  <option value="Test">Test</option>
-                </select>
-              </div>
-              <div>
-                <legend className="legend">Set a timer (Countdown)</legend>
-                <input
-                  className="input_field"
-                  // type="datetime-local"
-                  type="time"
-                  {...register("timer")}
-                  placeholder=""
-                />
-              </div>
-            </>
-          )}
-
-          <input
-            type="hidden"
-            name="fb_insta_filter"
-            value="fb_insta_filter"
-            {...register("fb_insta_filter", {
-              defaultValue: "fb_insta_filter",
-            })}
-          />
-          {/* show pro options here */}
-        </div>
+        
 
         <div className="text_inputs">
           <div className="switch">
@@ -512,6 +435,84 @@ const ChooseOptionContent = ({
                   </Typography>
                 </div>
               </div>
+              {/* <div className="text_inputs"> */}
+          {/* {isPro && showProCustomize && ( */}
+            <>
+              <div>
+                <legend className="legend">Logo</legend>
+                <div className=" select_File">
+                  <input
+                    name="profilepic"
+                    type="file"
+                    accept="image/*"
+                    className="input_field"
+                    onChange={(e) => {
+                      const selectedFile = e.target.files[0];
+                      if (
+                        selectedFile &&
+                        selectedFile.type.startsWith("image/")
+                      ) {
+                        setLogoFile(selectedFile);
+                      } else {
+                        alert(
+                          "Invalid file type. Please select an image file."
+                        );
+                      }
+                    }}
+                  />
+
+                  {logoFile && (
+                    <p style={{ display: "none" }}>
+                      Selected File: {logoFile?.name}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div>
+                <legend className="legend">Background Color</legend>
+                <select
+                  className="input_field min_screen"
+                  {...register("background_color")}
+                  placeholder="Bg color"
+                >
+                  <option value="Magenta">Magenta</option>
+                  <option value="Test">Test</option>
+                </select>
+              </div>
+              <div>
+                <legend className="legend">Confetti style</legend>
+                <select
+                  className="input_field min_screen"
+                  {...register("style")}
+                  placeholder="1"
+                >
+                  <option value="Rainbow">Rainbow</option>
+                  <option value="Test">Test</option>
+                </select>
+              </div>
+              <div>
+                <legend className="legend">Set a timer (Countdown)</legend>
+                <input
+                  className="input_field"
+                  // type="datetime-local"
+                  type="time"
+                  {...register("timer")}
+                  placeholder=""
+                />
+              </div>
+            </>
+          {/* )} */}
+
+          <input
+            type="hidden"
+            name="fb_insta_filter"
+            value="fb_insta_filter"
+            {...register("fb_insta_filter", {
+              defaultValue: "fb_insta_filter",
+            })}
+          />
+          {/* show pro options here */}
+        {/* </div> */}
             </>
           )}
         </div>
@@ -540,7 +541,7 @@ const ChooseOptionContent = ({
           </Box>
         </Container>
       </form>
-    </>
+    </div>
   );
 };
 
