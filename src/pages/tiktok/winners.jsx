@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Box, Typography, Container, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -7,7 +8,6 @@ import WinnerOne from "@/components/Winners/WinnerOne";
 import Navbar from "@/components/AppBar/AppBar";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import Footer from "@/components/Footer";
 
 const Winner = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -22,11 +22,11 @@ const Winner = () => {
   const router = useRouter();
 
   const serializedData = router.query.data || null;
-
+console.log(serializedData)
   const handleCopyIframeCode = () => {
     if(typeof window !== "undefined") {
       const iframeCode = generateIframeCode(
-        `http://localhost:3000/facebook/winners?data=/${serializedData}`
+        `http://localhost:3000/tiktok/winners?data=/${serializedData}`
       );
       copyToClipboard(iframeCode);
       alert("copied to clipboard!");
@@ -78,12 +78,67 @@ const Winner = () => {
               )}
                <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
 
+
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}
-            />
+            /> 
           </Box>
-          <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/facebook/giveaway', query: { tab: 2 }}}/>
+          <Box className="footer1">
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              href="/">
+              <Typography
+                style={{ cursor: "pointer" }}
+                className="new_contest active"
+              >
+                Start a New Contest{" "}
+              </Typography>
+            </Link>
+            <div 
+              style={{
+                  cursor: "pointer",
+                }} 
+                onClick={handleCopyIframeCode}
+                className="share"
+            >
+              <Typography>Share the results</Typography>
+              <div className="svg-container"></div>
+              <div className="share_link">
+                <Link href="#">https://viralkit.io/</Link>
+              </div>
+              <div
+                style={{
+                  paddingLeft: "15px",
+                  paddingTop: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                <Image
+                  src="/copy.png"
+                  width="24"
+                  height="24"
+                  alt="copy"
+                ></Image>
+              </div>
+            </div>
+            <div className="pick">
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                href={{
+                  pathname: "/facebook/giveaway",
+                  query: { tab: 2 },
+                }}
+              >
+                <Typography 
+                  style={{ cursor: "pointer" }}
+                  className="new_winner"
+                >
+                  Pick Another Winner
+                </Typography>
+              </Link>
+            </div>
+          </Box>
         </Box>
       </Container>
     </>

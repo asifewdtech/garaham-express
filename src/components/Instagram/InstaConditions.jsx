@@ -61,15 +61,16 @@ const InstagramConditions = ({
     );
 
     formData.append("profilepic", logoFile?.name ? logoFile.name : "");
-    formData.append("resource", "facebook");
+    formData.append("resource", "instagram");
 
-    formData.append("post_id", postId);
+    formData.append("post_id",'12');
 
     try {
       const response = await axios.post(
         "http://localhost/viralyIO/api/includes/actions.php",
         formData
       );
+      console.log(response, 'instaresponse')
       if (response?.data.success) {
         setCommentData(response?.data);
       }
@@ -126,6 +127,8 @@ const InstagramConditions = ({
   const handleChange = () => {
     setIsChecked(!isChecked);
   };
+
+  
 
   return (
     <div className="p_sm" >

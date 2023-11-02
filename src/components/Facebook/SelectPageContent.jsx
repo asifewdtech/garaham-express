@@ -12,24 +12,33 @@ const SelectPageContent = ({
 }) => {
   const [selectedPageId, setSelectedPageId] = useState(null);
   const [pageName, setpageName] = useState(null)
-
   useEffect(() => {
+    // const selectedPage = localStorage.getItem("selectedPage");
+    // const pagecontent= localStorage.getItem('pagecontent')
     
-    const selectedPage = localStorage.getItem("selectedPage");
-
-    if (selectedPage) {
-      const id = JSON.parse(selectedPage);
-      setSelectedPageId(parseInt(id));
+    const content= localStorage.getItem('selectedValue')
+   
+    if(content)
+    {
+      setpageName(JSON.parse(content))
     }
-
+   
+    // if (selectedPage) {
+    //   const id = JSON.parse(selectedPage);
+    //   const text = JSON.parse(pagecontent)
+    //   const  value=`${parseInt (id)}-${text}`
+    //   setSelectedPageId(value);
+    //   console.log(parseInt(id));
+    // }
   }, []);
+  
 
   const handlePageChange = async (e) => {
     const selectedValue = e.target.value;
 
     const [id, page] = selectedValue.split("-");
 setpageName(selectedValue)
-
+localStorage.setItem("selectedValue", JSON.stringify(selectedValue));
     localStorage.setItem("selectedPage", JSON.stringify(id));
     localStorage.setItem("pagecontent", JSON.stringify(page));
     localStorage.removeItem("selectedConditions");
@@ -64,7 +73,7 @@ setpageName(selectedValue)
       console.log(error);
     }
   };
-console.log(pageName)
+// console.log(pageName)
   return (
     <>
       <Typography className="CP_heading"> Select your Facebook page</Typography>

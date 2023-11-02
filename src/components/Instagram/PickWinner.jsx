@@ -5,30 +5,24 @@ import newtrophy from "@/assets/images/newtrophy.png";
 
 import { useEffect, useRef, useState } from "react";
 
-const PickWinner = ({ contestData, decrement }) => {
+const PickWinner = ({commentData, contestData, decrement }) => {
+  console.log(commentData)
   const [loading, setLoading] = useState(false); // State to track loading
   const router = useRouter();
   const tweetElementRef = useRef(null);
 
   const serializedData =
-    contestData && encodeURIComponent(JSON.stringify(contestData?.data));
-  const tweetElement = document.getElementById("tweet");
-  console.log("tweetElement:", tweetElementRef.current);
-  useEffect(() => {
-    const tweetURL = contestData.link;
-    const tweetID = extractTweetIDFromURL(tweetURL);
+  commentData && encodeURIComponent(JSON.stringify(commentData?.data));
 
-    if (tweetID) {
-    }
-  }, [contestData]);
+ 
 
   const handleNavigation = () => {
     // Store data in localStorage before navigating
     localStorage.setItem("myData", serializedData);
     router.push(
-      `${contestData
-        ? `/facebook/winners?data=${serializedData}`
-        : "/facebook/giveaway"
+      `${commentData
+        ? `/instagram/winners?data=${serializedData}`
+        : "/instagram/giveaway"
       }`
     );
   };
@@ -104,7 +98,7 @@ const PickWinner = ({ contestData, decrement }) => {
 
         <div className="pickWinner_sm" style={{ textAlign: "center" }}>
           <Box>
-            <Image alt="trophy" className="trophy1" src={newtrophy} />
+            <img alt="trophy" className="trophy1" src='/newtrophy.png' />
             <div className="text-center">
               <Button
                 disableTouchRipple

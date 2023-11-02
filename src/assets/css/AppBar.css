@@ -239,3 +239,22 @@
   padding: 14px 34px 0 34px;
   padding-bottom: 0px !important;
 }
+@media only screen and (max-width:786px){
+  .nav-bg {
+   
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+@media only screen and (min-width:1399px) {
+
+  .nav-btns {
+    font-size: 18px;
+  }
+  .signin-btn {
+    font-size: 14px;
+  }
+  .CP_inner_container {
+    padding: 30px 43px;
+  }
+  }

@@ -126,7 +126,7 @@ min-height: 689px;
   width: 100%;
 }
 .sideHeadings{
-  font-size: 20px;
+  font-size: 18px;
 }
 .contest {
   color: #1877f2;
@@ -135,7 +135,7 @@ min-height: 689px;
   font-size: 26px;
   font-style: normal;
   font-weight: 500;
-  line-height: 70px;
+  line-height: 37px;
   text-align: center;
 
   letter-spacing: -0.34px;
@@ -176,6 +176,8 @@ min-height: 689px;
 
 .content_div {
   display: flex;
+      z-index: 10;
+    /* position: fixed; */
 }
 
 .fb-box-condition {
@@ -266,8 +268,19 @@ min-height: 689px;
 }
 @media only screen and (min-width: 1440px)  {
   .contest {
-    font-size: 25px;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 25px;
+    
   }
+  .page{
+    margin-top: 45px;
+    padding: 0px 30px;
+  }
+  
+  .sideHeadings {
+    font-size: 20px;
+}
 }
 @media only screen and (min-width: 769px) and (max-width: 1100px) {
 

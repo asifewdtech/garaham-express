@@ -88,54 +88,111 @@ const SelectPostContent = ({
         Choose your Facebook post by clicking on it.
       </Typography>
       <div className="cards-main-box" style={{ paddingBottom: "30px" }}>
-        <Box className="cards">
+        <Box className="cards" style={{maxHeight: "430px", overflowY: "auto", padding:'20px'}}>
           {posts ? (
             posts?.map((card, i) => {
               return (
                 <Card
-                  key={i}
-                  onClick={(e) => handleSelectCard(e, card, i)}
-                  className={`post_card ${
-                    selectCard === i ? "active_card" : ""
-                  }`}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      width: "50%",
-                    }}
-                  >
-                    <CardContent sx={{ padding: 0 }}>
-                      <Typography
-                        variant="subtitle1"
-                        color="text.secondary"
-                        component="div"
-                        className="post_text"
-                      >
-                        {card.message}
-                      </Typography>
-                    </CardContent>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        pl: 1,
-                        pb: 1,
-                      }}
-                    ></Box>
-                    <Typography className="cmnts_count">
-                      • &nbsp; {commentData ? commentData.data.length : 4}{" "}
-                      comments &nbsp; •{" "}
-                    </Typography>
-                  </Box>
-                  <CardMedia
-                    component="img"
-                    image={card.media_url}
-                    alt="post image"
-                    className="post_image"
-                  />
-                </Card>
+  key={i}
+  onClick={(e) => handleSelectCard(e, card, i)}
+  className={`post_card ${selectCard === i ? "active_card" : ""}`}
+  sx={{
+    display: "flex",
+    gap: "20px", // Add gap between columns
+  }}
+>
+  <Box
+    sx={{
+      flexGrow: 1,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent:'space-between',
+      width: "50%",
+    }}
+  >
+    <CardContent sx={{ padding: 0 }}>
+      <Typography
+        variant="subtitle1"
+        color="text.secondary"
+        component="div"
+        className="post_text hide-scrollbar"
+        // style={{maxHeight:'100px', lineBreak:'auto'}}
+      >
+        {card.message}
+        </Typography>
+    </CardContent>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        pl: 1,
+        pb: 1,
+      }}
+    >
+      {/* Additional content for the text column, if needed */}
+    </Box>
+    <Typography className="cmnts_count">
+      • &nbsp; {commentData ? commentData.data.length : 4} comments &nbsp; •
+    </Typography>
+  </Box>
+  <div
+   
+    className="fb_post_img"
+  >
+    <img
+      src={card.media_url}
+      alt="post image"
+      className="post_image"
+      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+    />
+  </div>
+</Card>
+
+                // <Card
+                //   key={i}
+                //   onClick={(e) => handleSelectCard(e, card, i)}
+                //   className={`post_card ${
+                //     selectCard === i ? "active_card" : ""
+                //   }`}
+                // >
+                //   <Box
+                //     sx={{
+                //       flexGrow:1,
+                //       display: "flex",
+                //       flexDirection: "column",
+                //       width: "50%",
+                //     }}
+                //   >
+                //     <CardContent sx={{ padding: 0 }}>
+                //       <Typography
+                //         variant="subtitle1"
+                //         color="text.secondary"
+                //         component="div"
+                //         className="post_text"
+                //       >
+                //         {card.message}
+                //       </Typography>
+                //     </CardContent>
+                //     <Box
+                //       sx={{
+                //         display: "flex",
+                //         alignItems: "center",
+                //         pl: 1,
+                //         pb: 1,
+                //       }}
+                //     ></Box>
+                //     <Typography className="cmnts_count">
+                //       • &nbsp; {commentData ? commentData.data.length : 4}{" "}
+                //       comments &nbsp; •{" "}
+                //     </Typography>
+                //   </Box>
+                //   <CardMedia
+                //     component="img"
+                //     image={card.media_url}
+                //     alt="post image"
+                //     className="post_image"
+                //   />
+                // </Card>
               );
             })
           ) : (

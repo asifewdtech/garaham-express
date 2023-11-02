@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  /* overflow-x: auto; */
 
 
 }
@@ -21,13 +21,17 @@
 
 .winner_heading {
   color: #555;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   font-feature-settings: "clig" off, "liga" off;
   font-family: 'Catamaran', sans-serif;
   font-size: 80px;
   font-style: normal;
   font-weight: 700;
-  line-height: 70px;
+  line-height: 50px;
+      /* margin-top: 54px; 
+      margin-bottom: 15px;
+      line-height: 10px; */
+
   letter-spacing: -0.34px;
   display: flex;
   justify-content: center;
@@ -45,7 +49,7 @@
   letter-spacing: -0.34px;
   margin: auto;
   width: fit-content;
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 .no_winner_subheading{
    color: #555;
@@ -55,7 +59,7 @@
   font-style: normal;
   font-weight: 400;
   /* height:400px; */
-  height: calc(100vh - 300px);
+  /* height: calc(100vh - 300px); */
   letter-spacing: -0.34px;
   margin: auto;
   width: fit-content;
@@ -194,33 +198,37 @@
 
 /* MEDIA QUERY */
 
-@media only screen and (min-width: 600px) and (max-width: 900px) {
+@media only screen and (min-width: 600px) and (max-width: 978px) {
   .winner_heading {
-    font-size: 80px;
+    font-size: 60px;
   }
   .no_winner_subheading{
-    height: 200px;
+    /* height: 200px; */
     font-size: 22px;
   
   }
+  .winner_subheading {
+    font-size: 30px;
+}
 }
 
-@media only screen and (min-width: 320px) and (max-width: 600px) {
+/* @media only screen and (min-width: 320px) and (max-width: 600px) { */
+  @media only screen and (max-width: 600px) { 
   .winner_heading {
-    font-size: 26px;
+    font-size: 40px;
     text-align: center;
   }
 
   .winner_subheading {
-    font-size: 22px;
+    font-size: 24px;
   }
   .no_winner_subheading{
-   height:200px;
+   /* height:200px; */
    font-size: 22px;
  
  }
   .footer {
-    display: none;
+    /* display: none; */
   }
 
   .share {
@@ -247,18 +255,21 @@
 
   .share_copy {
     display: flex;
-  }
+  } 
+ 
 }
-
+.winnerTitle{
+  
+}
 
 .footer1 {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top: 78px;
   flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 788px) {
+@media only screen and (max-width: 986px) {
   .pick {
     margin-top: 10px;
   }
@@ -269,18 +280,44 @@
     padding-right: 20px;
     margin-top: 15px;
   }
-
-  .footer1 {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    flex-wrap: wrap;
-  }
+  
 
   .winner_subheading {
     text-align: center;
     margin-top: 0;
   }
+}
+/* @media only screen and (max-width:968px) {
+  .footer1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+} */
+.footer1{
+  display: flex;
+  flex-wrap: wrap;
+}
+/* CSS for medium and small screens */
+/* CSS for smaller screens */
+@media only screen and (max-width: 978px) {
+  .footer1 {
+    display: none;  }
+    
+     .sm_footer{
+      margin: auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      width: max-content;
+      margin-top: 41px;
+     }
 }
 
 @media only screen and (min-width: 780px) and (max-width: 1200px) {
@@ -313,6 +350,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+        cursor: pointer;
+    /* flex-grow: 1; */
   }
 
   .share {
@@ -327,5 +366,44 @@
     align-items: center;
   }
 
+  .winnerMsg {
+    overflow: hidden;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+  }
+  
+}
+@media (min-width: 1501px) {
+  .css-1fhuhbu-MuiContainer-root {
+      padding-left: 80px;
+      padding-right: 117px;
+  }
+}
 
+@media (max-width:779px) {
+  .new_contest{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px; 
+    padding: 7px 4px;
+    height: 44px;
+    width: max-content;
+    flex-grow: 1;
+  }
+  .new_winner{
+    width: max-content;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px; 
+padding: 7px 4px;
+height: 44px;
+cursor: pointer;
+flex-grow: 1;
+  }  
+ 
 }

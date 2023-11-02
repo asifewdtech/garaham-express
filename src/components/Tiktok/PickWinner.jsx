@@ -27,8 +27,8 @@ const PickWinner = ({ contestData, decrement }) => {
     localStorage.setItem("myData", serializedData);
     router.push(
       `${contestData
-        ? `/facebook/winners?data=${serializedData}`
-        : "/facebook/giveaway"
+        ? `/tiktok/winners?data=${serializedData}`
+        : "/tiktok/giveaway"
       }`
     );
   };
@@ -106,7 +106,7 @@ const PickWinner = ({ contestData, decrement }) => {
 
         <div className="pickWinner_sm" style={{ textAlign: "center" }}>
           <Box>
-            <Image alt="trophy" className="trophy1" src={newtrophy} />
+            <img alt="trophy" className="trophy1" src={newtrophy} />
             <div className="text-center">
               <Button
                 disableTouchRipple

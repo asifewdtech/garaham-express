@@ -48,7 +48,11 @@ const TwitterConditions = ({
   formData.append("description", descriptionSwitch);
   formData.append("location", locationSwitch);
 
-    formData.append("resource", "facebook");
+  formData.append(
+    "twitter_filter",
+    data.twitter_filter ? data.twitter_filter : ""
+  );
+
 
     formData.append("post_id", postId);
 
@@ -201,7 +205,14 @@ const TwitterConditions = ({
               name="badwords"
             /></div>
           </div>
-        
+          <input
+            type="hidden"
+            name="twitter_filter"
+            value="twitter_filter"
+            {...register("twitter_filter", {
+              defaultValue: "twitter_filter",
+            })}
+          />
       
 
      

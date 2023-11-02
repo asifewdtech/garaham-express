@@ -22,11 +22,11 @@ const Winner = () => {
   const router = useRouter();
 
   const serializedData = router.query.data || null;
-
+  console.log(serializedData)
   const handleCopyIframeCode = () => {
-    if(typeof window !== "undefined") {
+    if (typeof window !== "undefined") {
       const iframeCode = generateIframeCode(
-        `http://localhost:3000/facebook/winners?data=/${serializedData}`
+        `http://localhost:3000/youtube/winners?data=/${serializedData}`
       );
       copyToClipboard(iframeCode);
       alert("copied to clipboard!");
@@ -56,7 +56,7 @@ const Winner = () => {
         document.body.classList.add("inside-iframe");
       }
     }
-    
+
   }, []);
 
   return (
@@ -65,10 +65,10 @@ const Winner = () => {
       <Container maxWidth sx={{ pb: "15px" }}>
         <Box className="winner_container">
           <Box className="winner">
-         
+
             <Typography className="winner_subheading" >
             </Typography>
-           
+
             {commentsArray !== null && commentsArray.length === 0
               ? <Typography className="no_winner_subheading">Disclaimer: There is no winner for a Giveaway.</Typography>
               : <>   {commentsArray !== null && (
@@ -78,12 +78,13 @@ const Winner = () => {
               )}
                <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
 
+
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}
             />
           </Box>
-          <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/facebook/giveaway', query: { tab: 2 }}}/>
+          <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/youtube/giveaway', query: { tab: 1 }}}/>
         </Box>
       </Container>
     </>

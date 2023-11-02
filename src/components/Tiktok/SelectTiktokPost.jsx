@@ -25,7 +25,7 @@ const SelectTiktokPost = ({ increment, setContestData, contestData }) => {
     // Regular expression to validate a Twitter post link
     const twitterPostLinkRegex = /^https?:\/\/twitter\.com\/[^/]+\/status\/\d+/;
     localStorage.setItem("postLink", JSON.stringify(postLink));
-    if (twitterPostLinkRegex.test(postLink)) {
+    // if (!twitterPostLinkRegex.test(postLink)) {
       setContestData((prev) => ({
         ...prev,
         link: postLink,
@@ -34,14 +34,14 @@ const SelectTiktokPost = ({ increment, setContestData, contestData }) => {
         conditions: {},
       }));
       increment(e);
-    } else {
-      // Display an error message or perform other validation handling here
-      alert(
-        "Invalid Twitter post link. Please enter a valid Twitter post URL."
-      );
-    }
+    // } else {
+    //   // Display an error message or perform other validation handling here
+    //   alert(
+    //     "Invalid Twitter post link. Please enter a valid Twitter post URL."
+    //   );
+    // }
   };
-
+ 
   return (
     <Box className="p_sm">
       <Typography id="main_heading" className="CP_heading">

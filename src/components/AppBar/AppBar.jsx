@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import brandLogo from "../../assets/images/Viraly-logo-new1 1.png";
+import logoLg from "../../assets/images/logoLg.png";
 import { useRouter } from "next/router";
 
 const pages = ["Try It", "Features", "Blog", "Help Docs", "Princing", "Login"];
@@ -31,10 +32,11 @@ const Navbar = () => {
     <>
       <AppBar position="static" className="nav-bg">
         <Container
-          maxWidth="xl"
+         maxWidth='100vw'
+          // maxWidth="xl"
           sx={{
-            paddingLeft: { xs: "15px", md: "45px" },
-            paddingRight: { xs: "15px", md: "45px" },
+            paddingLeft: { xs: "15px", md: "33px" },
+            paddingRight: { xs: "15px", md: "42px" },
             maxWidth: "100%",
           }}
         >
@@ -55,9 +57,9 @@ const Navbar = () => {
                   }}
                 >
                   <Image
-                    src={brandLogo}
+                    src={logoLg}
                     width={125}
-                    height={30}
+                    height={29}
                     alt="brandlogo"
                   />
                 </Typography>
@@ -79,7 +81,7 @@ const Navbar = () => {
                 >
                   <Image
                     src={brandLogo}
-                    width={100}
+                    width={140}
                     alt="brandlogo"
                   />
                 </Typography>

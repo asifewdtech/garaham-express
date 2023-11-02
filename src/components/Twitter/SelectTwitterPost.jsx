@@ -22,7 +22,24 @@ const SelectTwitterPost = ({ increment, setContestData, contestData }) => {
     }
 
   }, []);
-
+  const fetchPostData=async ()=>{
+    const formData= new FormData()
+    formData.append("twitter_url", postLink);
+  
+    try {
+      const response = await axios.post(
+        "http://localhost/viralyIO/api/includes/actions.php",
+        formData
+      );
+      console.log(response)
+      if (response?.data.success) {
+        // setPosts(response?.data.data);
+        localStorage.setItem("posts", JSON.stringify(response?.data.data));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleScanButtonClick = (e) => {
     // Regular expression to validate a Twitter post link
@@ -37,6 +54,7 @@ const SelectTwitterPost = ({ increment, setContestData, contestData }) => {
         conditions: {},
       }));
       increment(e);
+      fetchPostData()
     } else {
       // Display an error message or perform other validation handling here
       alert("Invalid Twitter post link. Please enter a valid Twitter post URL.");

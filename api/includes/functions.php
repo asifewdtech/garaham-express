@@ -15,8 +15,9 @@
 		private $facebookAppScopeForInstagram = ['email', 'instagram_basic', 'pages_messaging_subscriptions', 'pages_messaging', 'pages_show_list', 'public_profile', 'pages_manage_cta', 'pages_manage_instant_articles', 'pages_manage_engagement', 'pages_read_user_content'];
 		private $facebookCallback = "https://viraly.io/facebook.php"; // example domain
 		private $instagramCallback = 'https://viraly.io/instagram.php'; // example domain
-		private $twitterToken = 'AAAAAAAAAAAAAAAAAAAAANsFJwEAAAAAfTW4wacxGS%2BamEZCzC66yVcRPpQ%3DvupILvDFQ6RT81wbmxg75T00BW8cXHhdILGROBKHmSSqrf8Otm';
-		private $twitterGuestID = 'v1%3A167972137896244660';
+		private $twitterApiKey = '1676245213571092481-aiuD5wyA2gKZb6VyvPjkhzXltb4x8b';
+		private $twitterApiSecret = 'I6LvtEpG49UxYnJfFKh0ax8khNfbdg2mT3wctidiWBxR9';
+		private $twitterBearerToken = 'AAAAAAAAAAAAAAAAAAAAAPvSqgEAAAAAGGURfdvMk%2FXQR%2Fvrao%2BU3SAb%2BSs%3DoeEvkBW65L2snv9GkdjVuALuPgIJvzsqlylIvdFMbT6mLaWZmw';
 		private $youtubeApiKey = 'AIzaSyDY6Vqs8XbmRlhM8Z919BDj1rtROJTOUBI';
 		private $youtubeBaseUrl = 'https://www.googleapis.com/youtube/v3/';
 
@@ -889,8 +890,9 @@
 					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 					CURLOPT_CUSTOMREQUEST => 'GET',
 					CURLOPT_HTTPHEADER => array(
-						'Authorization: Bearer '.$this->twitterToken,
+						'Authorization: Bearer '.$this->twitterBearerToken,
 						'Cookie: guest_id='.$this->twitterGuestID
+						// "Authorization: Bearer $this->twitterApiKey:$this->twitterApiSecret"
 					),
 				)
 			);
@@ -974,11 +976,15 @@
 				$uniqueusersIds = [];
 				if (isset($requestData['badwords']) && !empty($requestData['badwords'])) {
 					$badwords = [];
+					$badwordsArr = explode(" ", $requestData['badwords']); // Convert badwords string to an array
+						
 					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentsData) {
 						// if ($this->searchFromString(preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($commentsData->message)), preg_replace("/[^a-zA-Z0-9]+/", "", html_entity_decode($requestData['badwords'])))) {
-						if ($this->searchFromString($commentsData->message, $requestData['badwords'])) {
+						foreach($badwordsArr as $badWord){
+							if ($this->searchFromString($commentsData->message, $badWord)) {
 							$badwords[]= $commentsData->id;
 						}
+					}
 					}
 					if(count($badwords)>0){
 						$badwords = implode(',',$badwords);

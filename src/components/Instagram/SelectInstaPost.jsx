@@ -4,13 +4,14 @@ import Link from "next/link";
 import axios from "axios";
 
 
-const SelectInstaPost = ({ increment, setContestData, contestData }) => {
+const SelectInstaPost = ({ increment, setPosts, setContestData, contestData }) => {
   const [postLink, setPostLink] = useState(""); 
   const handlePageChange = (e) => {
+    localStorage.clear()
     const selectedValue = e.target.value;
     setPostLink(selectedValue);
-    localStorage.removeItem("selectedConditions");
-    localStorage.removeItem("selectedPost");
+    const postLink = localStorage.setItem("postLink",selectedValue);
+   
   };
   useEffect(() => {
     
@@ -37,10 +38,34 @@ const SelectInstaPost = ({ increment, setContestData, contestData }) => {
         img: "",
         conditions: {},
       }));
+      handlePage()
       increment(e);
+      
     } else {
       // Display an error message or perform other validation handling here
       alert("Invalid Instagram post link. Please enter a valid  post URL.");
+    }
+  };
+  
+  const handlePage = async (id) => {
+    const formData = new FormData();
+
+    formData.append("page_id", postLink);
+    formData.append("resource", "instagram");
+
+    try {
+      const response = await axios.post(
+        "http://localhost/viralyIO/api/includes/actions.php",
+        formData
+      );
+      // console.log(response)
+      if (response?.data.success) {
+        const post= response?.data.data
+        setPosts(post);
+        localStorage.setItem("postDetails", JSON.stringify(post));
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -49,7 +74,7 @@ const SelectInstaPost = ({ increment, setContestData, contestData }) => {
       <Typography id='main_heading' className="CP_heading">Paste The Link Of Your Instagram Post</Typography>
       <Typography style={{ paddingLeft: 0 }} className="CP_sub_heading">
       Copy the url of the Instagram post that you would like to pick a comment from and paste it in the field bellow </Typography>
-      <Box sx={{ display: 'flex', gap: 3 }} className="sm_col">
+      <Box sx={{ display: 'flex', flexWrap:'wrap', gap: 3 }} className="sm_col">
         <input
           id="link_input"
           type="text"

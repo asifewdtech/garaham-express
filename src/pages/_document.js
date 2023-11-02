@@ -3,7 +3,8 @@ export default function Document() {
   return (
     <Html>
      <Head>
-          <script async src="https://platform.twitter.com/widgets.js" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         </Head>
     <body>
       <Main />

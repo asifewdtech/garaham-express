@@ -26,7 +26,7 @@ const PickWinner = ({ commentData }) => {
       </Typography>
       <div style={{ textAlign: "center" }}>
         <Box>
-          <Image alt="trophy" className="trophy1" src={newtrophy} />
+          <img alt="trophy" className="trophy1" src='/newtrophy.png' />
           <div className="text-center">
             <Button disableTouchRipple  onClick={handleNavigation} variant="contained" className="save_btn">
               Choose a Winner

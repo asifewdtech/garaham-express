@@ -24,9 +24,10 @@ const Winner = () => {
   const serializedData = router.query.data || null;
 
   const handleCopyIframeCode = () => {
+    console.log(serializedData)
     if(typeof window !== "undefined") {
       const iframeCode = generateIframeCode(
-        `http://localhost:3000/facebook/winners?data=/${serializedData}`
+        `http://localhost:3000/instagram/winners?data=/${serializedData}`
       );
       copyToClipboard(iframeCode);
       alert("copied to clipboard!");
@@ -38,6 +39,7 @@ const Winner = () => {
   };
 
   const copyToClipboard = (text) => {
+    console.log(text);
     const textArea = document.createElement("textarea");
     textArea.value = text;
     document.body.appendChild(textArea);
@@ -78,12 +80,13 @@ const Winner = () => {
               )}
                <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
 
+
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}
-            />
+            /> 
           </Box>
-          <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/facebook/giveaway', query: { tab: 2 }}}/>
+         <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/instagram/giveaway', query: { tab: 1 }}}/>
         </Box>
       </Container>
     </>

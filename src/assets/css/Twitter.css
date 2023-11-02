@@ -96,6 +96,7 @@ line-height: 30px; /* 150% */
 }
 .pickWinner_sm{
   visibility: hidden;
+  position: absolute;
 }
 .pickWinner_lg{
   position: relative;
@@ -145,15 +146,13 @@ line-height: 30px; /* 150% */
   margin-top: 29px !important;
 }
 .PWinner_trophy{
-  width: 150.647px;
-  height: 169.319px;
-  transform: rotate(6.318deg);
-
-  position: absolute;
+   position: absolute;
   top: 0;
-  right: -75px;
-  top: -45px;
   transform: rotate(39deg);
+  width: 130px;
+  height: 130px;
+  right: -57px;
+  top: -31px;
 }
 .instaPostLikes{
   font-size: 12px;
@@ -300,18 +299,39 @@ flex-shrink: 0;
   border: none;
 }
 .options-container {
-  max-height: 200px !important;
-  overflow-y: auto;
+  /* max-height: 200px !important;
+  overflow-y: auto; */
   border-radius: 10px;
   transform: translateY(4px) !important
 }
 .select_scrollbar {
-  height: 98%;
-  margin: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--black-300, #EAEAEA) #F9F9F9;
+  padding: 5px;
+
+}
+::-webkit-scrollbar-track {
+  background: #F9F9F9;
+  border-radius: 5px;
+  width: 12px;
 }
 
+/* Style for scrollbar thumb (background and border-radius) */
+::-webkit-scrollbar-thumb {
+  background: var(--black-300, #EAEAEA);
+  border-radius: 6px;
+ width: 10px;
+  border: 1px #F9F9F9 solid;
+}
+.css-6hp17o-MuiList-root-MuiMenu-list{
+  height: 200px ;
+  overflow-y: auto;
+}
+.ellipsedText{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /* .select_scrollbar::-webkit-scrollbar {
   width: 6px;
  
@@ -333,7 +353,7 @@ flex-shrink: 0;
 } */
 
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 14px;
 }
 
@@ -349,7 +369,7 @@ flex-shrink: 0;
 
   border-right: solid 4px white;
   background-color: var(--black-300, #EAEAEA);
-}
+} */
 .text{
   color: #555;
   border-radius: 10px;
@@ -442,6 +462,7 @@ letter-spacing: -0.34px;
     }
     .pickWinner_sm{
       visibility: visible;
+      position: relative;
     }
     .pickWinner_lg{
       visibility: hidden;
@@ -473,5 +494,11 @@ letter-spacing: -0.34px;
     .tiktokPostVideo {
         width: 97px;
         height: 172px;
+    }
+    .PWinner_trophy{
+      width: 150.647px;
+  height: 169.319px;
+  right: -75px;
+  top: -45px;
     }
 }

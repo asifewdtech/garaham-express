@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import SelectYoutubePost from "@/components/Youtube/SelectYoutubePost";
 import YoutubeConditions from "@/components/Youtube/YoutubeConditions";
 import PickWinner, { YTSidePost } from "@/components/Youtube/PickWinner";
+import { SelectButtons } from "../instagram/giveaway";
 
 
 
@@ -31,7 +32,7 @@ const TwitterGiveaway = () => {
   let myPages = [];
   const [contestData, setContestData] = useState({
     link: "",
-    postText: "",
+    post: "",
     img: "",
     conditions: {},
   });
@@ -45,9 +46,9 @@ const TwitterGiveaway = () => {
   useEffect(() => {
     const tabFromQuery = parseInt(router.query.tab, 10);
     if (
-      localStorage.getItem("pagecontent") &&
+      localStorage.getItem("ytpostDetails") &&
       !isNaN(tabFromQuery) &&
-      tabFromQuery === 2
+      tabFromQuery === 1
     ) {
       setcurrentTabIndex(tabFromQuery);
     } else if (!isNaN(tabFromQuery) && tabFromQuery === 2) {
@@ -135,33 +136,21 @@ PickWinner
   }
 
   useEffect(() => {
-    const pagetext = JSON.parse(localStorage.getItem("pagecontent"));
-    const posttext = JSON.parse(localStorage.getItem("selectedPost"));
+    const postLink= JSON.parse(localStorage.getItem("postLink"));
+
+    const ytpostDetails= JSON.parse(localStorage.getItem("ytpostDetails"));
     const conditions = JSON.parse(localStorage.getItem("selectedConditions"));
-    const postId = JSON.parse(localStorage.getItem("postId"));
-    if (postId) {
-      if (typeof postId === "number") {
-        console.log(postId);
-      } else {
-        const parsedPostId = parseInt(postId, 10);
-        if (!isNaN(parsedPostId)) {
-          setPostId(postId);
-        } else {
-          console.log("postId is not a valid number");
-        }
-      }
-    }
+   
 
     const updatedContestData = { ...contestData };
 
-    if (posttext) {
-      updatedContestData.img = posttext.img;
-      updatedContestData.postText = posttext.postText;
+    if (postLink) {
+      updatedContestData.link = postLink;
     }
+if (ytpostDetails){
+  updatedContestData.post= ytpostDetails
 
-    if (pagetext) {
-      updatedContestData.page = pagetext;
-    }
+}
 
     if (conditions) {
       updatedContestData.conditions = conditions;
@@ -182,31 +171,13 @@ PickWinner
       <Navbar />
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
-          <Grid container spacing={2} className="select-button-container">
-            {selectButtons.map((item, i) => {
-              return (
-                <Grid className="btn-grid" item xs={4} key={i}>
-                  <Item
-                    as="button"
-                    disabled={
-                      !(
-                        contestData.conditions.winners ||
-                        visitedTabs.includes(i)
-                      )
-                    }
-                    onClick={(e) => handleSelect(e, i)}
-                    data-tab={item}
-                    className={`list_btns list_items ${
-                      currentTabIndex === i ? "active_li" : null
-                    }`}
-                  >
-                    <span className="button_list_number"> {`${i + 1}.`}</span>{" "}
-                    {`${item}`}
-                  </Item>
-                </Grid>
-              );
-            })}
-          </Grid>
+        <SelectButtons
+        visitedTabs={visitedTabs}
+        contestData={contestData}
+            selectButtons={selectButtons}
+            currentTabIndex={currentTabIndex}
+            handleSelect={handleSelect}
+          />
           <div className="content_div">
             <div className="CP_inner_container">
               {arrayOfComponents.map((Component, index) =>
@@ -220,7 +191,8 @@ PickWinner
                     key={index}
                     pages={myPages}
                     setPosts={setPosts}
-                    posts={posts}
+                    posts={contestData.post}
+
                     setPostId={setPostId}
                     postId={postId}
                     setCommentData={setCommentData}
@@ -251,22 +223,22 @@ PickWinner
                     {contestData.link}
                     {/* Copy the URL of the Twitter post that you would like to pick a comment from and paste it in the field below */}
                   </p>
-                  <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                    Video
-                  </Typography>
-               {contestData.link?.length !== 0 ? (
-                     <div>   <YTSidePost /> </div> 
+                  
+               {(contestData.post?.length !== 0 )? (
+                     <div> <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                     Video
+                   </Typography>  <YTSidePost posts={contestData.post}/> </div> 
                   
                   
                   ) : (
                     ""
                   )}
 
-                  <Typography
-                    sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}
-                  >
-                    Conditions
-                  </Typography>
+{contestData?.conditions.winners  && (
+    <Typography className="sideHeadings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
+      Conditions
+    </Typography>
+  )}
 <div className="conditions">
                   {Object.entries(contestData?.conditions).map(
                     ([key, value]) => (

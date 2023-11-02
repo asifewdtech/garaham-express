@@ -5,43 +5,29 @@ import newtrophy from "@/assets/images/newtrophy.png";
 
 import { useEffect, useRef, useState } from "react";
 
-const PickWinner = ({ contestData, decrement }) => {
+const PickWinner = ({ commentData, contestData, decrement, posts }) => {
+  console.log(posts)
   const [loading, setLoading] = useState(false); // State to track loading
   const router = useRouter();
   const tweetElementRef = useRef(null);
 
   const serializedData =
-    contestData && encodeURIComponent(JSON.stringify(contestData?.data));
-  const tweetElement = document.getElementById("tweet");
-  console.log("tweetElement:", tweetElementRef.current);
-  useEffect(() => {
-    const tweetURL = contestData.link;
-    const tweetID = extractTweetIDFromURL(tweetURL);
-
-    if (tweetID) {
-    }
-  }, [contestData]);
+  commentData && encodeURIComponent(JSON.stringify(commentData?.data));
+ 
+ 
 
   const handleNavigation = () => {
     // Store data in localStorage before navigating
     localStorage.setItem("myData", serializedData);
     router.push(
-      `${contestData
-        ? `/facebook/winners?data=${serializedData}`
-        : "/facebook/giveaway"
+      `${commentData
+        ? `/youtube/winners?data=${serializedData}`
+        : "/youtube/giveaway"
       }`
     );
   };
 
-  // Function to extract the tweet ID from the URL
-  const extractTweetIDFromURL = (url) => {
-    const tweetURLParts = url.split("/");
-    if (tweetURLParts.length >= 5) {
-      return tweetURLParts[5];
-    }
-    return null;
-  };
-
+ 
   return (
     <>
       <Typography className="CP_heading">
@@ -70,7 +56,7 @@ const PickWinner = ({ contestData, decrement }) => {
                   marginTop: "39px",
                 }}
               >
-              <Box className='ytpostContainer'> <YoutubePost /></Box> 
+              <Box className='ytpostContainer'> <YoutubePost posts={posts}/></Box> 
 
                 <img
                   className="PWinner_trophy yttrophy"
@@ -105,8 +91,8 @@ const PickWinner = ({ contestData, decrement }) => {
         )}
 
         <div className="pickWinner_sm" style={{ textAlign: "center" }}>
-          <Box>
-            <Image alt="trophy" className="trophy1" src={newtrophy} />
+        {posts &&  <Box>
+            <img alt="trophy" className="trophy1" src='/newtrophy.png' />
             <div className="text-center">
               <Button
                 disableTouchRipple
@@ -117,7 +103,7 @@ const PickWinner = ({ contestData, decrement }) => {
                 Choose a Winner
               </Button>
             </div>
-          </Box>
+          </Box>}
         </div>
       </div>
     </>
@@ -125,30 +111,30 @@ const PickWinner = ({ contestData, decrement }) => {
 };
 
 export default PickWinner;
-const YoutubePost = () => {
+const YoutubePost = ({posts}) => {
   return (
     <Box className="ytwinner">
-      <img src="/yt2.png"  className="ytPostImg" />
+      <img src={posts?.thumbnails}  className="ytPostImg" />
       <Box className='InstaPostDetails'> 
       
-      <Typography className="ytvideoTitle">Amazon Rainforest 🌿 | Adventure of a Lifetime!</Typography>
+      <Typography className="ytvideoTitle">{posts?.titleVideo}</Typography>
 
-      <Typography className="ytViews">13211 views . 5 years ago </Typography>
+      <Typography className="ytViews">{posts?.viewCount} views . 5 years ago </Typography>
       </Box>
      
     </Box>
   );
 };
 
-export const YTSidePost = () => {
+export const YTSidePost = ({posts, contestData}) => {
   return (
     <Box className="ytpostSmall">
-      <img src="/yt2.png"  className="ytPostSmall" />
+      <img img src={posts?.thumbnails}  className="ytPostSmall" />
       <Box sx={{ paddingLeft:'5px'}} className=''> 
       
-      <Typography sx={{color:'black'}} className="ytvideoTitle  ytViewsSmall">Amazon Rainforest 🌿 | Adventure of a Lifetime! </Typography>
+      <Typography sx={{color:'black'}} className="ytvideoTitle  ytViewsSmall">{posts?.titleVideo} </Typography>
 
-      <Typography  className="ytViews ytViewsSmall">13211 views . 5 years ago </Typography>
+      <Typography  className="ytViews ytViewsSmall">{posts?.viewCount} views . 5 years ago </Typography>
       </Box>
      
     </Box>

@@ -4,9 +4,11 @@ import Link from "next/link";
 import axios from "axios";
 
 
-const SelectYoutubePost = ({ increment, setContestData, contestData }) => {
+const SelectYoutubePost = ({ increment,setPosts, setContestData, contestData }) => {
   const [postLink, setPostLink] = useState(""); 
+  const [loading, setloading] = useState(false)
   const handlePageChange = (e) => {
+    localStorage.clear()
     const selectedValue = e.target.value;
     setPostLink(selectedValue);
     localStorage.removeItem("selectedConditions");
@@ -37,13 +39,38 @@ const SelectYoutubePost = ({ increment, setContestData, contestData }) => {
         img: "",
         conditions: {},
       }));
-      increment(e);
-    } else {
-      // Display an error message or perform other validation handling here
-      alert("Invalid Twitter post link. Please enter a valid video URL.");
+   
+      fetchPostData(e);
+    } else {alert("Invalid Twitter post link. Please enter a valid video URL.");
     }
   };
-
+  const fetchPostData=async (e)=>{
+  
+    setloading(true)
+    const formData= new FormData()
+    formData.append("video_url", postLink);
+  
+    try {
+      const response = await axios.post(
+        "http://localhost/viralyIO/api/includes/actions.php",
+        formData
+      );
+      console.warn(response.data)
+      // console.log(response.data.data)
+      if (response?.data.success) {
+        const postdetails=  response.data.data
+        setloading(false)
+        setContestData((prev) => {
+          return { ...prev, post: postdetails };
+        });
+        // setPosts(postdetails);
+        localStorage.setItem("ytpostDetails", JSON.stringify(postdetails));
+        increment(e);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Box className='p_sm' >
       <Typography id='main_heading' className="CP_heading">Paste The Link Of Your YouTube Video</Typography>
@@ -61,14 +88,15 @@ const SelectYoutubePost = ({ increment, setContestData, contestData }) => {
         />
         {/* <Link href="#"> */}
           <Button
+        
             style={{ marginTop: 0 }}
             disableTouchRipple
-            disabled={!postLink}
+            disabled={!postLink || loading}
             variant="contained"
             className="save_btn"
             onClick={handleScanButtonClick}
           >
-            Scan
+           {loading?"Scanning": "Scan"}
           </Button>
         {/* </Link> */}
       </Box>

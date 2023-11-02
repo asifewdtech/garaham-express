@@ -22,11 +22,11 @@ const Winner = () => {
   const router = useRouter();
 
   const serializedData = router.query.data || null;
-
+console.log(serializedData)
   const handleCopyIframeCode = () => {
     if(typeof window !== "undefined") {
       const iframeCode = generateIframeCode(
-        `http://localhost:3000/facebook/winners?data=/${serializedData}`
+        `http://localhost:3000/twitter/winners?data=/${serializedData}`
       );
       copyToClipboard(iframeCode);
       alert("copied to clipboard!");
@@ -78,12 +78,14 @@ const Winner = () => {
               )}
                <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
 
+
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}
-            />
+            /> 
           </Box>
-          <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/facebook/giveaway', query: { tab: 2 }}}/>
+          <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/twitter/giveaway', query: { tab: 1 }}}/>
+          
         </Box>
       </Container>
     </>

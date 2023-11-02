@@ -31,13 +31,10 @@ const TwitterGiveaway = () => {
   let myPages = [];
   const [contestData, setContestData] = useState({
     link: "",
-    postText: "",
-    img: "",
+   post:{},
     conditions: {},
   });
-  console.log(contestData, "contestData")
 
-  // dynamic content for side container
   const saveContestData = (e) => {
     // console.log(e.target.value)
   };
@@ -45,13 +42,14 @@ const TwitterGiveaway = () => {
   // conditionally rendering the components
   useEffect(() => {
     const tabFromQuery = parseInt(router.query.tab, 10);
+    // console.log(tabFromQuery)
     if (
-      localStorage.getItem("pagecontent") &&
+      localStorage.getItem("postDetails") &&
       !isNaN(tabFromQuery) &&
-      tabFromQuery === 2
+      tabFromQuery === 1
     ) {
-      setcurrentTabIndex(tabFromQuery);
-    } else if (!isNaN(tabFromQuery) && tabFromQuery === 2) {
+      setcurrentTabIndex(1);
+    } else if (!isNaN(tabFromQuery) && tabFromQuery === 1) {
       setcurrentTabIndex(0);
     }
   }, [router.query.tab]);
@@ -133,39 +131,24 @@ PickWinner
   }
 
   useEffect(() => {
-    const pagetext = JSON.parse(localStorage.getItem("pagecontent"));
-    const posttext = JSON.parse(localStorage.getItem("selectedPost"));
+    const postLink = JSON.parse(localStorage.getItem("postLink"));
     const conditions = JSON.parse(localStorage.getItem("selectedConditions"));
-    const postId = JSON.parse(localStorage.getItem("postId"));
-    if (postId) {
-      if (typeof postId === "number") {
-        console.log(postId);
-      } else {
-        const parsedPostId = parseInt(postId, 10);
-        if (!isNaN(parsedPostId)) {
-          setPostId(postId);
-        } else {
-          console.log("postId is not a valid number");
-        }
-      }
-    }
-
+   const postDetails=JSON.parse(localStorage.getItem("postDetails"));
     const updatedContestData = { ...contestData };
 
-    if (posttext) {
-      updatedContestData.img = posttext.img;
-      updatedContestData.postText = posttext.postText;
+    if (postLink) {
+      updatedContestData.link = postLink
     }
 
-    if (pagetext) {
-      updatedContestData.page = pagetext;
+    if (postDetails) {
+      updatedContestData.post = postDetails;
     }
 
     if (conditions) {
       updatedContestData.conditions = conditions;
     }
     setContestData(updatedContestData);
-  }, [posts]);
+  }, []);
 
  
 
@@ -180,31 +163,13 @@ PickWinner
       <Navbar />
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
-          <Grid container spacing={2} className="select-button-container">
-            {selectButtons.map((item, i) => {
-              return (
-                <Grid className="btn-grid" item xs={4} key={i}>
-                  <Item
-                    as="button"
-                    disabled={
-                      !(
-                        contestData.conditions.winners ||
-                        visitedTabs.includes(i)
-                      )
-                    }
-                    onClick={(e) => handleSelect(e, i)}
-                    data-tab={item}
-                    className={`list_btns list_items ${
-                      currentTabIndex === i ? "active_li" : null
-                    }`}
-                  >
-                    <span className="button_list_number"> {`${i + 1}.`}</span>{" "}
-                    {`${item}`}
-                  </Item>
-                </Grid>
-              );
-            })}
-          </Grid>
+        <SelectButtons
+         visitedTabs={visitedTabs}
+        contestData={contestData}
+            selectButtons={selectButtons}
+            currentTabIndex={currentTabIndex}
+            handleSelect={handleSelect}
+          />
           <div className="content_div">
             <div className="CP_inner_container">
               {arrayOfComponents.map((Component, index) =>
@@ -249,38 +214,47 @@ PickWinner
                     {contestData.link}
                     {/* Copy the URL of the Twitter post that you would like to pick a comment from and paste it in the field below */}
                   </p>
-                  <Typography className="sideHeadings"  sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                  {/* <Typography className="sideHeadings"  sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Post
-                  </Typography>
+                  </Typography> */}
                   {contestData.link?.length !== 0 ? (
+                    <>  <Typography className="sideHeadings"  sx={{ pb: "10px", fontFamily: "Catamaran"  }}
+                    >
+                      Post
+                    </Typography>
                     <div className="insta_sideImg_con">
+                      
                     
                       <img
                         src="/postImg.png"
                         className="insta_sideImg"
                         alt="post-img"
                       />
-                    </div>
+                    </div></>
                   ) : (
                     ""
                   )}
-                  <Typography className="sideHeadings"
-                    sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}
-                  >
-                    Conditions
-                  </Typography>
-<div className="conditions">
-                  {Object.entries(contestData?.conditions).map(
-                    ([key, value]) => (
-                      <Typography
-                        sx={{ pb: "5px" }}
-                        className="fb-box-condition"
-                        key={key}
-                      >
-                        {value !== "" ? value : ""}
-                      </Typography>
-                    )
-                  )}
+                 
+{contestData?.conditions.winners  && (
+    <Typography className="sideHeadings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
+      Conditions
+    </Typography>
+  )}
+                  <div className="conditions">
+                   
+        
+                    {Object.entries(contestData?.conditions).map(
+                      ([key, value]) => (
+                        <>
+                          <Typography
+                            sx={{ pb: "5px" }}
+                            className="fb-box-condition"
+                            key={key}
+                          >
+                            {value !== "" ? value : ""}
+                          </Typography></>
+                      )
+                    )}
                   </div>
                 </div>
               </div>
@@ -293,3 +267,36 @@ PickWinner
 };
 
 export default TwitterGiveaway;
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
+
+export const SelectButtons = ({ visitedTabs, contestData, selectButtons, currentTabIndex, handleSelect }) => {
+
+  return (
+    <Grid container className="select-button-container">
+      {selectButtons.map((item, i) => {
+        return (
+          <Grid style={{ padding: 0 }} className="btn-grid" flex='0 0 auto' item xs={4} key={i}>
+            <Item 
+              as="button"
+              disabled={ !(
+                contestData.conditions.winners ||
+                visitedTabs.includes(i)
+              )}
+              onClick={(e) => handleSelect(e, i)}
+              data-tab={item}
+              className={`list_btns list_items ${currentTabIndex === i ? "active_li" : null}`}
+            >
+              <span className="button_list_number">{`${i + 1}.`}</span> {`${item}`}
+            </Item>
+          </Grid>
+        );
+      })}
+    </Grid>
+  );
+};

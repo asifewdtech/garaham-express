@@ -5,7 +5,8 @@ import {
   } from "@mui/material";
   import { useRouter } from 'next/router';
   import Image from "next/image";
-  import newtrophy from "@/assets/images/newtrophy.png";
+  import newtrophy from "@/assets/images/newtrophy.png"
+  
   import BorderColorIcon from '@mui/icons-material/BorderColor';
   import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
   import { useRef, useState } from "react";
@@ -21,7 +22,7 @@ import {
     const handleNavigation = () => {
       // Store data in localStorage before navigating
       localStorage.setItem("myData", serializedData);
-      router.push(`${contestData ? `/facebook/winners?data=${serializedData}` : "/facebook/giveaway"}`);
+      router.push(`${contestData ? `/twitter/winners?data=${serializedData}` : "/twitter/giveaway"}`);
     };
   
     // Function to extract the tweet ID from the URL
@@ -75,7 +76,7 @@ import {
 
               <div className="pickWinner_sm" style={{ textAlign: "center" }}>
         <Box>
-          <Image alt="trophy" className="trophy1" src={newtrophy} />
+          <img alt="trophy" className="trophy1" src='/newtrophy.png' />
           <div className="text-center">
             <Button disableTouchRipple  onClick={handleNavigation} variant="contained" className="save_btn">
               Choose a Winner

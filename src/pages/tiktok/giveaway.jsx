@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import SelectTiktokPost from "@/components/Tiktok/SelectTiktokPost";
 import TiktokConditions from "@/components/Tiktok/TiktokConditions";
 import PickWinner, { TikTokSidePost } from "@/components/Tiktok/PickWinner";
+import { SelectButtons } from "../instagram/giveaway";
 
 
 // import {PickWinner} from "@/components/Twitter/PickWinner";
@@ -179,31 +180,13 @@ PickWinner
       <Navbar />
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
-          <Grid container spacing={2} className="select-button-container">
-            {selectButtons.map((item, i) => {
-              return (
-                <Grid className="btn-grid" item xs={4} key={i}>
-                  <Item
-                    as="button"
-                    disabled={
-                      !(
-                        contestData.conditions.winners ||
-                        visitedTabs.includes(i)
-                      )
-                    }
-                    onClick={(e) => handleSelect(e, i)}
-                    data-tab={item}
-                    className={`list_btns list_items ${
-                      currentTabIndex === i ? "active_li" : null
-                    }`}
-                  >
-                    <span className="button_list_number"> {`${i + 1}.`}</span>{" "}
-                    {`${item}`}
-                  </Item>
-                </Grid>
-              );
-            })}
-          </Grid>
+        <SelectButtons
+         visitedTabs={visitedTabs}
+        contestData={contestData}
+            selectButtons={selectButtons}
+            currentTabIndex={currentTabIndex}
+            handleSelect={handleSelect}
+          />
           <div className="content_div">
             <div className="CP_inner_container">
               {arrayOfComponents.map((Component, index) =>

@@ -12,7 +12,7 @@ const YoutubeConditions = ({
   setContestData,
   postId,
   contestData,
-  setCommentData,
+  setCommentData, posts
 }) => {
   const [isUniqueUsersChecked, setIsUniqueUsersChecked] = useState(false);
   const [isDuplicatesChecked, setIsDuplicatesChecked] = useState(false);
@@ -56,12 +56,12 @@ const YoutubeConditions = ({
     formData.append("ban_abusive_comments", isBanAbusiveChecked );
 
     formData.append(
-      "fb_insta_filter",
-      data.fb_insta_filter ? data.fb_insta_filter : ""
+      "youtube_filter",
+      data.youtube_filter ? data.youtube_filter : ""
     );
 
     formData.append("profilepic", logoFile?.name ? logoFile.name : "");
-    formData.append("resource", "facebook");
+   formData.append("video_id", posts?.video_id)
 
     formData.append("post_id", postId);
 
@@ -70,6 +70,7 @@ const YoutubeConditions = ({
         "http://localhost/viralyIO/api/includes/actions.php",
         formData
       );
+      console.log(response)
       if (response?.data.success) {
         setCommentData(response?.data);
       }
@@ -249,10 +250,10 @@ const YoutubeConditions = ({
 
             <input
               type="hidden"
-              name="fb_insta_filter"
-              value="fb_insta_filter"
-              {...register("fb_insta_filter", {
-                defaultValue: "fb_insta_filter",
+              name="youtube_filter"
+              value="youtube_filter"
+              {...register("youtube_filter", {
+                defaultValue: "youtube_filter",
               })}
             />
 
