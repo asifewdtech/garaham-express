@@ -106,7 +106,7 @@ const PickWinner = ({ contestData, decrement }) => {
 
         <div className="pickWinner_sm" style={{ textAlign: "center" }}>
           <Box>
-            <img alt="trophy" className="trophy1" src={newtrophy} />
+            <img alt="trophy" className="trophy1" src='/newtrophy.png'/>
             <div className="text-center">
               <Button
                 disableTouchRipple

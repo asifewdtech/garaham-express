@@ -132,7 +132,7 @@ const SelectPostContent = ({
       {/* Additional content for the text column, if needed */}
     </Box>
     <Typography className="cmnts_count">
-      • &nbsp; {commentData ? commentData.data.length : 4} comments &nbsp; •
+      • &nbsp; {commentData ? commentData.data.length : 0} comments &nbsp; 
     </Typography>
   </Box>
   <div
