@@ -8,25 +8,16 @@ import Navbar from "@/components/AppBar/AppBar";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
+import WinnersHeading from "@/components/CommentPicker/WinnersHeading";
 
 const Winner = () => {
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-
   const [commentsArray, setCommentsArray] = useState(null);
   const router = useRouter();
-
   const serializedData = router.query.data || null;
-  console.log(serializedData)
   const handleCopyIframeCode = () => {
     if (typeof window !== "undefined") {
       const iframeCode = generateIframeCode(
-        `http://localhost:3000/youtube/winners?data=/${serializedData}`
+        `http://localhost:3000/twitter/winners?data=/${serializedData}`
       );
       copyToClipboard(iframeCode);
       alert("copied to clipboard!");
@@ -47,11 +38,7 @@ const Winner = () => {
   };
 
   useEffect(() => {
-
-    // Check if the code is running on the client-side
     if (typeof window !== "undefined") {
-      // Code here that relies on the window object
-      // Function to add class to body when inside an iframe
       if (window.self !== window.top) {
         document.body.classList.add("inside-iframe");
       }
@@ -65,26 +52,14 @@ const Winner = () => {
       <Container maxWidth sx={{ pb: "15px" }}>
         <Box className="winner_container">
           <Box className="winner">
-
-            <Typography className="winner_subheading" >
-            </Typography>
-
-            {commentsArray !== null && commentsArray.length === 0
-              ? <Typography className="no_winner_subheading">Disclaimer: There is no winner for a Giveaway.</Typography>
-              : <>   {commentsArray !== null && (
-                <Typography className="winner_heading">
-                  {commentsArray.length === 1 ? "And the WINNER is" : "And the WINNERS are"}
-                </Typography>
-              )}
-               <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
-
-
+            <WinnersHeading commentsArray={commentsArray} />
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}
             />
           </Box>
-          <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/youtube/giveaway', query: { tab: 1 }}}/>
+          <Footer iframe={handleCopyIframeCode} redirectLink={{ pathname: '/youtube/giveaway', query: { tab: 1 } }} />
+
         </Box>
       </Container>
     </>

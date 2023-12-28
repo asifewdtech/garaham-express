@@ -125,7 +125,7 @@ min-height: 689px;
   text-align: center;
   width: 100%;
 }
-.sideHeadings{
+.side_headings{
   font-size: 18px;
 }
 .contest {
@@ -278,7 +278,7 @@ min-height: 689px;
     padding: 0px 30px;
   }
   
-  .sideHeadings {
+  .side_headings {
     font-size: 20px;
 }
 }

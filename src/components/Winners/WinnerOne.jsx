@@ -1,39 +1,22 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
 import { useRouter } from 'next/router';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
-
-
-import Fade from '@mui/material/Fade';
-import CustomTooltip from "./ToolTip";
-
+import Tooltip, {  tooltipClasses } from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 
 const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
-  const [showEntries, setshowEntries] = useState(false);
-  const [direction, setdirection] = useState("entry_right");
-  console.log(commentsArray, 'arrayOfObjects')
-
-  const handleHover = (e) => {
-    setshowEntries(true);
-    let margin_left = e.clientX + 290;
-    console.log(margin_left < window.innerWidth);
-    if (margin_left < window.innerWidth) {
-      setdirection("entry_right");
-    } else {
-      setdirection("entry_left");
-    }
-  };
-
   const router = useRouter();
 
   const serializedUrlData = router.query.data || null;
   useEffect(() => {
-    const serializedData = localStorage.getItem("myData");
-    if (serializedData) {
+    let serializedData = localStorage.getItem("myData");
+    if (serializedData && serializedData !== "undefined") {
       const arrayOfObjects = JSON.parse(decodeURIComponent(serializedData));
       setCommentsArray(arrayOfObjects);
+    }
+    else {
+      setCommentsArray(null)
     }
   }, []);
 
@@ -50,7 +33,7 @@ const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
                   <img src="/newwinnertrophy.png" alt="" />
                   <div className="yellowBorder marginImg">
                     <p className="py-3 px-4 winnerTitle text-primary mb-0 ellipsedText" style={{
-                      maxWidth: '100%', overflow: 'hidden'     
+                      maxWidth: '100%', overflow: 'hidden'
                     }}>
                       {item.from_name}
                     </p>
@@ -62,19 +45,20 @@ const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
                   className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 "
                   style={{ marginLeft: "17px", paddingLeft: "16px" }}
                 >
+                  <div className="position-absolute ellipseimg">
+                    <UserEntries 
+                      title="Among the whole list, there were 7 entries of @saramarshall user."
+                      placement="top-start"
+                      arrow
+                      // open
+                    >
+                      <img className="mainImg" src="/ellipse.png" alt="" />
+                    </UserEntries>
 
+                  </div>
 
-
-                  {/* <div className="position-absolute ellipseimg">
-      <Tooltip title={<CustomTooltip />} arrow>
-        <img className="mainImg" src="/ellipse.png" alt="" />
-      </Tooltip>
-    </div> */}
-                  {/* <CustomTooltip /> */}
-
-                  {/*  https://static.thenounproject.com/png/4035892-200.png */}
                   <div className="d-flex align-items-center centerCont pl-lg-0 pl-sm-3 pl-3 winnerContestentScnd">
-                    <img style={{ width: '98px', height: '98px' }} className="winner_dp" src={item.profilepic ? item.profilepic : "/commentdp.png"} alt="" />
+                    <img style={{ width: '98px', height: '98px', borderRadius: "100%" }} className="winner_dp" src={item.profilepic ? item.profilepic : "/commentdp.png"} alt="" />
 
                     <div className="d-flex px-3 align-items-sm-start flex-wrap align-items-lg-center align-items-start fColoum">
                       <h6
@@ -83,11 +67,8 @@ const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
                       >
                         {item.from_name}
                       </h6>
-                      <p className="winnerMsg hide-scrollbar  mb-0 mt-2 mt-sm-2 mt-lg-0">
+                      <p dangerouslySetInnerHTML={{ __html: item.message }} className="winnerMsg hide-scrollbar mb-0 mt-2 mt-sm-2 mt-lg-0"></p>
 
-
-                        {item.message}
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -100,4 +81,53 @@ const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
   );
 };
 
-export default WinnerOne; 
+export default WinnerOne;
+
+const UserEntries = styled(({ className, ...props }) => (
+  <Tooltip sx={{
+    '& .MuiTooltip-arrow': {
+      background: 'red',
+      "&::before": {
+        backgroundColor: "blue",
+        border: "2px solid red"
+      },
+    },
+  }} {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: 'white',
+    color: '#555',
+    padding: '17px 21px',
+    boxShadow: theme.shadows[1],
+    fontSize: 20,
+    borderRadius: '10px',
+    lineHeight: '30px',
+    fontWeight: 500,
+  },
+  arrow: {
+    fontSize: 20,
+    color: "#4A4A4A",
+    "&::before": {
+      backgroundColor: "blue",
+      border: "2px solid red"
+    },
+    "&:before": {
+      border: "1px solid #E6E8ED"
+    },
+  },
+  // '&.arrow': {
+  //   position: 'absolute', // Change 'relative' to 'absolute'
+  //   '&:before': {
+  //     content: '""',
+  //     position: 'absolute',
+  //     top: '-10px',
+  //     left: '50%',
+  //     backgroundColor: "white !important",
+  //     transform: 'translateX(-50%)',
+  //     borderTop: '10px solid #fff',
+  //     borderLeft: '10px solid transparent',
+  //     borderRight: '10px solid transparent',
+  //     borderRadius: '4px',
+  //   },
+  // },
+}));

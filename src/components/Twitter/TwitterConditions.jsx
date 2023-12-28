@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
 import MySwitch from "../ConditionsForm/Switch";
 import axios from "axios";
+import axiosInstance from "../utils/Utils";
 const TwitterConditions = ({
   decrement,
   increment,
@@ -14,64 +15,85 @@ const TwitterConditions = ({
   const [avatarSwitch, setAvatarSwitch] = useState(false);
   const [descriptionSwitch, setDescriptionSwitch] = useState(false);
   const [locationSwitch, setLocationSwitch] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm({ defaultValues: contestData.conditions });
+  const [tweetId, setTweetId] = useState(localStorage.getItem("tweet_id"));
+
+  useEffect(() => {
+    const storedTweetId = localStorage.getItem("tweet_id");
+    if (storedTweetId) {
+      setTweetId(storedTweetId);
+    }
+  }, []);
+  const { register, handleSubmit, watch, setValue } = useForm({
+    defaultValues: contestData.conditions,
+  });
+  useEffect(() => {
+    setAvatarSwitch(contestData.conditions.avatarSwitch || false);
+    setDescriptionSwitch(contestData.conditions.descriptionSwitch || false);
+    setLocationSwitch(contestData.conditions.locationSwitch || false);
+  }, []);
 
   const onSubmit = async (data, e) => {
+    const dataToSend = {
+      ...data,
+      avatarSwitch,
+      descriptionSwitch,
+      locationSwitch,
+    };
     data
-      ? localStorage.setItem("selectedConditions", JSON.stringify(data))
+      ? localStorage.setItem("selectedConditions", JSON.stringify(dataToSend))
       : "";
-      const dataToSend = {
-        ...data,
-        avatarSwitch,
-        descriptionSwitch,
-        locationSwitch,
-      };
-  
     setContestData((prev) => ({ ...prev, conditions: dataToSend }));
-
     increment(e);
-
     const formData = new FormData();
-
     formData.append("title", data.title ? data.title : "");
     formData.append("winners", data.winners ? data.winners : "");
     formData.append("badwords", data.badwords ? data.badwords : "");
-    formData.append("tweetCount", data.postCount ? data.postCount : "");
-    formData.append("ProfileAge", data.Profile_Age ? data.Profile_Age : "");
-  formData.append("avatar", avatarSwitch);
-  formData.append("description", descriptionSwitch);
-  formData.append("location", locationSwitch);
-
-  formData.append(
-    "twitter_filter",
-    data.twitter_filter ? data.twitter_filter : ""
-  );
-
-
-    formData.append("post_id", postId);
-
+    formData.append("tweet_count", data.tweetCount ? data.tweetCount : "");
+    formData.append("profile_age", data.Profile_Age ? data.Profile_Age : "");
+    formData.append("avatar", avatarSwitch);
+    formData.append("description", descriptionSwitch);
+    formData.append("location", locationSwitch);
+    formData.append("location", locationSwitch);
+    formData.append(
+      "tweet_id",
+      data.tweet_id ? data.tweet_id : localStorage.getItem("tweet_id")
+    );
+    formData.append(
+      "twitter_filter",
+      data.twitter_filter ? data.twitter_filter : ""
+    );
     try {
-      const response = await axios.post(
-        "http://localhost/viralyIO/api/includes/actions.php",
+      const response = await axiosInstance.post(
+        "",
         formData
       );
       if (response?.data.success) {
-        setCommentData(response?.data);
-        console.log(response)
+        const modifiedData = response.data.data.map((item) => {
+          return {
+            id: item.id,
+            tweet_id: item.tweet_id,
+            from_name: item.username,
+            location: item.location,
+            name: item.name,
+            message: item.description,
+            profilepic: item.profile_image_url,
+            created_at: item.created_at,
+            tweeter_id: item.tweeter_id,
+            followers_count: item.followers_count,
+            following_count: item.following_count,
+            tweet_count: item.tweet_count,
+            listed_count: item.listed_count,
+            age: item.age,
+          };
+        });
+
+        setCommentData(modifiedData);
       }
     } catch (error) {
       console.log(error);
     }
   };
   let winners = watch("winners", 1);
-
-
 
   const winnerIncrement = () => {
     const newValue = +winners + 1;
@@ -91,8 +113,11 @@ const TwitterConditions = ({
         {" "}
         Select the conditions you want to apply on your giveaway
       </Typography>
-      <Typography className="CP_sub_heading bold_sm_headings">Basic Conditions</Typography>
-      {/* FORM */}
+      <Typography className="CP_sub_heading bold_sm_headings">
+        Basic Conditions
+      </Typography>
+
+      {/* <-------------------FORM ---------------> */}
       <form onSubmit={handleSubmit(onSubmit)} className="form">
         <div className="text_inputs">
           <div>
@@ -161,61 +186,77 @@ const TwitterConditions = ({
             <legend className="legend">Tweet Count</legend>
             <input
               className="input_field"
-              {...register("Tweet_Count")}
-              placeholder="#peace"
-              name="Tweet_Count"
+              {...register("tweetCount")}
+              placeholder="0"
+              name="tweetCount"
             />
           </div>
-          </div>
-        
-          <div>
-          <Typography style={{paddingBottom:0, paddingLeft:0}} className="CP_sub_heading">Basic Conditions</Typography>
-          <div  style={{paddingLeft:0}} className="exclude switch">
-        <MySwitch
-          onChange={() => setAvatarSwitch(!avatarSwitch)}
-          checked={avatarSwitch}
-          inputProps={{ "aria-label": "controlled" }}
-        />
-        <Typography className="switch_text">Avatar</Typography>
-      </div>
-      <div   style={{paddingLeft:0}} className="exclude switch">
-        <MySwitch
-          onChange={() => setDescriptionSwitch(!descriptionSwitch)}
-          checked={descriptionSwitch}
-          inputProps={{ "aria-label": "controlled" }}
-        />
-        <Typography className="switch_text">Description</Typography>
-      </div>
-      <div  style={{paddingLeft:0}} className="exclude switch">
-        <MySwitch
-          onChange={() => setLocationSwitch(!locationSwitch)}
-          checked={locationSwitch}
-          inputProps={{ "aria-label": "controlled" }}
-        />
-        <Typography className="switch_text">Location</Typography>
-      </div>
         </div>
-        <div style={{marginLeft:0, marginTop:'25px'}} className="text_inputs">
-            <div>
+
+        <div>
+          <Typography
+            style={{ paddingBottom: 0, paddingLeft: 0 }}
+            className="CP_sub_heading"
+          >
+            Basic Conditions
+          </Typography>
+          <div style={{ paddingLeft: 0 }} className="exclude switch">
+            <MySwitch
+              onChange={() => setAvatarSwitch(!avatarSwitch)}
+              checked={avatarSwitch}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <Typography className="switch_text">Avatar</Typography>
+          </div>
+          <div style={{ paddingLeft: 0 }} className="exclude switch">
+            <MySwitch
+              onChange={() => setDescriptionSwitch(!descriptionSwitch)}
+              checked={descriptionSwitch}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <Typography className="switch_text">Description</Typography>
+          </div>
+          <div style={{ paddingLeft: 0 }} className="exclude switch">
+            <MySwitch
+              onChange={() => setLocationSwitch(!locationSwitch)}
+              checked={locationSwitch}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <Typography className="switch_text">Location</Typography>
+          </div>
+        </div>
+        <div
+          style={{ marginLeft: 0, marginTop: "25px" }}
+          className="text_inputs"
+        >
+          <div>
             <legend className="legend">Censor Words</legend>
             <input
               className="input_field"
               {...register("badwords")}
               placeholder="Censor words"
               name="badwords"
-            /></div>
+            />
           </div>
-          <input
-            type="hidden"
-            name="twitter_filter"
-            value="twitter_filter"
-            {...register("twitter_filter", {
-              defaultValue: "twitter_filter",
-            })}
-          />
-      
+        </div>
 
-     
+        <input
+          type="hidden"
+          name="tweet_id"
+          value={tweetId}
+          {...register("tweet_id", {
+            defaultValue: tweetId,
+          })}
+        />
+
+        <input
+          type="hidden"
+          name="twitter_filter"
+          value="twitter_filter"
+          {...register("twitter_filter", {
+            defaultValue: "twitter_filter",
+          })}
+        />
 
         <Container maxWidth="xl" sx={{ marginLeft: "-12px" }}>
           <Box
@@ -241,9 +282,9 @@ const TwitterConditions = ({
           </Box>
         </Container>
       </form>
+      {/* <-------------------FORM ---------------> */}
     </div>
   );
 };
 
 export default TwitterConditions;
-

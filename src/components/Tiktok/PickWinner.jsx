@@ -12,8 +12,6 @@ const PickWinner = ({ contestData, decrement }) => {
 
   const serializedData =
     contestData && encodeURIComponent(JSON.stringify(contestData?.data));
-  const tweetElement = document.getElementById("tweet");
-  console.log("tweetElement:", tweetElementRef.current);
   useEffect(() => {
     const tweetURL = contestData.link;
     const tweetID = extractTweetIDFromURL(tweetURL);

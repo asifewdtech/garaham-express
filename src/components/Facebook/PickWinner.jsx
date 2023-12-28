@@ -3,12 +3,9 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import Image from "next/image";
-import newtrophy from "@/assets/images/newtrophy.png";
 import { useRouter } from 'next/router';
 
 const PickWinner = ({ commentData }) => {
-  console.log(commentData?.data, 'commentData')
   const serializedData = commentData && encodeURIComponent(JSON.stringify(commentData?.data));
   const router = useRouter();
 

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Box, Typography, Container, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -8,6 +7,8 @@ import WinnerOne from "@/components/Winners/WinnerOne";
 import Navbar from "@/components/AppBar/AppBar";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import Footer from "@/components/Footer";
+import WinnersHeading from "@/components/CommentPicker/WinnersHeading";
 
 const Winner = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -20,13 +21,13 @@ const Winner = () => {
 
   const [commentsArray, setCommentsArray] = useState(null);
   const router = useRouter();
-
+  console.log(commentsArray)
   const serializedData = router.query.data || null;
-console.log(serializedData)
+  console.log(serializedData)
   const handleCopyIframeCode = () => {
-    if(typeof window !== "undefined") {
+    if (typeof window !== "undefined") {
       const iframeCode = generateIframeCode(
-        `http://localhost:3000/tiktok/winners?data=/${serializedData}`
+        `http://localhost:3000/twitter/winners?data=/${serializedData}`
       );
       copyToClipboard(iframeCode);
       alert("copied to clipboard!");
@@ -47,16 +48,12 @@ console.log(serializedData)
   };
 
   useEffect(() => {
-
-    // Check if the code is running on the client-side
     if (typeof window !== "undefined") {
-      // Code here that relies on the window object
-      // Function to add class to body when inside an iframe
       if (window.self !== window.top) {
         document.body.classList.add("inside-iframe");
       }
     }
-    
+
   }, []);
 
   return (
@@ -65,80 +62,14 @@ console.log(serializedData)
       <Container maxWidth sx={{ pb: "15px" }}>
         <Box className="winner_container">
           <Box className="winner">
-         
-            <Typography className="winner_subheading" >
-            </Typography>
-           
-            {commentsArray !== null && commentsArray.length === 0
-              ? <Typography className="no_winner_subheading">Disclaimer: There is no winner for a Giveaway.</Typography>
-              : <>   {commentsArray !== null && (
-                <Typography className="winner_heading">
-                  {commentsArray.length === 1 ? "And the WINNER is" : "And the WINNERS are"}
-                </Typography>
-              )}
-               <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
-
-
+            <WinnersHeading commentsArray={commentsArray} />
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}
-            /> 
+            />
           </Box>
-          <Box className="footer1">
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              href="/">
-              <Typography
-                style={{ cursor: "pointer" }}
-                className="new_contest active"
-              >
-                Start a New Contest{" "}
-              </Typography>
-            </Link>
-            <div 
-              style={{
-                  cursor: "pointer",
-                }} 
-                onClick={handleCopyIframeCode}
-                className="share"
-            >
-              <Typography>Share the results</Typography>
-              <div className="svg-container"></div>
-              <div className="share_link">
-                <Link href="#">https://viralkit.io/</Link>
-              </div>
-              <div
-                style={{
-                  paddingLeft: "15px",
-                  paddingTop: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <Image
-                  src="/copy.png"
-                  width="24"
-                  height="24"
-                  alt="copy"
-                ></Image>
-              </div>
-            </div>
-            <div className="pick">
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                href={{
-                  pathname: "/facebook/giveaway",
-                  query: { tab: 2 },
-                }}
-              >
-                <Typography 
-                  style={{ cursor: "pointer" }}
-                  className="new_winner"
-                >
-                  Pick Another Winner
-                </Typography>
-              </Link>
-            </div>
-          </Box>
+          <Footer iframe={handleCopyIframeCode} redirectLink={{ pathname: '/tiktok/giveaway', query: { tab: 1 } }} />
+
         </Box>
       </Container>
     </>

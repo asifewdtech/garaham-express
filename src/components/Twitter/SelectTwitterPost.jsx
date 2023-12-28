@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Link from "next/link";
 import axios from "axios";
+import axiosInstance from "../utils/Utils";
 
 
-const SelectTwitterPost = ({ increment, setContestData, contestData }) => {
+const SelectTwitterPost = ({ increment, setContestData, contestData, setPosts }) => {
   const [postLink, setPostLink] = useState(""); 
   const handlePageChange = (e) => {
     const selectedValue = e.target.value;
@@ -22,19 +23,22 @@ const SelectTwitterPost = ({ increment, setContestData, contestData }) => {
     }
 
   }, []);
+
+  
   const fetchPostData=async ()=>{
     const formData= new FormData()
     formData.append("twitter_url", postLink);
   
     try {
-      const response = await axios.post(
-        "http://localhost/viralyIO/api/includes/actions.php",
+      const response = await axiosInstance.post(
+        "",
         formData
       );
-      console.log(response)
+      // console.log(response.data, "twitter post link response")
       if (response?.data.success) {
-        // setPosts(response?.data.data);
-        localStorage.setItem("posts", JSON.stringify(response?.data.data));
+        const tweet= JSON.parse(response?.data?.data)
+        setPosts(tweet.tweets[0]);
+        localStorage.setItem("tweet_id", (tweet.tweet_id));
       }
     } catch (error) {
       console.log(error);

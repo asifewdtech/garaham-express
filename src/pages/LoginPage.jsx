@@ -2,6 +2,7 @@ import { LoginSocialFacebook } from 'reactjs-social-login';
 import { FacebookLoginButton } from 'react-social-login-buttons';
 import { useState } from 'react';
 import axios from 'axios';
+import axiosInstance from '@/components/utils/Utils';
 // import { useRouter } from 'next/router';
 
 
@@ -18,7 +19,7 @@ const LoginPage = () => {
     try {
       const formData = new FormData(e.target);
       
-      const response = await axios.post(`http://localhost/viralyIO/api/includes/actions.php`,formData);
+      const response = await axiosInstance.post(``,formData);
       console.log('Server response:', response.data);
     } catch (error) {
       console.error('Error sending data:', error);
@@ -54,7 +55,7 @@ const LoginPage = () => {
         console.log(finalData, 'finaldata');
         const formData = objectToFormData(finalData);
         try {
-          axios.post('http://localhost/viralyIO/api/includes/actions.php', formData)
+          axiosInstance.post('', formData)
           .then(function (response) {
             console.log(response);
           })

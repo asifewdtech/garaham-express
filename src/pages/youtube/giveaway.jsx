@@ -5,21 +5,13 @@ import Navbar from "@/components/AppBar/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import { useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
 import SelectYoutubePost from "@/components/Youtube/SelectYoutubePost";
 import YoutubeConditions from "@/components/Youtube/YoutubeConditions";
 import PickWinner, { YTSidePost } from "@/components/Youtube/PickWinner";
-import { SelectButtons } from "../instagram/giveaway";
-
-
-
-// import {PickWinner} from "@/components/Twitter/PickWinner";
-
-
+import { SelectButtons } from "@/components/SelectButton/SelectButton";
 const TwitterGiveaway = () => {
   const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");
@@ -57,13 +49,13 @@ const TwitterGiveaway = () => {
   }, [router.query.tab]);
 
   const arrayOfComponents = [
-// SelectInstaPost,
-// InstagramConditions,
-// PickWinner
-SelectYoutubePost,
-YoutubeConditions,
-PickWinner
-  
+    // SelectInstaPost,
+    // InstagramConditions,
+    // PickWinner
+    SelectYoutubePost,
+    YoutubeConditions,
+    PickWinner
+
 
   ];
   const decrement = (e) => {
@@ -75,7 +67,7 @@ PickWinner
     if (currentTabIndex !== arrayOfComponents.length) {
       setcurrentTabIndex(currentTabIndex + 1);
       setVisitedTabs((prev) => [...prev, currentTabIndex + 1]);
-    } 
+    }
   };
 
   // BUTTONS
@@ -109,48 +101,23 @@ PickWinner
     }
   }
 
-  useEffect(() => {
-    const fetchPages = async () => {
-      const formData = new FormData();
-      formData.append("user_id", "#41fd5994c08918b5889c82c05b2723aa");
-      formData.append("resource", "facebook");
-
-      try {
-        const response = await axios.post(
-          "http://localhost/viralyIO/api/includes/actions.php",
-          formData
-        );
-        setPages(response?.data.pages);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPages();
-  }, []);
-
-  for (const page in pages) {
-    myPages.push({
-      id: page,
-      page: pages[page],
-    });
-  }
 
   useEffect(() => {
-    const postLink= JSON.parse(localStorage.getItem("postLink"));
+    const postLink = JSON.parse(localStorage.getItem("postLink"));
 
-    const ytpostDetails= JSON.parse(localStorage.getItem("ytpostDetails"));
+    const ytpostDetails = JSON.parse(localStorage.getItem("ytpostDetails"));
     const conditions = JSON.parse(localStorage.getItem("selectedConditions"));
-   
+
 
     const updatedContestData = { ...contestData };
 
     if (postLink) {
       updatedContestData.link = postLink;
     }
-if (ytpostDetails){
-  updatedContestData.post= ytpostDetails
+    if (ytpostDetails) {
+      updatedContestData.post = ytpostDetails
 
-}
+    }
 
     if (conditions) {
       updatedContestData.conditions = conditions;
@@ -158,7 +125,7 @@ if (ytpostDetails){
     setContestData(updatedContestData);
   }, [posts]);
 
- 
+
 
   useEffect(() => {
     window.addEventListener("beforeunload", function (event) {
@@ -171,9 +138,9 @@ if (ytpostDetails){
       <Navbar />
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
-        <SelectButtons
-        visitedTabs={visitedTabs}
-        contestData={contestData}
+          <SelectButtons
+            visitedTabs={visitedTabs}
+            contestData={contestData}
             selectButtons={selectButtons}
             currentTabIndex={currentTabIndex}
             handleSelect={handleSelect}
@@ -201,9 +168,9 @@ if (ytpostDetails){
                 ) : null
               )}
             </div>
-{/* side cotainer starts  */}
-<div  className=""></div>
-            <div  className="side_container  ">
+            {/* side cotainer starts  */}
+            <div className=""></div>
+            <div className="side_container  ">
               <div className="image_container">
                 <Image
                   width="115"
@@ -213,44 +180,44 @@ if (ytpostDetails){
                 />
               </div>
               <div className="side_text">
-                <Typography   className="contest yt_text">YouTube Contest</Typography>
+                <Typography className="contest yt_text">YouTube Contest</Typography>
                 <div className="page">
                   <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                   Link
+                    Link
                   </Typography>
-                  <p style={{ lineBreak:"anywhere",  paddingBottom: "15px", whiteSpace: 'normal'   }} className="fb-box-condition">
+                  <p style={{ lineBreak: "anywhere", paddingBottom: "15px", whiteSpace: 'normal' }} className="fb-box-condition">
                     {" "}
                     {contestData.link}
                     {/* Copy the URL of the Twitter post that you would like to pick a comment from and paste it in the field below */}
                   </p>
-                  
-               {(contestData.post?.length !== 0 )? (
-                     <div> <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                     Video
-                   </Typography>  <YTSidePost posts={contestData.post}/> </div> 
-                  
-                  
+
+                  {(contestData.post?.length !== 0) ? (
+                    <div> <Typography sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                      Video
+                    </Typography>  <YTSidePost posts={contestData.post} /> </div>
+
+
                   ) : (
                     ""
                   )}
 
-{contestData?.conditions.winners  && (
-    <Typography className="sideHeadings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
-      Conditions
-    </Typography>
-  )}
-<div className="conditions">
-                  {Object.entries(contestData?.conditions).map(
-                    ([key, value]) => (
-                      <Typography
-                        sx={{ pb: "5px" }}
-                        className="fb-box-condition"
-                        key={key}
-                      >
-                        {value !== "" ? value : ""}
-                      </Typography>
-                    )
+                  {contestData?.conditions.winners && (
+                    <Typography className="side_headings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
+                      Conditions
+                    </Typography>
                   )}
+                  <div className="conditions">
+                    {Object.entries(contestData?.conditions).map(
+                      ([key, value]) => (
+                        <Typography
+                          sx={{ pb: "5px" }}
+                          className="fb-box-condition"
+                          key={key}
+                        >
+                          {value !== "" ? value : ""}
+                        </Typography>
+                      )
+                    )}
                   </div>
                 </div>
               </div>

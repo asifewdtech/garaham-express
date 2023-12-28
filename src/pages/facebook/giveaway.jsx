@@ -5,16 +5,15 @@ import Navbar from "@/components/AppBar/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import SelectPageContent from "@/components/Facebook/SelectPageContent";
-import SelectPostContent from "@/components/SelectPost/SelectPostContent";
+import SelectPostContent from "@/components/Facebook/SelectPostContent";
 import ChooseOptionContent from "@/components/Facebook/ChooseOptionContent";
 import PickWinner from "@/components/Facebook/PickWinner";
 import { useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
-import { SelectButtons } from "../instagram/giveaway";
+import axiosInstance from "@/components/utils/Utils";
+import { SelectButtons } from "@/components/SelectButton/SelectButton";
 
 const SelectFbPageCopy = () => {
   const router = useRouter();
@@ -67,7 +66,7 @@ const SelectFbPageCopy = () => {
     if (currentTabIndex !== arrayOfComponents.length) {
       setcurrentTabIndex(currentTabIndex + 1);
       setVisitedTabs((prev) => [...prev, currentTabIndex + 1]);
-    } 
+    }
   };
 
   // BUTTONS
@@ -108,8 +107,8 @@ const SelectFbPageCopy = () => {
       formData.append("resource", "facebook");
 
       try {
-        const response = await axios.post(
-          "http://localhost/viralyIO/api/includes/actions.php",
+        const response = await axiosInstance.post(
+          "",
           formData
         );
         setPages(response?.data.pages);
@@ -134,13 +133,12 @@ const SelectFbPageCopy = () => {
     const postId = JSON.parse(localStorage.getItem("postId"));
     if (postId) {
       if (typeof postId === "number") {
-        console.log(postId);
+    
       } else {
         const parsedPostId = parseInt(postId, 10);
         if (!isNaN(parsedPostId)) {
           setPostId(postId);
         } else {
-          console.log("postId is not a valid number");
         }
       }
     }
@@ -162,7 +160,7 @@ const SelectFbPageCopy = () => {
     setContestData(updatedContestData);
   }, [posts]);
 
- 
+
 
   useEffect(() => {
     window.addEventListener("beforeunload", function (event) {
@@ -175,9 +173,9 @@ const SelectFbPageCopy = () => {
       <Navbar />
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
-        <SelectButtons
-         visitedTabs={visitedTabs}
-        contestData={contestData}
+          <SelectButtons
+            visitedTabs={visitedTabs}
+            contestData={contestData}
             selectButtons={selectButtons}
             currentTabIndex={currentTabIndex}
             handleSelect={handleSelect}
@@ -204,8 +202,8 @@ const SelectFbPageCopy = () => {
                 ) : null
               )}
             </div>
-{/* side cotainer starts  */}
-<div  className=""></div>
+            {/* side cotainer starts  */}
+            <div className=""></div>
             <div className="side_container  ">
               <div className="image_container">
                 <Image
@@ -218,7 +216,7 @@ const SelectFbPageCopy = () => {
               <div className="side_text">
                 <Typography className="contest">Facebook Contest</Typography>
                 <div className="page">
-                  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                  <Typography className="side_headings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Page
                   </Typography>
                   <Typography sx={{ pb: "15px" }} className="fb-box-condition">
@@ -226,41 +224,41 @@ const SelectFbPageCopy = () => {
                     {contestData.page}
                   </Typography>
                   {contestData.postText?.length !== 0 ? (
-  <>
-    <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-      Post
-    </Typography>
-    <div className="insta_sideImg_con">
-      <div className="side_card_box">
-        <Typography className="sideboxcardtext">
-          {truncatePost(contestData.postText)}
-        </Typography>
-        <img src={contestData.img} className="sideboximg" alt="post-img" />
-      </div>
-    </div>
-  </>
-) : (
-  ""
-)}
-
-                  
- {contestData?.conditions.winners  && (
-    <Typography className="sideHeadings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
-      Conditions
-    </Typography>
-  )}
-<div className="conditions">
-                  {Object.entries(contestData?.conditions).map(
-                    ([key, value]) => (
-                      <Typography
-                        sx={{ pb: "5px" }}
-                        className="fb-box-condition"
-                        key={key}
-                      >
-                        {value !== "" ? value : ""}
+                    <>
+                      <Typography className="side_headings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                        Post
                       </Typography>
-                    )
+                      <div className="insta_sideImg_con">
+                        <div className="side_card_box">
+                          <Typography className="sideboxcardtext">
+                            {truncatePost(contestData.postText)}
+                          </Typography>
+                          <img src={contestData.img} className="sideboximg" alt="post-img" />
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    ""
                   )}
+
+
+                  {contestData?.conditions.winners && (
+                    <Typography className="side_headings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
+                      Conditions
+                    </Typography>
+                  )}
+                  <div className="conditions">
+                    {Object.entries(contestData?.conditions).map(
+                      ([key, value]) => (
+                        <Typography
+                          sx={{ pb: "5px" }}
+                          className="fb-box-condition"
+                          key={key}
+                        >
+                          {value !== "" ? value : ""}
+                        </Typography>
+                      )
+                    )}
                   </div>
                 </div>
               </div>

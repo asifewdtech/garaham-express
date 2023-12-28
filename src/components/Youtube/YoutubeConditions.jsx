@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
 import MySwitch from "../ConditionsForm/Switch";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";
-
+import axiosInstance from "../utils/Utils";
 const YoutubeConditions = ({
   decrement,
   increment,
@@ -18,13 +18,13 @@ const YoutubeConditions = ({
   const [isDuplicatesChecked, setIsDuplicatesChecked] = useState(false);
   const [isRepliesChecked, setIsRepliesChecked] = useState(false);
   const [isBanAbusiveChecked, setIsBanAbusiveChecked] = useState(false);
-  
-  const [logoFile, setLogoFile] = useState(null);
   const [isChecked, setIsChecked] = useState("");
-  // const [value, setValue] = useState(0)
-
-  const label = { inputProps: { "aria-label": "Color switch demo" } };
-
+  useEffect(() => {
+    setIsUniqueUsersChecked(contestData.conditions.isUniqueUsersChecked || false);
+    setIsDuplicatesChecked(contestData.conditions.isDuplicatesChecked || false);
+    setIsRepliesChecked(contestData.conditions.isRepliesChecked || false);
+    setIsBanAbusiveChecked(contestData.conditions.isBanAbusiveChecked || false);
+  }, [contestData.conditions]);
   const {
     register,
     handleSubmit,
@@ -33,67 +33,50 @@ const YoutubeConditions = ({
     formState: { errors },
   } = useForm({ defaultValues: contestData.conditions });
 
+  useEffect(() => {
+    setValue("video_id", localStorage.getItem('video_id'))
+  }, [localStorage.getItem('video_id')])
+
   const onSubmit = async (data, e) => {
-    data
-      ? localStorage.setItem("selectedConditions", JSON.stringify(data))
-      : "";
-    const dataToSend = { ...data };
+    const dataToSend = { ...data, isBanAbusiveChecked, isRepliesChecked, isUniqueUsersChecked, isDuplicatesChecked };
     setContestData((prev) => ({ ...prev, conditions: dataToSend }));
-
-    increment(e);
-
+    data
+      ? localStorage.setItem("selectedConditions", JSON.stringify(dataToSend))
+      : "";
     const formData = new FormData();
-
     formData.append("title", data.title ? data.title : "");
     formData.append("winners", data.winners ? data.winners : "");
-    formData.append("badwords", data.badwords ? data.badwords : "");
-    formData.append("words", data.words ? data.words : "");
+    formData.append("nPhrases", data.badwords ? data.badwords : "");
+    formData.append("keyfilter", data.words ? data.words : "");
+    formData.append("endDate", data.endDate ? data.endDate : "");
     formData.append("phrases", data.phrases ? data.phrases : "");
-    formData.append("blocks", data.blocks ? data.blocks : "");
-    formData.append("uniqueusers", isUniqueUsersChecked );
-    formData.append("duplicates", isDuplicatesChecked );
-    formData.append("include_replies", isRepliesChecked );
-    formData.append("ban_abusive_comments", isBanAbusiveChecked );
-
+    formData.append("block", data.blocks ? data.blocks : "");
+    formData.append("uniqueuser", isUniqueUsersChecked);
+    formData.append("duplicateComments", isDuplicatesChecked);
+    formData.append("include_replies", isRepliesChecked);
+    formData.append("ban_abusive_comments", isBanAbusiveChecked);
     formData.append(
       "youtube_filter",
       data.youtube_filter ? data.youtube_filter : ""
     );
-
-    formData.append("profilepic", logoFile?.name ? logoFile.name : "");
-   formData.append("video_id", posts?.video_id)
+    formData.append("video_id", data.video_id);
 
     formData.append("post_id", postId);
 
     try {
-      const response = await axios.post(
-        "http://localhost/viralyIO/api/includes/actions.php",
+      const response = await axiosInstance.post(
+        "",
         formData
       );
-      console.log(response)
       if (response?.data.success) {
         setCommentData(response?.data);
       }
     } catch (error) {
       console.log(error);
     }
+    increment(e);
   };
   let winners = watch("winners", 1);
-  let postCount = watch("postCount", 0);
-  let followers = watch("followers", 0);
-
-  const postIncrement = () => {
-    const newValue = +postCount + 1;
-
-    setValue("postCount", newValue);
-  };
-
-  const postDecrement = () => {
-    const newValue = +postCount - 1;
-    newValue >= 0
-      ? setValue("postCount", newValue)
-      : setValue("postCount", postCount);
-  };
 
   const winnerIncrement = () => {
     const newValue = +winners + 1;
@@ -107,25 +90,17 @@ const YoutubeConditions = ({
       : setValue("winners", winners);
   };
 
-  const followersIncrement = () => {
-    const newValue = +followers + 1;
-    setValue("followers", newValue);
+  const handle_uni_swi = () => {
+    setIsUniqueUsersChecked(!isUniqueUsersChecked);
   };
-
-  const followersDecrement = () => {
-    const newValue = +followers - 1;
-    newValue >= 0
-      ? setValue("followers", newValue)
-      : setValue("followers", followers);
+  const handle_ban_swi= () => {
+    setIsBanAbusiveChecked(!isBanAbusiveChecked);
   };
-
-  const ispositive = (num) => {
-    console.log(num);
-    num >= 0 ? num - 1 : 0;
+  const handle_dup_swi = () => {
+    setIsDuplicatesChecked(!isDuplicatesChecked);
   };
-
-  const handleChange = () => {
-    setIsChecked(!isChecked);
+  const handle_rep_swi = () => {
+    setIsRepliesChecked(!isRepliesChecked);
   };
 
   return (
@@ -223,31 +198,37 @@ const YoutubeConditions = ({
 
           <>
             <div className="exclude yt_switches switch">
-              <MySwitch
-                onChange={handleChange}
+              <MySwitch checked={isUniqueUsersChecked}
+                onChange={handle_uni_swi}
                 inputProps={{ "aria-label": "controlled" }}
               />
               <Typography className="switch_text">Get Unique Users</Typography>
             </div>
-            <div  style={{}} className="exclude yt_switches switch">
-              <MySwitch inputProps={{ "aria-label": "controlled" }} />
+            <div style={{}} className="exclude yt_switches switch">
+              <MySwitch checked={isDuplicatesChecked}  onChange={handle_dup_swi} inputProps={{ "aria-label": "controlled" }} />
               <Typography className="switch_text">
                 Duplicate comments
               </Typography>
             </div>
             <div style={{}} className="exclude yt_switches switch">
-              <MySwitch inputProps={{ "aria-label": "controlled" }} />
+              <MySwitch checked={isRepliesChecked}  onChange={handle_rep_swi} inputProps={{ "aria-label": "controlled" }} />
               <Typography className="switch_text">
                 Include replies
               </Typography>
             </div>
             <div style={{}} className="exclude yt_switches switch">
-              <MySwitch inputProps={{ "aria-label": "controlled" }} />
+              <MySwitch  checked={isBanAbusiveChecked}  onChange={handle_ban_swi} inputProps={{ "aria-label": "controlled" }} />
               <Typography className="switch_text">
                 Ban abusive comments
               </Typography>
             </div>
-
+            <input
+              type="hidden"
+              name="video_id"
+              {...register("video_id", {
+                defaultValue: localStorage.getItem("video_id"),
+              })}
+            />
             <input
               type="hidden"
               name="youtube_filter"
@@ -260,7 +241,7 @@ const YoutubeConditions = ({
           </>
 
         </div>
-        <div style={{marginTop:'20px'}} className="text_inputs">
+        <div style={{ marginTop: '20px' }} className="text_inputs">
           <div>
             <legend className="legend">Neglect Phrases</legend>
             <input
@@ -286,8 +267,9 @@ const YoutubeConditions = ({
               {...register("endDate")}
               placeholder="25/02/2023"
               name="endDate"
+              type="date"
             /></div>
-      
+
 
         </div>
 

@@ -5,7 +5,6 @@ import Navbar from "@/components/AppBar/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import { useEffect } from "react";
 import axios from "axios";
@@ -13,12 +12,8 @@ import { useRouter } from "next/router";
 import SelectTiktokPost from "@/components/Tiktok/SelectTiktokPost";
 import TiktokConditions from "@/components/Tiktok/TiktokConditions";
 import PickWinner, { TikTokSidePost } from "@/components/Tiktok/PickWinner";
-import { SelectButtons } from "../instagram/giveaway";
-
-
-// import {PickWinner} from "@/components/Twitter/PickWinner";
-
-
+import axiosInstance from "@/components/utils/Utils";
+import { SelectButtons } from "@/components/SelectButton/SelectButton";
 const TwitterGiveaway = () => {
   const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");
@@ -57,10 +52,10 @@ const TwitterGiveaway = () => {
 
   const arrayOfComponents = [
 
-SelectTiktokPost,
-TiktokConditions,
-PickWinner
-  
+    SelectTiktokPost,
+    TiktokConditions,
+    PickWinner
+
 
   ];
   const decrement = (e) => {
@@ -72,7 +67,7 @@ PickWinner
     if (currentTabIndex !== arrayOfComponents.length) {
       setcurrentTabIndex(currentTabIndex + 1);
       setVisitedTabs((prev) => [...prev, currentTabIndex + 1]);
-    } 
+    }
   };
 
   // BUTTONS
@@ -113,13 +108,14 @@ PickWinner
       formData.append("resource", "facebook");
 
       try {
-        const response = await axios.post(
-          "http://localhost/viralyIO/api/includes/actions.php",
+        const response = await axiosInstance.post(
+          "",
           formData
         );
         setPages(response?.data.pages);
       } catch (error) {
         console.log(error);
+
       }
     };
     fetchPages();
@@ -139,7 +135,7 @@ PickWinner
     const postId = JSON.parse(localStorage.getItem("postId"));
     if (postId) {
       if (typeof postId === "number") {
-        console.log(postId);
+      
       } else {
         const parsedPostId = parseInt(postId, 10);
         if (!isNaN(parsedPostId)) {
@@ -167,7 +163,7 @@ PickWinner
     setContestData(updatedContestData);
   }, [posts]);
 
- 
+
 
   useEffect(() => {
     window.addEventListener("beforeunload", function (event) {
@@ -180,9 +176,9 @@ PickWinner
       <Navbar />
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
-        <SelectButtons
-         visitedTabs={visitedTabs}
-        contestData={contestData}
+          <SelectButtons
+            visitedTabs={visitedTabs}
+            contestData={contestData}
             selectButtons={selectButtons}
             currentTabIndex={currentTabIndex}
             handleSelect={handleSelect}
@@ -209,8 +205,8 @@ PickWinner
                 ) : null
               )}
             </div>
-{/* side cotainer starts  */}
-<div  className=""></div>
+            {/* side cotainer starts  */}
+            <div className=""></div>
             <div className="side_container  ">
               <div className="image_container">
                 <Image
@@ -221,42 +217,42 @@ PickWinner
                 />
               </div>
               <div className="side_text">
-                <Typography   className="contest tiktok_text">TikTok Giveaway</Typography>
+                <Typography className="contest tiktok_text">TikTok Giveaway</Typography>
                 <div className="page">
-                  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                   Link
+                  <Typography className="side_headings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                    Link
                   </Typography>
-                  <p style={{ lineBreak:"anywhere",  paddingBottom: "15px", whiteSpace: 'normal'   }} className="fb-box-condition">
+                  <p style={{ lineBreak: "anywhere", paddingBottom: "15px", whiteSpace: 'normal' }} className="fb-box-condition">
                     {" "}
                     {contestData.link}
                     {/* Copy the URL of the Twitter post that you would like to pick a comment from and paste it in the field below */}
                   </p>
-                  
+
                   {contestData.link?.length !== 0 ? (
-                    <><Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
-                    Post
-                  </Typography><TikTokSidePost /></>
+                    <><Typography className="side_headingss" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                      Post
+                    </Typography><TikTokSidePost /></>
                   ) : (
                     ""
                   )}
 
-{contestData?.conditions.winners  && (
-    <Typography className="sideHeadings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
-      Conditions
-    </Typography>
-  )}
-<div className="conditions">
-                  {Object.entries(contestData?.conditions).map(
-                    ([key, value]) => (
-                      <Typography
-                        sx={{ pb: "5px" }}
-                        className="fb-box-condition"
-                        key={key}
-                      >
-                        {value !== "" ? value : ""}
-                      </Typography>
-                    )
+                  {contestData?.conditions.winners && (
+                    <Typography className="side_headings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
+                      Conditions
+                    </Typography>
                   )}
+                  <div className="conditions">
+                    {Object.entries(contestData?.conditions).map(
+                      ([key, value]) => (
+                        <Typography
+                          sx={{ pb: "5px" }}
+                          className="fb-box-condition"
+                          key={key}
+                        >
+                          {value !== "" ? value : ""}
+                        </Typography>
+                      )
+                    )}
                   </div>
                 </div>
               </div>

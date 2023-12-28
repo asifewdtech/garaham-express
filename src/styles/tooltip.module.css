@@ -1,0 +1,10 @@
+.tooltip_main{
+    background-color: white;
+    border: 1px gray solid;
+}
+.MuiTooltip-arrow{
+    background-color: white;
+}
+.MuiTooltip-arrow ::before {
+    background-color: white;
+}

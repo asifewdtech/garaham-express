@@ -8,6 +8,7 @@ import Navbar from "@/components/AppBar/AppBar";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Footer from "@/components/Footer";
+import WinnersHeading from "@/components/CommentPicker/WinnersHeading";
 
 const Winner = () => {
   const Item = styled(Paper)(({ theme }) => ({
@@ -25,7 +26,7 @@ const Winner = () => {
 
   const handleCopyIframeCode = () => {
     console.log(serializedData)
-    if(typeof window !== "undefined") {
+    if (typeof window !== "undefined") {
       const iframeCode = generateIframeCode(
         `http://localhost:3000/instagram/winners?data=/${serializedData}`
       );
@@ -58,7 +59,7 @@ const Winner = () => {
         document.body.classList.add("inside-iframe");
       }
     }
-    
+
   }, []);
 
   return (
@@ -67,26 +68,16 @@ const Winner = () => {
       <Container maxWidth sx={{ pb: "15px" }}>
         <Box className="winner_container">
           <Box className="winner">
-         
+
             <Typography className="winner_subheading" >
             </Typography>
-           
-            {commentsArray !== null && commentsArray.length === 0
-              ? <Typography className="no_winner_subheading">Disclaimer: There is no winner for a Giveaway.</Typography>
-              : <>   {commentsArray !== null && (
-                <Typography className="winner_heading">
-                  {commentsArray.length === 1 ? "And the WINNER is" : "And the WINNERS are"}
-                </Typography>
-              )}
-               <Typography className="winner_subheading">Congrats! Your winner has been picked!</Typography> </>}
-
-
+            <WinnersHeading commentsArray={commentsArray} />
             <WinnerOne
               commentsArray={commentsArray}
               setCommentsArray={setCommentsArray}
-            /> 
+            />
           </Box>
-         <Footer iframe={handleCopyIframeCode} redirectLink={ {pathname: '/instagram/giveaway', query: { tab: 1 }}}/>
+          <Footer iframe={handleCopyIframeCode} redirectLink={{ pathname: '/instagram/giveaway', query: { tab: 1 } }} />
         </Box>
       </Container>
     </>

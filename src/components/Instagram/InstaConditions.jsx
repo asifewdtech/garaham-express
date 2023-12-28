@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
 import MySwitch from "../ConditionsForm/Switch";
-import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";
+import axiosInstance from "../utils/Utils";
 
-const InstagramConditions = ({
+const ChooseOptionContent = ({
   decrement,
   increment,
   setContestData,
@@ -15,12 +15,27 @@ const InstagramConditions = ({
   setCommentData,
 }) => {
   const [showAdvanceOptions, setshowAdvanceOptions] = useState(false);
-  const [showProCustomize, setshowProCustomize] = useState(false);
   const [logoFile, setLogoFile] = useState(null);
-  const [isChecked, setIsChecked] = useState("");
-  const [isPro, setisPro] = useState(false);
-  // const [value, setValue] = useState(0)
-
+  const [isduplicatesChecked, setIsDuplicateChecked] = useState(false);
+  const [isUniqueChecked, setisUniqueChecked] = useState(false)
+  const [isTagChecked, setisTagChecked] = useState(false)
+  const [isFollowingChecked, setIsFollowingChecked] = useState(false)
+  
+  const handleDuplicateChange = () => {
+    setIsDuplicateChecked(!isduplicatesChecked)
+  }
+  const handleUniqueChange = () => {
+    setisUniqueChecked(!isUniqueChecked)
+  }
+  const handleAdvancedChange = () => {
+    setshowAdvanceOptions(!showAdvanceOptions)
+  }
+  const handleTagChange = () => {
+    setisTagChecked(!isTagChecked)
+  }
+  const handleFollowingChange = () => {
+    setIsFollowingChecked(!isFollowingChecked)
+  }
   const label = { inputProps: { "aria-label": "Color switch demo" } };
 
   const {
@@ -28,16 +43,24 @@ const InstagramConditions = ({
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
   } = useForm({ defaultValues: contestData.conditions });
 
-  const onSubmit = async (data, e) => {
-    data
-      ? localStorage.setItem("selectedConditions", JSON.stringify(data))
-      : "";
-    const dataToSend = { ...data };
-    setContestData((prev) => ({ ...prev, conditions: dataToSend }));
 
+  useEffect(() => {
+    setIsDuplicateChecked(contestData.conditions.isduplicatesChecked || false);
+    setisTagChecked(contestData.conditions.isTagChecked || false);
+    setIsFollowingChecked(contestData.conditions.isFollowingChecked || false);
+    setshowAdvanceOptions(contestData.conditions.showAdvanceOptions || false);
+    setisUniqueChecked(contestData.conditions.isUniqueChecked || false);
+  
+  }, []);
+
+  const onSubmit = async (data, e) => {
+    const dataToSend = { ...data, showAdvanceOptions, isTagChecked, isFollowingChecked, isUniqueChecked, isduplicatesChecked};
+    setContestData((prev) => ({ ...prev, conditions: dataToSend }));
+    data
+      ? localStorage.setItem("selectedConditions", JSON.stringify(dataToSend))
+      : "";
     increment(e);
 
     const formData = new FormData();
@@ -53,24 +76,21 @@ const InstagramConditions = ({
     formData.append("mintags", data.mintags ? data.mintags : "");
     formData.append("mentions", data.mentions ? data.mentions : "");
     formData.append("blocks", data.blocks ? data.blocks : "");
-    formData.append("uniqueusers", isChecked);
-    formData.append("duplicates", isChecked);
+    formData.append("uniqueusers", isUniqueChecked);
+    formData.append("duplicates", isduplicatesChecked);
     formData.append(
       "fb_insta_filter",
       data.fb_insta_filter ? data.fb_insta_filter : ""
     );
-
     formData.append("profilepic", logoFile?.name ? logoFile.name : "");
     formData.append("resource", "instagram");
-
     formData.append("post_id",'12');
 
     try {
-      const response = await axios.post(
-        "http://localhost/viralyIO/api/includes/actions.php",
+      const response = await axiosInstance.post(
+        "",
         formData
       );
-      console.log(response, 'instaresponse')
       if (response?.data.success) {
         setCommentData(response?.data);
       }
@@ -123,13 +143,6 @@ const InstagramConditions = ({
     console.log(num);
     num >= 0 ? num - 1 : 0;
   };
-
-  const handleChange = () => {
-    setIsChecked(!isChecked);
-  };
-
-  
-
   return (
     <div className="p_sm" >
       <Typography className="CP_heading">
@@ -213,68 +226,20 @@ const InstagramConditions = ({
           </div>
           <div className="exclude switch">
             <MySwitch
-              onChange={handleChange}
-              inputProps={{ "aria-label": "controlled" }}
+              checked={isduplicatesChecked}
+              onChange={handleDuplicateChange}
+              {...label}
             />
             <Typography className="switch_text">Exclude Duplicates</Typography>
           </div>
         </div>
-        {/* {!isPro && (
-  <Tooltip
-  sx={{ bgcolor: 'red', color: 'white' }}
-    title="Subscribe to our pro plan to use more features"
-    placement="bottom-start"
-  >
-    <div className="switch">
-      <div
-        className="switch_container proplan advanced"
-        style={{ width: '43%', marginBottom: '20px' }}
-      >
-        <MySwitch
-          {...label}
-          className={isPro ? '' : 'not-allowed-cursor'}
-          disabled={!isPro}
-          onChange={() => setshowProCustomize(!showProCustomize)}
-        />
-
-        <Typography className="switch_text pro">
-          Pro Version Customization - Branding
-        </Typography>
-      </div>
-    </div>
-  </Tooltip>
-)}
-
-{isPro && (
-  <div className="switch">
-    <div
-      className="switch_container proplan advanced"
-      style={{ width: '43%', marginBottom: '20px' }}
-    >
-      <MySwitch
-        {...label}
-        className={isPro ? '' : 'not-allowed-cursor'}
-        disabled={!isPro}
-        onChange={() => setshowProCustomize(!showProCustomize)}
-      />
-
-      <Typography className="switch_text pro">
-        Pro Version Customization - Branding
-      </Typography>
-    </div>
-  </div>
-)} */}
-
-
-
-        
-
         <div className="text_inputs">
           <div className="switch">
             <div className="switch_container advanced switch">
               <MySwitch
                 {...label}
-                onChange={() => setshowAdvanceOptions(!showAdvanceOptions)}
+                checked={showAdvanceOptions}
+                onChange={handleAdvancedChange}
               />
               <Typography className="switch_text">
                 Show Advanced Conditions
@@ -284,9 +249,9 @@ const InstagramConditions = ({
           {showAdvanceOptions && (
             <>
               {/* <div></div> */}
-              <div style={{  }} className="exclude switch">
-                <MySwitch inputProps={{ "aria-label": "controlled" }} />
-                <Typography className="switch_text">
+              <div style={{}} className="exclude switch">
+                <MySwitch checked={isFollowingChecked} onChange={handleFollowingChange}     {...label} />
+                <Typography onChange={handleFollowingChange} className="switch_text">
                   Must have following accounts
                 </Typography>
               </div>
@@ -422,16 +387,16 @@ const InstagramConditions = ({
               </div>
               <div>
                 <div className="exclude switch">
-                  <MySwitch inputProps={{ "aria-label": "controlled" }} />
+                  <MySwitch checked={isTagChecked} onChange={handleTagChange}     {...label} />
                   <Typography className="switch_text">
                     Avoid duplicate tags
                   </Typography>
                 </div>
                 <div className="exclude switch">
                   <MySwitch
-                    checked={isChecked}
-                    onChange={handleChange}
-                    inputProps={{ "aria-label": "controlled" }}
+                    checked={isUniqueChecked}
+                    onChange={handleUniqueChange}
+                    {...label}
                   />
                   <Typography className="switch_text">
                     Get Unique users
@@ -439,83 +404,84 @@ const InstagramConditions = ({
                 </div>
               </div>
               {/* <div className="text_inputs"> */}
-          {/* {isPro && showProCustomize && ( */}
-            <>
-              <div>
-                <legend className="legend">Logo</legend>
-                <div className=" select_File">
-                  <input
-                    name="profilepic"
-                    type="file"
-                    accept="image/*"
-                    className="input_field"
-                    onChange={(e) => {
-                      const selectedFile = e.target.files[0];
-                      if (
-                        selectedFile &&
-                        selectedFile.type.startsWith("image/")
-                      ) {
-                        setLogoFile(selectedFile);
-                      } else {
-                        alert(
-                          "Invalid file type. Please select an image file."
-                        );
-                      }
-                    }}
-                  />
+              {/* {isPro && showProCustomize && ( */}
+              <>
+                <div>
+                  <legend className="legend">Logo</legend>
+                  <div className=" select_File">
+                    <input
+                      name="profilepic"
+                      type="file"
+                      accept="image/*"
+                      className="input_field"
+                      onChange={(e) => {
+                        const selectedFile = e.target.files[0];
+                        if (
+                          selectedFile &&
+                          selectedFile.type.startsWith("image/")
+                        ) {
+                          setLogoFile(selectedFile);
+                        } else {
+                          alert(
+                            "Invalid file type. Please select an image file."
+                          );
+                        }
+                      }}
+                    />
 
-                  {logoFile && (
-                    <p style={{ display: "none" }}>
-                      Selected File: {logoFile?.name}
-                    </p>
-                  )}
+                    {logoFile && (
+                      <p style={{ display: "none" }}>
+                        Selected File: {logoFile.name}
+                      </p>
+                    )}
+
+                  </div>
                 </div>
-              </div>
-              <div>
-                <legend className="legend">Background Color</legend>
-                <select
-                  className="input_field min_screen"
-                  {...register("background_color")}
-                  placeholder="Bg color"
-                >
-                  <option value="Magenta">Magenta</option>
-                  <option value="Test">Test</option>
-                </select>
-              </div>
-              <div>
-                <legend className="legend">Confetti style</legend>
-                <select
-                  className="input_field min_screen"
-                  {...register("style")}
-                  placeholder="1"
-                >
-                  <option value="Rainbow">Rainbow</option>
-                  <option value="Test">Test</option>
-                </select>
-              </div>
-              <div>
-                <legend className="legend">Set a timer (Countdown)</legend>
-                <input
-                  className="input_field"
-                  // type="datetime-local"
-                  type="time"
-                  {...register("timer")}
-                  placeholder=""
-                />
-              </div>
-            </>
-          {/* )} */}
+                <div>
+                  <legend className="legend">Background Color</legend>
+                  <select
+                    className="input_field min_screen"
+                    {...register("background_color")}
+                    placeholder="Bg color"
+                  >
+                    <option value="Magenta">Magenta</option>
+                    <option value="Test">Test</option>
+                  </select>
+                </div>
+                <div>
+                  <legend className="legend">Confetti style</legend>
+                  <select
+                    className="input_field min_screen"
+                    {...register("style")}
+                    placeholder="1"
+                  >
+                    <option value="Rainbow">Rainbow</option>
+                    <option value="Test">Test</option>
+                  </select>
+                </div>
+                <div>
+                  <legend className="legend">Set a timer (Countdown)</legend>
+                  <input
+                    className="input_field"
+                    // type="datetime-local"
+                    type="time"
+                    {...register("timer")}
+                    placeholder=""
+                  />
+                </div>
+              </>
+              {/* )} */}
 
-          <input
-            type="hidden"
-            name="fb_insta_filter"
-            value="fb_insta_filter"
-            {...register("fb_insta_filter", {
-              defaultValue: "fb_insta_filter",
-            })}
-          />
-          {/* show pro options here */}
-        {/* </div> */}
+              <input
+                type="hidden"
+                name="fb_insta_filter"
+                value="fb_insta_filter"
+                {...register("fb_insta_filter", {
+                  defaultValue: "fb_insta_filter",
+                })}
+              />
+              {/* show pro options here */}
+              {/* </div> */}
             </>
           )}
         </div>
@@ -548,11 +514,4 @@ const InstagramConditions = ({
   );
 };
 
-export default InstagramConditions;
-const CustomTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ tooltip: className }} />
-))(({ theme }) => ({
-  backgroundColor: "red", // Set the background color here
-  color: "white", // Set the text color here
-  // Add any other custom styles you need
-}));
+export default ChooseOptionContent;

@@ -1,12 +1,8 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useRouter } from "next/router";
-import Image from "next/image";
-import newtrophy from "@/assets/images/newtrophy.png";
-
 import { useEffect, useRef, useState } from "react";
 
 const PickWinner = ({ commentData, contestData, decrement, posts }) => {
-  console.log(posts)
   const [loading, setLoading] = useState(false); // State to track loading
   const router = useRouter();
   const tweetElementRef = useRef(null);

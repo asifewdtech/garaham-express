@@ -626,7 +626,7 @@ a {
   }
 
   .winnerContestentScndMain img {
-      align-items: start;
+      align-items:flex-start;
   }
 .ellipseimg {
   height: 91px !important;
@@ -1369,4 +1369,21 @@ footer {
   .yt_filter{
     padding-top: 12px !important;
   }
+}
+
+.MuiTooltip-arrow{
+  background-color: white;
+}
+.css-kudwh-MuiTooltip-arrow::before {
+  content: "";
+  margin: auto;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: white !important;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  /* transform: rotate(45deg); */
+  border: 1px gray solid !important;
 }

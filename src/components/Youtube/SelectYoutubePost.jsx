@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import Link from "next/link";
+
 import axios from "axios";
-
-
+import axiosInstance from "../utils/Utils";
 const SelectYoutubePost = ({ increment,setPosts, setContestData, contestData }) => {
   const [postLink, setPostLink] = useState(""); 
   const [loading, setloading] = useState(false)
@@ -27,7 +26,7 @@ const SelectYoutubePost = ({ increment,setPosts, setContestData, contestData }) 
 
 
   const handleScanButtonClick = (e) => {
-    // Regular expression to validate a Twitter post link
+ 
     const youtubeVideoLinkRegex = /https?:\/\/(www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)|https?:\/\/(www\.)?youtu\.be\/([a-zA-Z0-9_-]+)/;
 
     localStorage.setItem("postLink", JSON.stringify(postLink));
@@ -49,16 +48,17 @@ const SelectYoutubePost = ({ increment,setPosts, setContestData, contestData }) 
     setloading(true)
     const formData= new FormData()
     formData.append("video_url", postLink);
+    formData.append("youtube_filter","youtube_filter" );
   
     try {
-      const response = await axios.post(
-        "http://localhost/viralyIO/api/includes/actions.php",
+      const response = await axiosInstance.post(
+        "",
         formData
       );
-      console.warn(response.data)
-      // console.log(response.data.data)
+
       if (response?.data.success) {
         const postdetails=  response.data.data
+        localStorage.setItem("video_id", response.data.data.video_id)
         setloading(false)
         setContestData((prev) => {
           return { ...prev, post: postdetails };

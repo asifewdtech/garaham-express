@@ -6,7 +6,6 @@ import newtrophy from "@/assets/images/newtrophy.png";
 import { useEffect, useRef, useState } from "react";
 
 const PickWinner = ({commentData, contestData, decrement }) => {
-  console.log(commentData)
   const [loading, setLoading] = useState(false); // State to track loading
   const router = useRouter();
   const tweetElementRef = useRef(null);

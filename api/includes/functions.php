@@ -891,8 +891,8 @@
 					CURLOPT_CUSTOMREQUEST => 'GET',
 					CURLOPT_HTTPHEADER => array(
 						'Authorization: Bearer '.$this->twitterBearerToken,
-						'Cookie: guest_id='.$this->twitterGuestID
-						// "Authorization: Bearer $this->twitterApiKey:$this->twitterApiSecret"
+						// 'Cookie: guest_id='.$this->twitterGuestID
+						"Authorization: Bearer $this->twitterApiKey:$this->twitterApiSecret"
 					),
 				)
 			);
@@ -1112,7 +1112,9 @@
 				}
 				if (isset($requestData['phrases']) && !empty($requestData['phrases'])) {
 					$phrases = [];
-					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]))->data as $commentData) {
+					foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]), true)['data'] as $commentData) {
+
+					// foreach (json_decode($this->getSpecificColumnData("comments", $cond, ["id","message"]), true)->data as $commentData) {
 						// if ($this->searchFromString($commentData, $requestData['phrases'])) {
 						if (strstr($commentData['message'], $requestData['phrases'])) {
 							// $phrases .= $commentData['id'] . "','";
@@ -1183,12 +1185,19 @@
 
 				$uniqueusers = '';
 				if (isset($requestData['uniqueuser']) && !empty($requestData['uniqueuser'])) {
-					foreach (json_decode($this->getUnique("comments", $cond, "id,from_name", "from_name"))->data as $comment) {
+					$response = json_decode($this->getUnique("comments", $cond, "id,from_name", "from_name"));
+					$uniqueUsersData = $response!=null && is_array($response->data)?$response->data:[];
+					foreach ($uniqueUsersData as $comment) {
 						$uniqueusers .= $comment->id . ",";
 					}
 					$uniqueusers = substr($uniqueusers, 0, -1);
-					$requireQuery.=" and id IN($uniqueusers)";
+					if($uniqueusers!=''){
+						$requireQuery.=" and id IN($uniqueusers)";
+					}
 				}
+
+				// print_r($requireQuery);
+				// die();
 				
 				if (isset($requestData['topComment']) && !empty($requestData['topComment'])) {
 					$ids = implode(',', json_decode($this->getDataUsingQuery(str_replace("*", 'id', $requireQuery), true))->data);
@@ -1203,10 +1212,12 @@
 			}
 	
 			if (isset($requestData['twitter_filter'])) {
-				$tweet_id = $requestData['tweet_id'];
+				// $tweet_id = $requestData['tweet_id'];
+				$tweet_id = 1568943992771051521;
 				$numberOfWinners = $requestData['winners'];
 				$winners = '';
 				$requireQuery = "select * from retweets where tweet_id='$tweet_id'";
+			
 				if (isset($requestData['winners']) && !empty($requestData['winners'])) {
 					foreach (json_decode($this->getRandomOrderData("retweets", 0, $requestData['winners'], array("tweet_id" => $tweet_id)))->data as $tweet) {
 						$winners .= $tweet->id . ",";
@@ -1243,7 +1254,7 @@
 					$requireQuery.=" and description !=''";
 				}
 
-				if(isset($requestData['location']) && !empty($requestData['location'])){
+				if(isset($requestData['location']) && $requestData['location']=='true'){
 					$requireQuery.=" and location !=''";
 				}
 	
@@ -1251,7 +1262,28 @@
 					$profile_age = $requestData['profile_age'];
 					$requireQuery.=" and age = $profile_age";
 				}
-
+				if (isset($requestData['badwords']) && !empty($requestData['badwords'])) {
+					$badwords = [];
+					$badwordsArr = explode(" ", $requestData['badwords']); // Convert bad words string to an array
+				
+					// Define $cond appropriately based on your logic
+					$cond = array("tweet_id" => $tweet_id); // Adjust this according to your needs
+				
+					// Use $data instead of $commentsData to avoid naming conflicts
+					foreach (json_decode($this->getSpecificColumnData("retweets", $cond, ["id","description"]))->data as $data) {
+						foreach($badwordsArr as $badWord){
+							if ($this->searchFromString($data->description, $badWord)) {
+								$badwords[]= $data->id;
+							}
+						}
+					}
+				
+					if(count($badwords) > 0){
+						$badwords = implode(',', $badwords);
+						$requireQuery .= " and id NOT IN($badwords)";
+					}
+				}
+				
 				if(isset($requestData['tweet_count']) && !empty($requestData['tweet_count']) && $requestData['tweet_count']!='Any'){
 					$tweet_count = $requestData['tweet_count'];
 					$requireQuery.=" and tweet_count >= $tweet_count";
@@ -1259,6 +1291,7 @@
 				}
 				setcookie("contest_name", (isset($requestData['title']) && !empty($requestData['title']) ? $requestData['title'] : ""));
 				$requireQuery .= " ORDER BY RAND() LIMIT 0, $numberOfWinners";
+				// return $requireQuery;
 				$comments = (json_decode($this->getDataUsingQuery($requireQuery, false))->data);
 			} 
 

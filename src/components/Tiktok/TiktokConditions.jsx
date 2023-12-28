@@ -5,6 +5,7 @@ import MySwitch from "../ConditionsForm/Switch";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";
+import axiosInstance from "../utils/Utils";
 
 const TiktokConditions = ({
   decrement,
@@ -66,8 +67,8 @@ const TiktokConditions = ({
     formData.append("post_id", postId);
 
     try {
-      const response = await axios.post(
-        "http://localhost/viralyIO/api/includes/actions.php",
+      const response = await axiosInstance.post(
+        "",
         formData
       );
       if (response?.data.success) {
@@ -119,7 +120,6 @@ const TiktokConditions = ({
   };
 
   const ispositive = (num) => {
-    console.log(num);
     num >= 0 ? num - 1 : 0;
   };
 

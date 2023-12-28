@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Link from "next/link";
 import axios from "axios";
+import axiosInstance from "../utils/Utils";
 
 
 const SelectInstaPost = ({ increment, setPosts, setContestData, contestData }) => {
@@ -54,8 +55,8 @@ const SelectInstaPost = ({ increment, setPosts, setContestData, contestData }) =
     formData.append("resource", "instagram");
 
     try {
-      const response = await axios.post(
-        "http://localhost/viralyIO/api/includes/actions.php",
+      const response = await axiosInstance.post(
+        "",
         formData
       );
       // console.log(response)

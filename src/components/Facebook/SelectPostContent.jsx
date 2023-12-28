@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import Link from "next/link";
+import axiosInstance from "../utils/Utils";
 
 const SelectPostContent = ({
   contestData,
@@ -23,40 +24,50 @@ const SelectPostContent = ({
 }) => {
   const [selectCard, setselectedCard] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
+    const selectedPost = localStorage.getItem("selectedPost");
+    const selectedCard = localStorage.getItem("selectedCard");
 
-      const selectedPost = localStorage.getItem("selectedPost");
-      const selectedCard = localStorage.getItem("selectedCard");
-  
-      if (selectedPost) {
-        const { postText, img, id } = JSON.parse(selectedPost);
-  
-        setPostId(id);
-        setContestData((prev) => ({ ...prev, postText, img }));
+    if (selectedPost) {
+      const { postText, img, id } = JSON.parse(selectedPost);
+
+      setPostId(id);
+      setContestData((prev) => ({ ...prev, postText, img }));
+    }
+
+    if (selectedCard) {
+      setselectedCard(parseInt(selectedCard, 10));
+    }
+
+    const postId = localStorage.getItem("postId");
+    if (postId) {
+      setPostId(parseInt(postId, 10));
+    }
+
+  }, []);
+
+  // Check if posts are available in localStorage, and use them if available
+  const fetchPosts = async (id) => {
+    const formData = new FormData();
+    formData.append("page_id", JSON.parse(id));
+    formData.append("resource", "facebook");
+    try {
+      const response = await axiosInstance.post(
+        "",
+        formData
+      );
+      if (response?.data.success) {
+        setPosts(response?.data.data);
+        // localStorage.setItem("posts", JSON.stringify(response?.data.data));
       }
-  
-      if (selectedCard) {
-        setselectedCard(parseInt(selectedCard, 10));
-      }
+    } catch (error) {
+      // console.log(error);
+    }
+  };
 
-      const postId = localStorage.getItem("postId");
-      if (postId) {
-        setPostId(parseInt(postId, 10));
-      }
-
-    }, []);
-  
-    // Check if posts are available in localStorage, and use them if available
-    useEffect(() => {
-
-      const postsFromLocalStorage = localStorage.getItem("posts");
-      if (postsFromLocalStorage) {
-        const parsedPosts = JSON.parse(postsFromLocalStorage);
-        setPosts(parsedPosts);
-      }
-      
-    }, [setPosts]);
-
+  const pageId = localStorage.getItem("selectedPage")
+  useEffect(() => { 
+    if(pageId) fetchPosts(pageId) }, [pageId])
   const handleSelectCard = (e, card, i) => {
     e.preventDefault();
     setselectedCard(i);
@@ -88,65 +99,65 @@ const SelectPostContent = ({
         Choose your Facebook post by clicking on it.
       </Typography>
       <div className="cards-main-box" style={{ paddingBottom: "30px" }}>
-        <Box className="cards" style={{maxHeight: "430px", overflowY: "auto", padding:'20px'}}>
+        <Box className="cards" style={{ maxHeight: "430px", overflowY: "auto", padding: '20px' }}>
           {posts ? (
             posts?.map((card, i) => {
               return (
                 <Card
-  key={i}
-  onClick={(e) => handleSelectCard(e, card, i)}
-  className={`post_card ${selectCard === i ? "active_card" : ""}`}
-  sx={{
-    display: "flex",
-    gap: "20px", // Add gap between columns
-  }}
->
-  <Box
-    sx={{
-      flexGrow: 1,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent:'space-between',
-      width: "50%",
-    }}
-  >
-    <CardContent sx={{ padding: 0 }}>
-      <Typography
-        variant="subtitle1"
-        color="text.secondary"
-        component="div"
-        className="post_text hide-scrollbar"
-        // style={{maxHeight:'100px', lineBreak:'auto'}}
-      >
-        {card.message}
-        </Typography>
-    </CardContent>
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        pl: 1,
-        pb: 1,
-      }}
-    >
-      {/* Additional content for the text column, if needed */}
-    </Box>
-    <Typography className="cmnts_count">
-      • &nbsp; {commentData ? commentData.data.length : 0} comments &nbsp; 
-    </Typography>
-  </Box>
-  <div
-   
-    className="fb_post_img"
-  >
-    <img
-      src={card.media_url}
-      alt="post image"
-      className="post_image"
-      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-    />
-  </div>
-</Card>
+                  key={i}
+                  onClick={(e) => handleSelectCard(e, card, i)}
+                  className={`post_card ${selectCard === i ? "active_card" : ""}`}
+                  sx={{
+                    display: "flex",
+                    gap: "20px", // Add gap between columns
+                  }}
+                >
+                  <Box
+                    sx={{
+                      flexGrow: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: 'space-between',
+                      width: "50%",
+                    }}
+                  >
+                    <CardContent sx={{ padding: 0 }}>
+                      <Typography
+                        variant="subtitle1"
+                        color="text.secondary"
+                        component="div"
+                        className="post_text hide-scrollbar"
+                      // style={{maxHeight:'100px', lineBreak:'auto'}}
+                      >
+                        {card.message}
+                      </Typography>
+                    </CardContent>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        pl: 1,
+                        pb: 1,
+                      }}
+                    >
+                      {/* Additional content for the text column, if needed */}
+                    </Box>
+                    <Typography className="cmnts_count">
+                      • &nbsp; {commentData ? commentData.data.length : 0} comments &nbsp;
+                    </Typography>
+                  </Box>
+                  <div
+
+                    className="fb_post_img"
+                  >
+                    <img
+                      src={card.media_url}
+                      alt="post image"
+                      className="post_image"
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  </div>
+                </Card>
 
                 // <Card
                 //   key={i}
@@ -206,7 +217,7 @@ const SelectPostContent = ({
           >
             <Link href="#">
               <Button
-              disableTouchRipple 
+                disableTouchRipple
                 variant="contained"
                 className="go_back"
                 onClick={decrement}
@@ -216,7 +227,7 @@ const SelectPostContent = ({
             </Link>
             <Link href="#">
               <Button
-              disableTouchRipple 
+                disableTouchRipple
                 variant="contained"
                 className="save_btn"
                 onClick={increment}

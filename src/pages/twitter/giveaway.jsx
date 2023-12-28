@@ -5,17 +5,13 @@ import Navbar from "@/components/AppBar/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import { useEffect } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
 import SelectTwitterPost from "@/components/Twitter/SelectTwitterPost";
 import TwitterConditions from "@/components/Twitter/TwitterConditions";
-import PickWinner, { SideTwitterPost, TwitterPost } from "@/components/Twitter/PickWinner";
-import { SelectButtons } from "../instagram/giveaway";
-
-// import {PickWinner} from "@/components/Twitter/PickWinner";
+import PickWinner, { SideTwitterPost } from "@/components/Twitter/PickWinner";
+import { SelectButtons } from "@/components/SelectButton/SelectButton";
 
 
 const TwitterGiveaway = () => {
@@ -39,17 +35,17 @@ const TwitterGiveaway = () => {
   const saveContestData = (e) => {
     // console.log(e.target.value)
   };
-  console.log(contestData, "contestData")
+  // console.log(contestData, "contestData")
   // conditionally rendering the components
   useEffect(() => {
     const tabFromQuery = parseInt(router.query.tab, 10);
     if (
-      localStorage.getItem("pagecontent") &&
+      localStorage.getItem("tweet_id") &&
       !isNaN(tabFromQuery) &&
-      tabFromQuery === 2
+      tabFromQuery === 1
     ) {
       setcurrentTabIndex(tabFromQuery);
-    } else if (!isNaN(tabFromQuery) && tabFromQuery === 2) {
+    } else if (!isNaN(tabFromQuery) && tabFromQuery === 1) {
       setcurrentTabIndex(0);
     }
   }, [router.query.tab]);
@@ -106,60 +102,14 @@ const TwitterGiveaway = () => {
   }
 
   useEffect(() => {
-    const fetchPages = async () => {
-      const formData = new FormData();
-      formData.append("user_id", "#41fd5994c08918b5889c82c05b2723aa");
-      formData.append("resource", "facebook");
-
-      try {
-        const response = await axios.post(
-          "http://localhost/viralyIO/api/includes/actions.php",
-          formData
-        );
-        setPages(response?.data.pages);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPages();
-  }, []);
-
-  for (const page in pages) {
-    myPages.push({
-      id: page,
-      page: pages[page],
-    });
-  }
-
-  useEffect(() => {
-    const pagetext = JSON.parse(localStorage.getItem("pagecontent"));
-    const posttext = JSON.parse(localStorage.getItem("selectedPost"));
+    const postLink = JSON.parse(localStorage.getItem("postLink"));
     const conditions = JSON.parse(localStorage.getItem("selectedConditions"));
     const postId = JSON.parse(localStorage.getItem("postId"));
-    if (postId) {
-      if (typeof postId === "number") {
-        console.log(postId);
-      } else {
-        const parsedPostId = parseInt(postId, 10);
-        if (!isNaN(parsedPostId)) {
-          setPostId(postId);
-        } else {
-          console.log("postId is not a valid number");
-        }
-      }
-    }
-
     const updatedContestData = { ...contestData };
 
-    if (posttext) {
-      updatedContestData.img = posttext.img;
-      updatedContestData.postText = posttext.postText;
+    if (postLink) {
+      updatedContestData.link = postLink;
     }
-
-    if (pagetext) {
-      updatedContestData.page = pagetext;
-    }
-
     if (conditions) {
       updatedContestData.conditions = conditions;
     }
@@ -179,9 +129,9 @@ const TwitterGiveaway = () => {
       <Navbar />
       <Container className="SP_container" maxWidth="xl">
         <Box className="">
-        <SelectButtons
-         visitedTabs={visitedTabs}
-        contestData={contestData}
+          <SelectButtons
+            visitedTabs={visitedTabs}
+            contestData={contestData}
             selectButtons={selectButtons}
             currentTabIndex={currentTabIndex}
             handleSelect={handleSelect}
@@ -222,7 +172,7 @@ const TwitterGiveaway = () => {
               <div className="side_text">
                 <Typography className="contest">Twitter Contest</Typography>
                 <div className="page">
-                  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                  <Typography className="side_headings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                     Link
                   </Typography>
                   <p style={{ lineBreak: "anywhere", paddingBottom: "15px", whiteSpace: 'normal' }} className="fb-box-condition">
@@ -231,8 +181,8 @@ const TwitterGiveaway = () => {
                     {/* Copy the URL of the Twitter post that you would like to pick a comment from and paste it in the field below */}
                   </p>
 
-                  {contestData.link?.length !== 0 ? (
-                    <>  <Typography className="sideHeadings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
+                  {/* {contestData.link?.length !== 0 ? (
+                    <>  <Typography className="side_headings" sx={{ pb: "10px", fontFamily: "Catamaran" }}>
                       Post
                     </Typography>
                       <div className="sidePost">
@@ -241,17 +191,17 @@ const TwitterGiveaway = () => {
 
                   ) : (
                     ""
+                  )} */}
+
+
+                  {contestData?.conditions.winners && (
+                    <Typography className="side_headings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
+                      Conditions
+                    </Typography>
                   )}
-
-
-{contestData?.conditions.winners  && (
-    <Typography className="sideHeadings" sx={{ pb: "10px", pt: "20px", fontFamily: "Catamaran" }}>
-      Conditions
-    </Typography>
-  )}
                   <div className="conditions">
-                   
-        
+
+
                     {Object.entries(contestData?.conditions).map(
                       ([key, value]) => (
                         <>
@@ -265,7 +215,7 @@ const TwitterGiveaway = () => {
                       )
                     )}
                   </div>
-                  
+
                 </div>
               </div>
             </div>

@@ -275,7 +275,7 @@ flex-shrink: 0;
 .tiktokwinner{
   display: flex;
   gap: 4px;
-  align-items: start;
+  align-items: flex-start;
   
 }
 .tiktokPostDetails{
