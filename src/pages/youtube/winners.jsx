@@ -1,55 +1,24 @@
 import React from "react";
-import { Box, Typography, Container, Paper } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Image from "next/image";
-import Link from "next/link";
-import WinnerOne from "@/components/Winners/WinnerOne";
-import Navbar from "@/components/AppBar/AppBar";
-import { useRouter } from "next/router";
+import { Box, Container} from "@mui/material";
+import WinnerOne from "@/components/winners/WinnerOne";
+import Navbar from "@/components/customInputs/AppBar";
 import { useState, useEffect } from "react";
-import Footer from "@/components/Footer";
-import WinnersHeading from "@/components/CommentPicker/WinnersHeading";
+import Footer from "@/components/home/Footer";
+import WinnersHeading from "@/components/home/WinnersHeading";
 
 const Winner = () => {
   const [commentsArray, setCommentsArray] = useState(null);
-  const router = useRouter();
-  const serializedData = router.query.data || null;
-  const handleCopyIframeCode = () => {
-    if (typeof window !== "undefined") {
-      const iframeCode = generateIframeCode(
-        `http://localhost:3000/twitter/winners?data=/${serializedData}`
-      );
-      copyToClipboard(iframeCode);
-      alert("copied to clipboard!");
-    }
-  };
-
-  const generateIframeCode = (url) => {
-    return `<iframe src="${url}" width="600" height="400" frameborder="0" allowfullscreen></iframe>`;
-  };
-
-  const copyToClipboard = (text) => {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("copy");
-    document.body.removeChild(textArea);
-  };
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (window.self !== window.top) {
         document.body.classList.add("inside-iframe");
       }
     }
-
   }, []);
-
   return (
     <>
       <Navbar />
-      <Container maxWidth sx={{ pb: "15px" }}>
+      <Container sx={{ pb: "15px" }}>
         <Box className="winner_container">
           <Box className="winner">
             <WinnersHeading commentsArray={commentsArray} />
@@ -58,7 +27,7 @@ const Winner = () => {
               setCommentsArray={setCommentsArray}
             />
           </Box>
-          <Footer iframe={handleCopyIframeCode} redirectLink={{ pathname: '/youtube/giveaway', query: { tab: 1 } }} />
+          <Footer redirectLink={{ pathname: '/youtube/giveaway', query: { tab: 1 } }} />
 
         </Box>
       </Container>

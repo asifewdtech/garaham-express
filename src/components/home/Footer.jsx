@@ -3,13 +3,11 @@ import React from 'react';
 import Link from 'next/link';
 import { Typography, Box } from '@mui/material';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-const Footer = ({ redirectLink, iframe }) => {
-
-  const generateIframe = () => {
-   iframe()
-  };
-
+const Footer = ({ redirectLink  }) => {
+  const router = useRouter();
+  const serializedData = router.query.data || null;
   return (
     <Box className="" >
       <Box className='footer1' display="flex" flexWrap="wrap">  <div className="pick">
@@ -26,7 +24,7 @@ const Footer = ({ redirectLink, iframe }) => {
           <div className="share_link">
             <Link href="#">https://viralkit.io/</Link>
           </div>
-          <div  onClick={generateIframe}  style={{ paddingLeft: '15px', paddingTop: '10px', cursor: 'pointer' }}>
+          <div  onClick={()=>{handleCopyIframeCode(serializedData,redirectLink.pathname)}}  style={{ paddingLeft: '15px', paddingTop: '10px', cursor: 'pointer' }}>
             <Image src="/copy.png" width="24" height="24" alt="copy"></Image>
           </div>
         </div>
@@ -48,7 +46,7 @@ const Footer = ({ redirectLink, iframe }) => {
           <div    className="share_link">
             <Link href="#">https://viralkit.io/</Link>
           </div>
-          <div onClick={generateIframe} style={{ paddingLeft: '15px', paddingTop: '10px', cursor: 'pointer' }}>
+          <div  onClick={()=>{handleCopyIframeCode(serializedData,redirectLink.pathname)}}style={{ paddingLeft: '15px', paddingTop: '10px', cursor: 'pointer' }}>
             <Image src="/copy.png" width="24" height="24" alt="copy"></Image>
           </div>
         </div>
@@ -63,8 +61,6 @@ const Footer = ({ redirectLink, iframe }) => {
               Pick Another Winner
             </Typography>
           </Link>
-
-
         </Box>
 
 
@@ -75,3 +71,30 @@ const Footer = ({ redirectLink, iframe }) => {
 };
 
 export default Footer;
+
+
+
+// Copying the iframe source to clipboard
+export  const handleCopyIframeCode = (serializedData, link) => {
+  const socialNetwork = link && link.split('/')[1]
+  console.log(socialNetwork[1])
+  const generateIframeCode = (url) => {
+    return `<iframe src="${url}" width="600" height="400" frameborder="0" allowfullscreen></iframe>`;
+  };
+
+  if (typeof window !== "undefined" && serializedData) {
+    const iframeCode = generateIframeCode(
+     "http://localhost:3000/"+ socialNetwork + "/winners?data=" + encodeURIComponent(serializedData)
+    );
+    copyToClipboard(iframeCode);
+    alert("copied to clipboard!");
+  }
+};
+const copyToClipboard = (text) => {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textArea);
+};

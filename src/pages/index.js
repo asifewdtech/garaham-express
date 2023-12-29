@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Navbar from '@/components/AppBar/AppBar'
-import CommentPicker from '@/components/CommentPicker/CommentPicker'
+import Navbar from '@/components/customInputs/AppBar'
+import CommentPicker from '@/components/home/CommentPicker'
 import { useEffect } from 'react'
 
 export default function Home() {

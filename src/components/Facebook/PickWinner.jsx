@@ -6,14 +6,16 @@ import {
 import { useRouter } from 'next/router';
 
 const PickWinner = ({ commentData }) => {
-  const serializedData = commentData && encodeURIComponent(JSON.stringify(commentData?.data));
   const router = useRouter();
-
   const handleNavigation = () => {
-    
-    // Store data in localStorage before navigating
-    localStorage.setItem("myData", serializedData);
-    router.push(`${commentData ? `/facebook/winners?data=${serializedData}` : "/facebook/giveaway"}`);
+    let serializedData = commentData && encodeURIComponent(JSON.stringify(commentData));
+    if (serializedData === "undefined") {
+      router.push(`${commentData ? `/facebook/winners?data=` : "/facebook/giveaway"}`);
+    }
+    else {
+      router.push(`${commentData ? `/facebook/winners?data=${serializedData}` : "/facebook/giveaway"}`);
+
+    }
   };
 
   return (

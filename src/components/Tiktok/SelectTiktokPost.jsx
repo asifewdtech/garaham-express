@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import { Box, Button, MenuItem, Typography } from "@mui/material";
-import Link from "next/link";
-import axios from "axios";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const SelectTiktokPost = ({ increment, setContestData, contestData }) => {
   const [showGuide, setshowGuide] = useState(false)
@@ -15,7 +12,6 @@ const SelectTiktokPost = ({ increment, setContestData, contestData }) => {
   };
   useEffect(() => {
     const postLink = localStorage.getItem("postLink");
-
     if (postLink) {
       setPostLink(JSON.parse(postLink));
     }

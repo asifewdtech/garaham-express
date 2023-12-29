@@ -1,29 +1,20 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const PickWinner = ({ commentData, contestData, decrement, posts }) => {
-  const [loading, setLoading] = useState(false); // State to track loading
+  const [loading, setLoading] = useState(false); 
   const router = useRouter();
-  const tweetElementRef = useRef(null);
-
-  const serializedData =
-  commentData && encodeURIComponent(JSON.stringify(commentData?.data));
- 
- 
 
   const handleNavigation = () => {
-    // Store data in localStorage before navigating
-    localStorage.setItem("myData", serializedData);
-    router.push(
-      `${commentData
-        ? `/youtube/winners?data=${serializedData}`
-        : "/youtube/giveaway"
-      }`
-    );
+    let serializedData = commentData && encodeURIComponent(JSON.stringify(commentData));
+    if (serializedData === "undefined") {
+      router.push(`${commentData ? `/youtube/winners?data=` : "/youtube/giveaway"}`);
+    }
+    else {
+      router.push(`${commentData ? `/youtube/winners?data=${serializedData}` : "/youtube/giveaway"}`);
+    }
   };
-
- 
   return (
     <>
       <Typography className="CP_heading">
@@ -43,7 +34,6 @@ const PickWinner = ({ commentData, contestData, decrement, posts }) => {
               }}
             >
               <Box
-                ref={tweetElementRef}
                 sx={{
                   position: "relative",
                   width: "fit-content",
@@ -105,7 +95,6 @@ const PickWinner = ({ commentData, contestData, decrement, posts }) => {
     </>
   );
 };
-
 export default PickWinner;
 const YoutubePost = ({posts}) => {
   return (
@@ -121,11 +110,10 @@ const YoutubePost = ({posts}) => {
     </Box>
   );
 };
-
 export const YTSidePost = ({posts, contestData}) => {
   return (
     <Box className="ytpostSmall">
-      <img img src={posts?.thumbnails}  className="ytPostSmall" />
+      <img  src={posts?.thumbnails}  className="ytPostSmall" />
       <Box sx={{ paddingLeft:'5px'}} className=''> 
       
       <Typography sx={{color:'black'}} className="ytvideoTitle  ytViewsSmall">{posts?.titleVideo} </Typography>

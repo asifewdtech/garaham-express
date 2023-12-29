@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
-import MySwitch from "../ConditionsForm/Switch";
+import MySwitch from "../customInputs/Switch";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";
 import axiosInstance from "../utils/Utils";
@@ -92,7 +92,7 @@ const ChooseOptionContent = ({
         formData
       );
       if (response?.data.success) {
-        setCommentData(response?.data);
+        setCommentData(response?.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -101,10 +101,8 @@ const ChooseOptionContent = ({
   let winners = watch("winners", 1);
   let postCount = watch("postCount", 0);
   let followers = watch("followers", 0);
-
   const postIncrement = () => {
     const newValue = +postCount + 1;
-
     setValue("postCount", newValue);
   };
 

@@ -1,7 +1,7 @@
 "use client";
 import { Box, Typography, Container } from "@mui/material";
 import React from "react";
-import Navbar from "@/components/AppBar/AppBar";
+import Navbar from "@/components/customInputs/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -9,11 +9,11 @@ import Image from "next/image";
 import { useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import SelectTiktokPost from "@/components/Tiktok/SelectTiktokPost";
-import TiktokConditions from "@/components/Tiktok/TiktokConditions";
-import PickWinner, { TikTokSidePost } from "@/components/Tiktok/PickWinner";
+import SelectTiktokPost from "@/components/tiktok/SelectTiktokPost";
+import TiktokConditions from "@/components/tiktok/TiktokConditions";
+import PickWinner, { TikTokSidePost } from "@/components/tiktok/PickWinner";
 import axiosInstance from "@/components/utils/Utils";
-import { SelectButtons } from "@/components/SelectButton/SelectButton";
+import { SelectButtons } from "@/components/customInputs/SelectButton";
 const TwitterGiveaway = () => {
   const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");

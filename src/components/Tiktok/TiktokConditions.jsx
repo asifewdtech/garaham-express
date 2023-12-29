@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
-import MySwitch from "../ConditionsForm/Switch";
+import MySwitch from "../customInputs/Switch";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";

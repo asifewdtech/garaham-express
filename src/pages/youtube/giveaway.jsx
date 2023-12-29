@@ -1,17 +1,17 @@
 "use client";
 import { Box, Typography, Container } from "@mui/material";
 import React from "react";
-import Navbar from "@/components/AppBar/AppBar";
+import Navbar from "@/components/customInputs/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import SelectYoutubePost from "@/components/Youtube/SelectYoutubePost";
-import YoutubeConditions from "@/components/Youtube/YoutubeConditions";
-import PickWinner, { YTSidePost } from "@/components/Youtube/PickWinner";
-import { SelectButtons } from "@/components/SelectButton/SelectButton";
+import SelectYoutubePost from "@/components/youtube/SelectYoutubePost";
+import YoutubeConditions from "@/components/youtube/YoutubeConditions";
+import PickWinner, { YTSidePost } from "@/components/youtube/PickWinner";
+import { SelectButtons } from "@/components/customInputs/SelectButton";
 const TwitterGiveaway = () => {
   const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");

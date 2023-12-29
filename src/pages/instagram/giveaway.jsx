@@ -1,17 +1,17 @@
 "use client";
 import { Box, Typography, Container } from "@mui/material";
 import React from "react";
-import Navbar from "@/components/AppBar/AppBar";
+import Navbar from "@/components/customInputs/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import SelectInstaPost from "@/components/Instagram/SelectInstaPost";
-import InstagramConditions from "@/components/Instagram/InstaConditions";
-import PickWinner from "@/components/Instagram/PickWinner";
-import { SelectButtons } from "@/components/SelectButton/SelectButton";
+import SelectInstaPost from "@/components/instagram/SelectInstaPost";
+import InstagramConditions from "@/components/instagram/InstaConditions";
+import PickWinner from "@/components/instagram/PickWinner";
+import { SelectButtons } from "@/components/customInputs/SelectButton";
 const TwitterGiveaway = () => {
   const router = useRouter();
   const [selectTab, setselectedTab] = useState("Select a page");

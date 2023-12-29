@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
-import MySwitch from "../ConditionsForm/Switch";
+import MySwitch from "../customInputs/Switch";
 import axios from "axios";
 import axiosInstance from "../utils/Utils";
 const TwitterConditions = ({

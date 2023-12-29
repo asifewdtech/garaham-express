@@ -1,17 +1,17 @@
 "use client";
 import { Box, Typography, Container } from "@mui/material";
 import React from "react";
-import Navbar from "@/components/AppBar/AppBar";
+import Navbar from "@/components/customInputs/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import SelectTwitterPost from "@/components/Twitter/SelectTwitterPost";
-import TwitterConditions from "@/components/Twitter/TwitterConditions";
-import PickWinner, { SideTwitterPost } from "@/components/Twitter/PickWinner";
-import { SelectButtons } from "@/components/SelectButton/SelectButton";
+import SelectTwitterPost from "@/components/twitter/SelectTwitterPost";
+import TwitterConditions from "@/components/twitter/TwitterConditions";
+import PickWinner, { SideTwitterPost } from "@/components/twitter/PickWinner";
+import { SelectButtons } from "@/components/customInputs/SelectButton";
 
 
 const TwitterGiveaway = () => {

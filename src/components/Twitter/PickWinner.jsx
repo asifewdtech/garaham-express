@@ -11,6 +11,8 @@ import { useState } from "react";
 const PickWinner = ({ commentData, decrement, posts }) => {
   const [loading, setLoading] = useState(false); // State to track loading
   const router = useRouter();
+
+  
   const handleNavigation = () => {
     let serializedData = commentData && encodeURIComponent(JSON.stringify(commentData));
     if (serializedData === "undefined") {
@@ -18,7 +20,6 @@ const PickWinner = ({ commentData, decrement, posts }) => {
       router.push(`${commentData ? `/twitter/winners?data=` : "/twitter/giveaway"}`);
     }
     else {
-      localStorage.setItem("myData", serializedData);
       router.push(`${commentData ? `/twitter/winners?data=${serializedData}` : "/twitter/giveaway"}`);
     }
   };

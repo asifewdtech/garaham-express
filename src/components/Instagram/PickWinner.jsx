@@ -8,32 +8,16 @@ import { useEffect, useRef, useState } from "react";
 const PickWinner = ({commentData, contestData, decrement }) => {
   const [loading, setLoading] = useState(false); // State to track loading
   const router = useRouter();
-  const tweetElementRef = useRef(null);
 
-  const serializedData =
-  commentData && encodeURIComponent(JSON.stringify(commentData?.data));
-
- 
 
   const handleNavigation = () => {
-    // Store data in localStorage before navigating
-    localStorage.setItem("myData", serializedData);
-    router.push(
-      `${commentData
-        ? `/instagram/winners?data=${serializedData}`
-        : "/instagram/giveaway"
-      }`
-    );
-  };
-
-  // Function to extract the tweet ID from the URL
-  const extractTweetIDFromURL = (url) => {
-    const tweetURLParts = url.split("/");
-    if (tweetURLParts.length >= 5) {
-      return tweetURLParts[5];
+    let serializedData = commentData && encodeURIComponent(JSON.stringify(commentData));
+    if (serializedData === "undefined") {
+      router.push(`${commentData ? `/instagram/winners?data=` : "/instagram/giveaway"}`);
     }
-    return null;
-  };
+    else {
+      router.push(`${commentData ? `/instagram/winners?data=${serializedData}` : "/instagram/giveaway"}`);
+    }}
 
   return (
     <>
@@ -53,7 +37,6 @@ const PickWinner = ({commentData, contestData, decrement }) => {
               }}
             >
               <Box
-                ref={tweetElementRef}
                 sx={{
                   position: "relative",
                   width: "fit-content",

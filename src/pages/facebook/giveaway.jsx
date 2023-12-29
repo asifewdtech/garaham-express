@@ -1,19 +1,19 @@
 "use client";
 import { Box, Typography, Container } from "@mui/material";
 import React from "react";
-import Navbar from "@/components/AppBar/AppBar";
+import Navbar from "@/components/customInputs/AppBar";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
-import SelectPageContent from "@/components/Facebook/SelectPageContent";
-import SelectPostContent from "@/components/Facebook/SelectPostContent";
-import ChooseOptionContent from "@/components/Facebook/ChooseOptionContent";
-import PickWinner from "@/components/Facebook/PickWinner";
+import SelectPageContent from "@/components/facebook/SelectFbPage";
+import SelectPostContent from "@/components/facebook/SelectFbPost";
+import ChooseOptionContent from "@/components/facebook/facebookConditions";
+import PickWinner from "@/components/facebook/PickWinner";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import axiosInstance from "@/components/utils/Utils";
-import { SelectButtons } from "@/components/SelectButton/SelectButton";
+import { SelectButtons } from "@/components/customInputs/SelectButton";
 
 const SelectFbPageCopy = () => {
   const router = useRouter();

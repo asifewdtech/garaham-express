@@ -21,8 +21,6 @@ const PickWinner = ({ contestData, decrement }) => {
   }, [contestData]);
 
   const handleNavigation = () => {
-    // Store data in localStorage before navigating
-    localStorage.setItem("myData", serializedData);
     router.push(
       `${contestData
         ? `/tiktok/winners?data=${serializedData}`

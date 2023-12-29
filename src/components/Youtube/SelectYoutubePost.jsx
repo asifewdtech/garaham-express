@@ -40,7 +40,7 @@ const SelectYoutubePost = ({ increment,setPosts, setContestData, contestData }) 
       }));
    
       fetchPostData(e);
-    } else {alert("Invalid Twitter post link. Please enter a valid video URL.");
+    } else {alert("Invalid youtube video link. Please enter a valid video URL.");
     }
   };
   const fetchPostData=async (e)=>{

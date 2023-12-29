@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
-import MySwitch from "../ConditionsForm/Switch";
+import MySwitch from "../customInputs/Switch";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";
 import axiosInstance from "../utils/Utils";
@@ -94,7 +94,7 @@ const ChooseOptionContent = ({
         formData
       );
       if (response?.data.success) {
-        setCommentData(response?.data);
+        setCommentData(response?.data.data);
       }
     } catch (error) {
       console.log(error);

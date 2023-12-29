@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Typography, Box, Container, Button } from "@mui/material";
-import MySwitch from "../ConditionsForm/Switch";
+import MySwitch from "../customInputs/Switch";
 import axios from "axios";
 import Tooltip from "@mui/material/Tooltip";
 import styled from "@emotion/styled";
@@ -69,7 +69,7 @@ const YoutubeConditions = ({
         formData
       );
       if (response?.data.success) {
-        setCommentData(response?.data);
+        setCommentData(response?.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -93,7 +93,7 @@ const YoutubeConditions = ({
   const handle_uni_swi = () => {
     setIsUniqueUsersChecked(!isUniqueUsersChecked);
   };
-  const handle_ban_swi= () => {
+  const handle_ban_swi = () => {
     setIsBanAbusiveChecked(!isBanAbusiveChecked);
   };
   const handle_dup_swi = () => {
@@ -188,10 +188,6 @@ const YoutubeConditions = ({
           </div>
 
         </div>
-
-
-
-
         <Typography className="CP_sub_heading yt_filter">Filters</Typography>
         <div className="text_inputs" id="yt_switches">
 
@@ -205,19 +201,19 @@ const YoutubeConditions = ({
               <Typography className="switch_text">Get Unique Users</Typography>
             </div>
             <div style={{}} className="exclude yt_switches switch">
-              <MySwitch checked={isDuplicatesChecked}  onChange={handle_dup_swi} inputProps={{ "aria-label": "controlled" }} />
+              <MySwitch checked={isDuplicatesChecked} onChange={handle_dup_swi} inputProps={{ "aria-label": "controlled" }} />
               <Typography className="switch_text">
                 Duplicate comments
               </Typography>
             </div>
             <div style={{}} className="exclude yt_switches switch">
-              <MySwitch checked={isRepliesChecked}  onChange={handle_rep_swi} inputProps={{ "aria-label": "controlled" }} />
+              <MySwitch checked={isRepliesChecked} onChange={handle_rep_swi} inputProps={{ "aria-label": "controlled" }} />
               <Typography className="switch_text">
                 Include replies
               </Typography>
             </div>
             <div style={{}} className="exclude yt_switches switch">
-              <MySwitch  checked={isBanAbusiveChecked}  onChange={handle_ban_swi} inputProps={{ "aria-label": "controlled" }} />
+              <MySwitch checked={isBanAbusiveChecked} onChange={handle_ban_swi} inputProps={{ "aria-label": "controlled" }} />
               <Typography className="switch_text">
                 Ban abusive comments
               </Typography>

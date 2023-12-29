@@ -2,23 +2,22 @@ import React from "react";
 import {useEffect } from "react";
 import { useRouter } from 'next/router';
 import Tooltip, {  tooltipClasses } from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
-const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
+const WinnerOne = ({ commentsArray, setCommentsArray }) => {
+ 
   const router = useRouter();
-
-  const serializedUrlData = router.query.data || null;
+  let serializedData = router.query.data || null;
   useEffect(() => {
-    let serializedData = localStorage.getItem("myData");
     if (serializedData && serializedData !== "undefined") {
       const arrayOfObjects = JSON.parse(decodeURIComponent(serializedData));
+      console.log(arrayOfObjects)
       setCommentsArray(arrayOfObjects);
     }
     else {
       setCommentsArray(null)
     }
-  }, []);
+  }, [serializedData]); 
 
   return (
     <div className="">
@@ -38,9 +37,7 @@ const WinnerOne = ({ count, commentsArray, setCommentsArray }) => {
                       {item.from_name}
                     </p>
                   </div>
-
                 </div>
-
                 <div
                   className="postSection winnerContestentScndMain position-relative py-3 px-0 px-sm-0 px-lg-4 "
                   style={{ marginLeft: "17px", paddingLeft: "16px" }}
